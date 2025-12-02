@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomBar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -167,26 +168,80 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/floatingButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp">
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/bottomBar"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center">
 
-        <ImageView
-            android:id="@+id/imageView13"
+        <ImageButton
+            android:id="@+id/btnSettings"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:srcCompat="@android:drawable/ic_dialog_info"
-            android:padding="15dp" />
-        <ImageView
-            android:id="@+id/imageView20"
+            android:padding="12dp"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="Settings"
+            android:elevation="8dp"/>
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>
+
+        <ImageButton
+            android:id="@+id/btnOther"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:srcCompat="@android:drawable/ic_dialog_info"
-            android:padding="15dp"
-            android:layout_marginTop="12dp" />
+            android:padding="12dp"
+            android:src="@android:drawable/ic_dialog_info"
+            android:contentDescription="Other"
+            android:elevation="8dp"/>
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:background="#333"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/btnNews"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_launcher_foreground"
+            android:padding="14dp"
+            android:backgroundTint="#CC0000"
+            android:contentDescription="News" />
+
+        <ImageButton
+            android:id="@+id/btnInfo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_launcher_foreground"
+            android:padding="14dp"
+            android:contentDescription="Info" />
+
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_launcher_foreground"
+            android:padding="14dp"
+            android:contentDescription="Profile" />
+
+    </LinearLayout>
+
+
 </RelativeLayout>
 
