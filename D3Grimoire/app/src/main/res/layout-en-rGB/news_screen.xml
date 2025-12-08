@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    android:background="#1A0F0A">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +27,8 @@
             android:textStyle="bold"
             android:textSize="30dp"
             android:layout_marginBottom="12dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="#FFFFFF"/>
 
     <ImageView
         android:id="@+id/imageView7"
@@ -44,7 +46,8 @@
         android:textStyle="bold"
         android:textSize="30dp"
         android:layout_marginBottom="12dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="#FFFFFF"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:padding="10dp"
-            android:background="#221111"
+            android:background="#2E355C"
             android:layout_marginBottom="12dp">
 
             <ImageView
@@ -92,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:padding="10dp"
-            android:background="#221111"
+            android:background="#2E355C"
             android:layout_marginBottom="12dp">
 
             <ImageView
@@ -130,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:padding="10dp"
-            android:background="#221111"
+            android:background="#2E355C"
             android:layout_marginBottom="12dp">
 
             <ImageView
@@ -185,7 +188,8 @@
             android:padding="12dp"
             android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Settings"
-            android:elevation="8dp"/>
+            android:elevation="8dp"
+            android:background="@drawable/circle_bg"/>
 
         <Space
             android:layout_width="10dp"
@@ -198,7 +202,8 @@
             android:padding="12dp"
             android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Other"
-            android:elevation="8dp"/>
+            android:elevation="8dp"
+            android:background="@drawable/circle_bg_default"/>
 
     </LinearLayout>
 

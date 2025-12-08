@@ -38,23 +38,25 @@
 
                 <ImageView
                     android:id="@+id/imgBarbarian1"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:src="@tools:sample/backgrounds/scenic"
                     android:scaleType="centerCrop"
                     android:background="#222" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/circle1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:padding="6dp"
                     android:layout_gravity="bottom|start"
                     android:layout_marginStart="4dp"
-                    android:layout_marginBottom="40dp"/>
+                    android:layout_marginBottom="40dp"
+                    android:padding="6dp"
+                    android:background="@drawable/circle_bg"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:scaleType="centerInside" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/circle2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -62,13 +64,16 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginBottom="4dp"
                     android:padding="6dp"
-                    android:src="@android:drawable/ic_dialog_info" />
+                    android:background="@drawable/circle_bg_default"
+                    android:src="@android:drawable/ic_dialog_info"
+                    android:scaleType="centerInside" />
+
 
             </FrameLayout>
 
             <ImageView
                 android:id="@+id/imgBarbarian2"
-                android:layout_width="0dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginStart="4dp"
@@ -108,7 +113,7 @@
             android:background="#113B46"
             android:gravity="center_vertical"
             android:clipToOutline="true"
-            android:backgroundTint="#00C8FF">
+            android:backgroundTint="#113B46">
 
             <ImageView
                 android:layout_width="70dp"

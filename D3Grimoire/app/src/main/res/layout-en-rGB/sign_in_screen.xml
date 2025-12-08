@@ -8,7 +8,8 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center_horizontal"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    android:background="#1A0F0A">
 
 
     <ImageView
@@ -101,7 +102,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="@android:color/transparent"
+                android:background="#33000000"
                 android:contentDescription="Login Steam"
                 android:src="@android:drawable/alert_light_frame" />
 
@@ -110,7 +111,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="@android:color/transparent"
+                android:background="#33000000"
                 android:contentDescription="Login PlayStation"
                 android:src="@android:drawable/alert_light_frame" />
 
@@ -119,7 +120,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="@android:color/transparent"
+                android:background="#33000000"
                 android:contentDescription="Login Nintendo"
                 android:src="@android:drawable/alert_light_frame" />
 
@@ -128,7 +129,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="@android:color/transparent"
+                android:background="#33000000"
                 android:contentDescription="Login Xbox"
                 android:src="@android:drawable/alert_light_frame" />
 
@@ -137,7 +138,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="@android:color/transparent"
+                android:background="#33000000"
                 android:contentDescription="Login Google"
                 android:src="@android:drawable/alert_light_frame" />
 
@@ -146,7 +147,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="@android:color/transparent"
+                android:background="#33000000"
                 android:contentDescription="Login BattleNet"
                 android:src="@android:drawable/alert_light_frame" />
 

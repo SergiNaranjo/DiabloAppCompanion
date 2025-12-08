@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="32dp">
+    android:paddingTop="32dp"
+    android:background="#1A0F0A">
 
     <!-- SCROLLABLE CONTENT -->
     <ScrollView
@@ -25,6 +26,7 @@
                 android:text="Classes"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp"/>
 
             <LinearLayout
@@ -39,7 +41,8 @@
                     android:text="BARBARIAN"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#CC0000"/>
 
                 <Button
                     android:layout_width="250dp"
@@ -47,7 +50,8 @@
                     android:text="CRUSADER"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#CC0000"/>
 
                 <Button
                     android:layout_width="250dp"
@@ -55,7 +59,8 @@
                     android:text="DEMON HUNTER"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#CC0000"/>
 
                 <Button
                     android:layout_width="250dp"
@@ -63,7 +68,8 @@
                     android:text="MONK"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#CC0000"/>
 
                 <Button
                     android:layout_width="250dp"
@@ -71,7 +77,8 @@
                     android:text="NECROMANCER"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#CC0000"/>
 
                 <Button
                     android:layout_width="250dp"
@@ -79,7 +86,8 @@
                     android:text="WITCH DOCTOR"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="#CC0000"/>
 
                 <Button
                     android:layout_width="250dp"
@@ -87,7 +95,8 @@
                     android:text="WIZARD"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:layout_marginBottom="24dp"/>
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="#CC0000"/>
             </LinearLayout>
 
             <!-- ITEMS SECTION -->
@@ -98,6 +107,7 @@
                 android:text="Items"
                 android:textSize="30sp"
                 android:textStyle="bold"
+                android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp"/>
 
             <!-- CARD #1 -->
@@ -106,7 +116,8 @@
                 android:layout_height="120dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:background="#8A0D08">
 
                 <ImageView
                     android:layout_width="90dp"
@@ -126,14 +137,16 @@
                         android:layout_height="wrap_content"
                         android:text="THE BUTCHER'S CLEAVER"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="MAGIC AXE"
                         android:textSize="12sp"
-                        android:layout_marginBottom="4dp" />
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -141,13 +154,15 @@
                         android:text="REQUIRES LEVEL: 3"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:layout_marginBottom="6dp" />
+                        android:layout_marginBottom="6dp"
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="118.3 DAMAGE PER SECOND\n+30 STRENGTH\n+20 ATTACKS PER SECOND"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -157,7 +172,8 @@
                 android:layout_height="120dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:background="#8A0D08">
 
                 <ImageView
                     android:layout_width="90dp"
@@ -177,14 +193,16 @@
                         android:layout_height="wrap_content"
                         android:text="AIDAN'S REVENGE"
                         android:textStyle="bold"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="AXE"
                         android:textSize="12sp"
-                        android:layout_marginBottom="4dp" />
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -192,13 +210,15 @@
                         android:text="REQUIRES LEVEL: 1"
                         android:textStyle="bold"
                         android:textSize="12sp"
-                        android:layout_marginBottom="6dp" />
+                        android:layout_marginBottom="6dp"
+                        android:textColor="@android:color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10.4 DAMAGE PER SECOND\n+10 STRENGTH\n+10 ATTACKS PER SECOND"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
             </LinearLayout>
 

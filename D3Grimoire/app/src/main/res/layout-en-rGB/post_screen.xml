@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    android:background="#1A0F0A">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,7 +33,8 @@
                 android:textSize="24sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="#FFFFFF"/>
 
             <TextView
                 android:id="@+id/textView10"
@@ -40,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:textSize="15sp"
+                android:textColor="#FFFFFF"
                 android:text="Sanctuary needs your help. Answer its call in Season 36: Lords of Hell. Starting September 12 at 5:00 p.m. CEST, the Nephalem can wield the power of the Lords of Hell season, which first appeared in Season 25. If you want to discover everything about the Rites of Sanctuary and Visions of Enmity permanent themes and much more, read on." />
 
             <TextView
@@ -50,7 +53,8 @@
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:layout_marginBottom="20dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -58,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:textSize="15sp"
+                android:textColor="#FFFFFF"
                 android:text="Sanctuary needs your help. Answer its call in Season 36: Lords of Hell. Starting September 12 at 5:00 p.m. CEST, the Nephalem can wield the power of the Lords of Hell season, which first appeared in Season 25. If you want to discover everything about the Rites of Sanctuary and Visions of Enmity permanent themes and much more, read on." />
 
         </LinearLayout>

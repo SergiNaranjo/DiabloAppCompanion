@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="#1A0F0A">
 
-    <!-- SCROLL PRINCIPAL -->
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
             android:gravity="center_horizontal"
             android:paddingTop="40dp">
 
-            <!-- HERO NAME -->
             <TextView
                 android:id="@+id/txtHeroName"
                 android:layout_width="wrap_content"
@@ -30,14 +28,14 @@
                 android:textColor="#FFFFFF"
                 android:layout_marginBottom="20dp"/>
 
-            <!-- INVENTORY / STATS GRID CON MARCO ROJO -->
             <LinearLayout
                 android:id="@+id/inventoryBox"
                 android:layout_width="240dp"
                 android:layout_height="410dp"
                 android:gravity="center"
                 android:padding="10dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:background="#CC0000">
 
                 <GridLayout
                     android:id="@+id/gridItems"
@@ -48,11 +46,105 @@
                     android:alignmentMode="alignMargins"
                     android:useDefaultMargins="true">
 
-                    <!-- FILA 1 -->
                     <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@tools:sample/avatars"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:padding="8dp"
                         android:scaleType="centerInside"/>
 
@@ -61,94 +153,8 @@
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <!-- FILA 2 -->
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <!-- FILA 3 -->
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <!-- FILA 4 -->
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <!-- FILA 5 -->
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
-                        android:padding="8dp"
-                        android:scaleType="centerInside"/>
+                        android:scaleType="centerInside"
+                        android:background="#1A0F0A"/>
 
                     <ImageView
                         android:layout_width="70dp"
@@ -160,7 +166,6 @@
 
             </LinearLayout>
 
-            <!-- DAMAGE -->
             <TextView
                 android:id="@+id/txtDamage"
                 android:layout_width="wrap_content"
@@ -171,19 +176,19 @@
                 android:textColor="#FFFFFF"
                 android:layout_marginBottom="18dp"/>
 
-            <!-- STATS BOX -->
             <LinearLayout
                 android:id="@+id/statsBox"
                 android:orientation="vertical"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:layout_marginBottom="40dp">
+                android:layout_marginBottom="40dp"
+                android:background="#CC0000">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LEVEL:              5"
+                    android:text="LEVEL:                 5"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:layout_marginBottom="4dp"/>
@@ -191,7 +196,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="STRENGHT:        2"
+                    android:text="STRENGHT:             2"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:layout_marginBottom="4dp"/>
@@ -199,7 +204,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEXTERITY:      1"
+                    android:text="DEXTERITY:            1"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:layout_marginBottom="4dp"/>
@@ -207,7 +212,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="INTELLIGENCE: 5"
+                    android:text="INTELLIGENCE:         5"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"
                     android:layout_marginBottom="4dp"/>
@@ -215,7 +220,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VITALITY:          4"
+                    android:text="VITALITY:             4"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp"/>
 
@@ -224,7 +229,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- BOTTOM BAR -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
