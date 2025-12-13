@@ -299,7 +299,7 @@
 
     </LinearLayout>
 
-
+    <!-- BOTTOM BAR -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
