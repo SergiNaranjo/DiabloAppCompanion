@@ -8,7 +8,8 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center_horizontal"
-    tools:ignore="MissingDefaultResource">
+    tools:ignore="MissingDefaultResource"
+    android:background="#1A0F0A">
 
 
     <ImageView
@@ -96,47 +97,59 @@
             app:rowCount="2"
             app:useDefaultMargins="true">
 
-            <ImageView
-                android:id="@+id/imageView5"
+            <ImageButton
+                android:id="@+id/btnSteam"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                app:srcCompat="@android:drawable/alert_light_frame" />
+                android:background="#33000000"
+                android:contentDescription="Login Steam"
+                android:src="@android:drawable/alert_light_frame" />
 
-            <ImageView
-                android:id="@+id/imageView6"
+            <ImageButton
+                android:id="@+id/btnPlayStation"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                app:srcCompat="@android:drawable/alert_light_frame" />
+                android:background="#33000000"
+                android:contentDescription="Login PlayStation"
+                android:src="@android:drawable/alert_light_frame" />
 
-            <ImageView
-                android:id="@+id/imageView8"
+            <ImageButton
+                android:id="@+id/btnNintendo"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                app:srcCompat="@android:drawable/alert_light_frame" />
+                android:background="#33000000"
+                android:contentDescription="Login Nintendo"
+                android:src="@android:drawable/alert_light_frame" />
 
-            <ImageView
-                android:id="@+id/imageView9"
+            <ImageButton
+                android:id="@+id/btnXbox"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                app:srcCompat="@android:drawable/alert_light_frame" />
+                android:background="#33000000"
+                android:contentDescription="Login Xbox"
+                android:src="@android:drawable/alert_light_frame" />
 
-            <ImageView
-                android:id="@+id/imageView10"
+            <ImageButton
+                android:id="@+id/btnGoogle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                app:srcCompat="@android:drawable/alert_light_frame" />
+                android:background="#33000000"
+                android:contentDescription="Login Google"
+                android:src="@android:drawable/alert_light_frame" />
 
-            <ImageView
-                android:id="@+id/imageView11"
+            <ImageButton
+                android:id="@+id/btnBattleNet"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                app:srcCompat="@android:drawable/alert_light_frame" />
+                android:background="#33000000"
+                android:contentDescription="Login BattleNet"
+                android:src="@android:drawable/alert_light_frame" />
 
         </androidx.gridlayout.widget.GridLayout>
 
@@ -147,8 +160,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:text="Don't have an account? REGISTER HERE"
-            android:textColor="#ffcc00"
-            android:textStyle="bold" />
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true" />
 
 
     </LinearLayout>
