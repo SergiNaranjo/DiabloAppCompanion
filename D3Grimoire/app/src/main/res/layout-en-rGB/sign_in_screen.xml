@@ -89,6 +89,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <!--Linea 93 hecha con chat GPT, no sabía como hacer el Grid Layout al principio-->
         <androidx.gridlayout.widget.GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
