@@ -1,6 +1,8 @@
 package com.example.d3grimoire
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
@@ -27,5 +29,9 @@ class MainActivity : AppCompatActivity() {
         rotate.interpolator = LinearInterpolator()
 
         image.startAnimation(rotate)
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            setContentView(R.layout.sign_in_screen)
+        }, 800)
     }
 }
