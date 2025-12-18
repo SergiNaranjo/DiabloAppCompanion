@@ -104,55 +104,10 @@
             android:layout_marginBottom="28dp"/>
 
 
-        <LinearLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/class_ability_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_marginBottom="20dp"
-            android:background="#113B46"
-            android:gravity="center_vertical"
-            android:clipToOutline="true"
-            android:backgroundTint="#113B46">
-
-            <!--ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@tools:sample/avatars"
-                android:layout_marginRight="16dp"
-                android:background="#000"
-                android:clipToOutline="true"-->
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="WHIRLWIND"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cost: 10 Fury"
-                    android:textColor="#87E5FF"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="6dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Unleash a flurry of attacks hitting everything in your path for 100% damage."
-                    android:textColor="#DDDDDD"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-        </LinearLayout>
+            android:layout_height="match_parent"/>
 
 
         <LinearLayout
