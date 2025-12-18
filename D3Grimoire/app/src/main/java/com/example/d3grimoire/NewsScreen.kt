@@ -2,6 +2,7 @@ package com.example.d3grimoire
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -14,37 +15,19 @@ class NewsScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_screen);
 
-        val intent : Intent = Intent(this, NewsPost::class.java);
-        intent.putExtra("url", "https://news.blizzard.com/en-us/article/24191146/season-35-eternal-conflict-has-concluded");
+        newsButtonData.forEach { data ->
+            val intent : Intent = Intent(this, NewsPost::class.java);
+            intent.putExtra("url", data.url);
 
-        var newsPostButton : NewsPostButton = NewsPostButton.newInstance(
-            "Juega a Diablo III en Game Pass!",
-            "Un nuevo pack de recompensas legendarias...",
-            { startActivity(intent) }
-        )
-        supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add(R.id.news_post_1, newsPostButton);
-        }
+            val newsPostButton: NewsPostButton = NewsPostButton.newInstance(
+                data,
+                { startActivity(intent); }
+            );
 
-        newsPostButton = NewsPostButton.newInstance(
-            "Juega a Diablo III en Game Pass!",
-            "Un nuevo pack de recompensas legendarias...",
-            { startActivity(intent) }
-        );
-        supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add(R.id.news_post_2, newsPostButton);
-        }
-
-        newsPostButton = NewsPostButton.newInstance(
-            "Juega a Diablo III en Game Pass!",
-            "Un nuevo pack de recompensas legendarias...",
-            { startActivity(intent) }
-        );
-        supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add(R.id.news_post_3, newsPostButton);
+            supportFragmentManager.commit {
+                setReorderingAllowed(true);
+                add(data.id, newsPostButton);
+            }
         }
     }
 }

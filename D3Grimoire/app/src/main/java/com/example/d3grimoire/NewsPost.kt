@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class NewsPost : AppCompatActivity() {
 
-    private lateinit var url : String;
+    private var url : String? = null;
     private lateinit var webView : WebView;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +17,19 @@ class NewsPost : AppCompatActivity() {
         setContentView(R.layout.activity_news_post)
 
         webView = findViewById<WebView>(R.id.news_post_webview);
-        url = intent.extras!!.getString("url")!!;
-        webView.loadUrl(url);
+
+        val webSettings = webView.settings
+        webSettings.javaScriptEnabled = true
+        webSettings.setSupportZoom(true)
+        webSettings.builtInZoomControls = true
+        webSettings.displayZoomControls = false
+        webSettings.loadsImagesAutomatically = true
+        webSettings.useWideViewPort = true
+        webSettings.loadWithOverviewMode = true
+
+        url = intent.extras?.getString("url");
+        assert(url != null);
+        url?.let { webView.loadUrl(url!!); };
 
     }
 }

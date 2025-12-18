@@ -16,14 +16,14 @@ class NewsPostButton : Fragment(R.layout.news_post_button) {
 
     companion object {
         fun newInstance(
-            title: String,
-            desc: String,
+            data: NewsData,
             onClick: () -> Unit
         ): NewsPostButton {
             return NewsPostButton().apply {
                 arguments = bundleOf(
-                    "title" to title,
-                    "desc" to desc
+                    "title" to data.name,
+                    "desc" to data.description,
+                    "imgId" to data.imgId
                 )
                 this.onClickListener = onClick
             }
@@ -38,6 +38,10 @@ class NewsPostButton : Fragment(R.layout.news_post_button) {
         val description : String? = requireArguments().getString("desc");
         textView = view.findViewById<TextView>(R.id.news_post_description);
         textView.text = description;
+
+        val imgId: Int? = requireArguments().getInt("imgId");
+        var imageView : ImageView = view.findViewById<ImageView>(R.id.news_post_image);
+        imageView.setImageResource(imgId!!);
 
         view.findViewById<View>(R.id.news_post_button).setOnClickListener { this.onClickListener?.invoke(); }
     }
