@@ -46,101 +46,101 @@
                     android:alignmentMode="alignMargins"
                     android:useDefaultMargins="true">
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
                     <ImageView
                         android:layout_width="70dp"
@@ -148,13 +148,13 @@
                         android:padding="8dp"
                         android:scaleType="centerInside"/>
 
-                    <ImageView
+                    <!--ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"/>
+                        android:background="#1A0F0A"-->
 
                     <ImageView
                         android:layout_width="70dp"

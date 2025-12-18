@@ -29,14 +29,14 @@
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
 
-            <ImageView
+            <!--ImageView
                 android:id="@+id/imgAvatar"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginBottom="12dp"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@tools:sample/avatars" />
+                android:src="@tools:sample/avatars" -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -54,12 +54,12 @@
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"/>
 
-                <ImageView
+                <!--ImageView
                     android:id="@+id/btnEdit"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="6dp"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@tools:sample/avatars" -->
             </LinearLayout>
 
             <TextView
@@ -90,12 +90,12 @@
                 android:padding="8dp"
                 android:background="#8A0D08">
 
-                <ImageView
+                <!--ImageView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="12dp"
                     android:scaleType="centerCrop"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@tools:sample/avatars" -->
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -129,12 +129,12 @@
                 android:padding="8dp"
                 android:background="#8A0D08">
 
-                <ImageView
+                <!--ImageView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="12dp"
                     android:scaleType="centerCrop"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@tools:sample/avatars" -->
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -168,12 +168,12 @@
                 android:padding="8dp"
                 android:background="#8A0D08">
 
-                <ImageView
+                <!--ImageView
                     android:layout_width="70dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="12dp"
                     android:scaleType="centerCrop"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@tools:sample/avatars" -->
 
                 <LinearLayout
                     android:layout_width="0dp"

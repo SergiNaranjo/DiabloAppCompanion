@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D3Grimoire">
         <activity
+            android:name=".CommunityScreen"
+            android:exported="false" />
+        <activity
+            android:name=".CommunityPost"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

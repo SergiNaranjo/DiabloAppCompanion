@@ -36,15 +36,15 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp">
 
-                <ImageView
+                <!--ImageView
                     android:id="@+id/imgBarbarian1"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:src="@tools:sample/backgrounds/scenic"
                     android:scaleType="centerCrop"
-                    android:background="#222" />
+                    android:background="#222" -->
 
-                <ImageButton
+                <!--ImageButton
                     android:id="@+id/circle1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -54,9 +54,9 @@
                     android:padding="6dp"
                     android:background="@drawable/circle_bg"
                     android:src="@android:drawable/ic_dialog_info"
-                    android:scaleType="centerInside" />
+                    android:scaleType="centerInside" -->
 
-                <ImageButton
+                <!--ImageButton
                     android:id="@+id/circle2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -66,12 +66,12 @@
                     android:padding="6dp"
                     android:background="@drawable/circle_bg_default"
                     android:src="@android:drawable/ic_dialog_info"
-                    android:scaleType="centerInside" />
+                    android:scaleType="centerInside" -->
 
 
             </FrameLayout>
 
-            <ImageView
+            <!--ImageView
                 android:id="@+id/imgBarbarian2"
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
@@ -79,7 +79,7 @@
                 android:layout_marginStart="4dp"
                 android:src="@tools:sample/backgrounds/scenic"
                 android:scaleType="centerCrop"
-                android:background="#222" />
+                android:background="#222" -->
 
         </LinearLayout>
 
@@ -115,13 +115,13 @@
             android:clipToOutline="true"
             android:backgroundTint="#113B46">
 
-            <ImageView
+            <!--ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@tools:sample/avatars"
                 android:layout_marginRight="16dp"
                 android:background="#000"
-                android:clipToOutline="true"/>
+                android:clipToOutline="true"-->
 
             <LinearLayout
                 android:orientation="vertical"
@@ -164,13 +164,13 @@
             android:background="#113B46"
             android:gravity="center_vertical">
 
-            <ImageView
+            <!--ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@tools:sample/avatars"
                 android:layout_marginRight="16dp"
                 android:background="#000"
-                android:clipToOutline="true"/>
+                android:clipToOutline="true"-->
 
             <LinearLayout
                 android:orientation="vertical"
@@ -212,13 +212,13 @@
             android:background="#113B46"
             android:gravity="center_vertical">
 
-            <ImageView
+            <!--ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@tools:sample/avatars"
                 android:layout_marginRight="16dp"
                 android:background="#000"
-                android:clipToOutline="true"/>
+                android:clipToOutline="true"-->
 
             <LinearLayout
                 android:orientation="vertical"
