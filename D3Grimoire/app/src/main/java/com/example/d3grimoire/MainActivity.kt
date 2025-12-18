@@ -12,6 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        startActivity(Intent(this, NewsScreen::class.java));
+        startActivity(Intent(this, NavBar::class.java));
     }
 }
