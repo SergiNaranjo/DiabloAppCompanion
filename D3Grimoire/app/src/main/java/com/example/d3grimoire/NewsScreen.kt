@@ -1,11 +1,12 @@
 package com.example.d3grimoire
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.os.Debug
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 
@@ -14,31 +15,19 @@ class NewsScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_screen);
 
-        var bundle : Bundle = bundleOf(
-            "title" to "Juega a Diablo III en Game Pass!",
-            "desc" to "Un nuevo pack de recompensas legendarias..."
-        );
-        supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add<NewsPost>(R.id.news_post_1, args = bundle);
-        }
+        newsButtonData.forEach { data ->
+            val intent : Intent = Intent(this, NewsPost::class.java);
+            intent.putExtra("url", data.url);
 
-        bundle = bundleOf(
-            "title" to "Juega a Diablo III en Game Pass!",
-            "desc" to "Un nuevo pack de recompensas legendarias..."
-        );
-        supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add<NewsPost>(R.id.news_post_2, args = bundle);
-        }
+            val newsPostButton: NewsPostButton = NewsPostButton.newInstance(
+                data,
+                { startActivity(intent); }
+            );
 
-        bundle = bundleOf(
-            "title" to "Juega a Diablo III en Game Pass!",
-            "desc" to "Un nuevo pack de recompensas legendarias..."
-        );
-        supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add<NewsPost>(R.id.news_post_3, args = bundle);
+            supportFragmentManager.commit {
+                setReorderingAllowed(true);
+                add(data.id, newsPostButton);
+            }
         }
     }
 }
