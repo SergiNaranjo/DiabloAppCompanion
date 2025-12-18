@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D3Grimoire">
         <activity
+            android:name=".InfoScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Item"
+            android:exported="false" />
+        <activity
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
