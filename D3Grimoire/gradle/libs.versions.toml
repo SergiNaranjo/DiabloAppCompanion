@@ -27,5 +27,5 @@ retrofit = { group = "com.squareup.retrofit2", name="retrofit", version.ref="ret
 converterGson = { group = "com.squareup.retrofit2", name="converter-gson", version.ref="converterGson" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.6.1" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version = "2.2.0" }
+android-application = { id = "com.android.application", version = "8.6.0" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
