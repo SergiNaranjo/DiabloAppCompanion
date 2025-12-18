@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D3Grimoire">
         <activity
+            android:name=".NewsPost"
+            android:exported="false" />
+        <activity
+            android:name=".NewsScreen"
+            android:exported="false" />
+        <activity
             android:name=".ClassInfoScreen"
             android:exported="false" />
         <activity
