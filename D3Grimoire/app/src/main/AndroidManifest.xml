@@ -12,6 +12,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D3Grimoire">
         <activity
+            android:name=".NewsPost"
+            android:exported="false" />
+        <activity
+            android:name=".NewsScreen"
+            android:exported="false" />
+        <activity
+            android:name=".ClassInfoScreen"
+            android:exported="false" />
+        <activity
+            android:name=".ClassAbility"
+            android:exported="false" />
+        <activity
+            android:name=".InfoScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Item"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileHero"
+            android:exported="false" />
+        <activity
+            android:name=".CommunityScreen"
+            android:exported="false" />
+        <activity
+            android:name=".CommunityPost"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

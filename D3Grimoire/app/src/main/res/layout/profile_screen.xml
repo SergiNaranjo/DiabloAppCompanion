@@ -29,14 +29,14 @@
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
 
-            <ImageView
+            <!--ImageView
                 android:id="@+id/imgAvatar"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginBottom="12dp"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@tools:sample/avatars" />
+                android:src="@tools:sample/avatars" -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -54,12 +54,12 @@
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"/>
 
-                <ImageView
+                <!--ImageView
                     android:id="@+id/btnEdit"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="6dp"
-                    android:src="@tools:sample/avatars" />
+                    android:src="@tools:sample/avatars" -->
             </LinearLayout>
 
             <TextView
@@ -81,123 +81,26 @@
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"/>
 
+            <!--res/layout/profile_hero.xml-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/hero_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
 
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:background="#8A0D08">
+            <!--res/layout/profile_hero.xml-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/hero_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
 
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="12dp"
-                    android:scaleType="centerCrop"
-                    android:src="@tools:sample/avatars" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Name2"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BARBARIAN LV. 5"
-                        android:textSize="13sp"
-                        android:textColor="#FFFFFF"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:background="#8A0D08">
-
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="12dp"
-                    android:scaleType="centerCrop"
-                    android:src="@tools:sample/avatars" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Name2"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BARBARIAN LV. 5"
-                        android:textSize="13sp"
-                        android:textColor="#FFFFFF"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:background="#8A0D08">
-
-                <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="12dp"
-                    android:scaleType="centerCrop"
-                    android:src="@tools:sample/avatars" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Name2"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="BARBARIAN LV. 5"
-                        android:textSize="13sp"
-                        android:textColor="#FFFFFF"/>
-                </LinearLayout>
-            </LinearLayout>
+            <!--res/layout/profile_hero.xml-->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/hero_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>
