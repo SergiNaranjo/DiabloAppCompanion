@@ -12,6 +12,10 @@ constraintlayout = "2.2.1"
 gridlayout = "1.1.0"
 retrofit = "2.9.0"
 converterGson = "2.9.0"
+firebaseAnalytics = "22.1.0"
+firebaseCommonKtx = "21.0.0"
+firebaseCrashlytics = "20.0.3"
+googleFirebaseCrashlytics = "3.0.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,7 +29,11 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 retrofit = { group = "com.squareup.retrofit2", name="retrofit", version.ref="retrofit" }
 converterGson = { group = "com.squareup.retrofit2", name="converter-gson", version.ref="converterGson" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-ktx", version.ref = "firebaseCommonKtx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.6.0" }
+android-application = { id = "com.android.application", version = "8.9.1" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
