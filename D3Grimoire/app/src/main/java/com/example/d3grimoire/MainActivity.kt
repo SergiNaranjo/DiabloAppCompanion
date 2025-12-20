@@ -5,8 +5,11 @@ import API.BlizzardAuthInstance
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.d3grimoire.posts.news.NewsActivity
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
@@ -21,10 +24,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var analytics: FirebaseAnalytics
     private lateinit var database: DatabaseReference
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
+
+        progressBar = findViewById(R.id.progressBar)
+        progressBar.visibility = View.VISIBLE
 
         // Firebase
         analytics = Firebase.analytics
@@ -78,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
                 TokenManager.token = response.body()!!.accessToken
 
-                goToMainApp()
+                goToNewsScreen()
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
@@ -88,12 +95,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun goToMainApp() {
-        startActivity(Intent(this, NavBar::class.java))
+    private fun goToNewsScreen() {
+        progressBar.visibility = View.GONE
+        startActivity(Intent(this, NewsActivity::class.java))
         finish()
     }
 
     private fun showError(message: String) {
+        progressBar.visibility = View.GONE
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
