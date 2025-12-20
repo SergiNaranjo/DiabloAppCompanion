@@ -7,6 +7,10 @@ android {
     namespace = "com.example.d3grimoire"
     compileSdk = 36
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.d3grimoire"
         minSdk = 24
@@ -15,6 +19,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "BLIZZARD_CLIENT_ID",
+            "\"${project.findProperty("BLIZZARD_CLIENT_ID")}\""
+        )
+
+        buildConfigField(
+            "String",
+            "BLIZZARD_CLIENT_SECRET",
+            "\"${project.findProperty("BLIZZARD_CLIENT_SECRET")}\""
+        )
     }
 
     buildTypes {
