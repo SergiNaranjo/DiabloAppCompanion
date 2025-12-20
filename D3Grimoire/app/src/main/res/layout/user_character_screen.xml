@@ -2,13 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +34,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:layout_marginBottom="20dp"
-                android:background="#CC0000">
+                android:background="@drawable/ic_template_hero">
 
                 <GridLayout
                     android:id="@+id/gridItems"
@@ -46,101 +45,89 @@
                     android:alignmentMode="alignMargins"
                     android:useDefaultMargins="true">
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_shoulder"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_head"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_shoulder"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_arm"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_body"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_arm"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_ring"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_belt"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_ring"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_arrow"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_pants"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_bow"/>
 
                     <ImageView
                         android:layout_width="70dp"
@@ -148,13 +135,12 @@
                         android:padding="8dp"
                         android:scaleType="centerInside"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_shoes"/>
 
                     <ImageView
                         android:layout_width="70dp"
@@ -178,95 +164,56 @@
 
             <LinearLayout
                 android:id="@+id/statsBox"
-                android:orientation="vertical"
                 android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_height="172dp"
                 android:layout_marginBottom="40dp"
-                android:background="#CC0000">
+                android:background="@drawable/ic_template_hero_info"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LEVEL:                 5"
+                    android:layout_marginBottom="4dp"
+                    android:text="LEVEL:                               5"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="STRENGHT:             2"
+                    android:layout_marginBottom="4dp"
+                    android:text="STRENGHT:                      2"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEXTERITY:            1"
+                    android:layout_marginBottom="4dp"
+                    android:text="DEXTERITY:                      1"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="INTELLIGENCE:         5"
+                    android:layout_marginBottom="4dp"
+                    android:text="INTELLIGENCE:                5"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VITALITY:             4"
+                    android:text="VITALITY:                          4"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <!-- BOTTOM BAR -->
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:background="#333"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
-
-        <ImageButton
-            android:id="@+id/btnNews"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher_foreground"
-            android:padding="14dp"
-            android:contentDescription="News" />
-
-        <ImageButton
-            android:id="@+id/btnInfo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher_foreground"
-            android:padding="14dp"
-            android:contentDescription="Info" />
-
-        <ImageButton
-            android:id="@+id/btnProfile"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher_foreground"
-            android:padding="14dp"
-            android:backgroundTint="#CC0000"
-            android:contentDescription="Profile" />
-    </LinearLayout>
 
 </RelativeLayout>
 

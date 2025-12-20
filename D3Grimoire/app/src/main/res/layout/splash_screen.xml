@@ -8,7 +8,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:padding="50dp"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -24,11 +24,13 @@
         android:layout_weight="10"
         app:srcCompat="@android:drawable/ic_notification_overlay" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="193dp"
-        android:layout_weight="4"
-        app:srcCompat="@android:drawable/btn_radio" />
-    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:indeterminate="true"
+        />
+
 </LinearLayout>

@@ -7,7 +7,7 @@
     android:layout_marginBottom="16dp"
     android:orientation="horizontal"
     android:padding="8dp"
-    android:background="#8A0D08">
+    android:background="@drawable/ic_template_heroes">
 
     <ImageView
         android:layout_width="70dp"

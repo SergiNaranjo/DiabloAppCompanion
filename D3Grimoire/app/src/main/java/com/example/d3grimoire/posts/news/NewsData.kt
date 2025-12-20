@@ -1,4 +1,6 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.posts.news
+
+import com.example.d3grimoire.R
 
 //Ideally, a separate API could be used for news.
 // Unfortunately, Blizzard doesn't share their news through an API.

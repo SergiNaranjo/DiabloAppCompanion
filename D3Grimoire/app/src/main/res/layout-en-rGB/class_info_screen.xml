@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A0F0A"
+    android:background="@drawable/ic_background"
     tools:ignore="MissingDefaultResource">
 
     <LinearLayout
@@ -112,12 +112,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_height="114dp"
             android:layout_marginBottom="20dp"
-            android:background="#113B46"
-            android:gravity="center_vertical">
+            android:background="@drawable/ic_template_classes"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
             <!--ImageView
                 android:layout_width="70dp"
@@ -128,10 +128,10 @@
                 android:clipToOutline="true"-->
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -139,33 +139,33 @@
                     android:text="HAMMER OF THE ANCIENTS"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:text="Cost: 25 Fury"
                     android:textColor="#87E5FF"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="6dp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Smash the ground with an ancient hammer for massive concentrated damage."
                     android:textColor="#DDDDDD"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_height="112dp"
             android:layout_marginBottom="20dp"
-            android:background="#113B46"
-            android:gravity="center_vertical">
+            android:background="@drawable/ic_template_classes"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
             <!--ImageView
                 android:layout_width="70dp"
@@ -176,10 +176,10 @@
                 android:clipToOutline="true"-->
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -187,22 +187,22 @@
                     android:text="WHIRLWIND"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:text="Cost: 10 Fury"
                     android:textColor="#87E5FF"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="6dp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="While whirling you move at +100% increased speed."
                     android:textColor="#DDDDDD"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
