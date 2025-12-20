@@ -71,43 +71,6 @@
         android:elevation="8dp"
         android:background="@drawable/circle_bg_default"/>
 
-    <LinearLayout
-        android:id="@+id/floatingButtons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/bottomBar"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/btnSettings"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
-            android:contentDescription="Settings"
-            android:elevation="8dp"
-            android:background="@drawable/circle_bg_default"/>
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="10dp"/>
-
-        <ImageButton
-            android:id="@+id/btnOther"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
-            android:contentDescription="Other"
-            android:elevation="8dp"
-            android:background="@drawable/circle_bg"/>
-
-    </LinearLayout>
-
     <!-- BOTTOM BAR -->
     <LinearLayout
         android:id="@+id/bottomBar"
