@@ -8,7 +8,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:padding="50dp"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
     <ImageView
         android:id="@+id/imageView2"

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
     <ScrollView
         android:id="@+id/scrollContent"
@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:layout_marginBottom="20dp"
-                android:background="#CC0000">
+                android:background="@drawable/ic_template_hero">
 
                 <GridLayout
                     android:id="@+id/gridItems"
@@ -178,51 +178,51 @@
 
             <LinearLayout
                 android:id="@+id/statsBox"
-                android:orientation="vertical"
                 android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:layout_height="172dp"
                 android:layout_marginBottom="40dp"
-                android:background="#CC0000">
+                android:background="@drawable/ic_template_hero_info"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LEVEL:                 5"
+                    android:layout_marginBottom="4dp"
+                    android:text="LEVEL:                               5"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="STRENGHT:             2"
+                    android:layout_marginBottom="4dp"
+                    android:text="STRENGHT:                      2"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DEXTERITY:            1"
+                    android:layout_marginBottom="4dp"
+                    android:text="DEXTERITY:                      1"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="INTELLIGENCE:         5"
+                    android:layout_marginBottom="4dp"
+                    android:text="INTELLIGENCE:                5"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="VITALITY:             4"
+                    android:text="VITALITY:                          4"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

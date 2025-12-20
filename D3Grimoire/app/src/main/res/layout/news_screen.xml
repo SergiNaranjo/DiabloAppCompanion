@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     tools:ignore="MissingDefaultResource"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:id="@+id/imageView7"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:srcCompat="@android:drawable/editbox_dropdown_light_frame"
+                app:srcCompat="@drawable/diablonews1"
                 android:scaleType="centerCrop"
                 android:layout_marginBottom="20dp" />
 
@@ -88,10 +88,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Settings"
             android:elevation="8dp"
-            android:background="@drawable/circle_bg"/>
+            android:background="@drawable/ic_btn_news_active"/>
 
         <Space
             android:layout_width="10dp"
@@ -102,10 +101,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Other"
             android:elevation="8dp"
-            android:background="@drawable/circle_bg_default"/>
+            android:background="@drawable/ic_btn_community_deactive"/>
 
     </LinearLayout>
 
