@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     tools:ignore="MissingDefaultResource"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        app:srcCompat="@android:drawable/editbox_dropdown_light_frame"
+        app:srcCompat="@drawable/diablonews1"
         android:scaleType="centerCrop"
         android:layout_marginBottom="20dp" />
 
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:padding="10dp"
-            android:background="#2E355C"
+            android:background="@drawable/ic_template_news"
             android:layout_marginBottom="12dp">
 
             <ImageView
@@ -91,12 +91,13 @@
                     android:layout_height="wrap_content"/>
         </LinearLayout>
 </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:padding="10dp"
-            android:background="#2E355C"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/ic_template_news"
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/imageView14"
@@ -108,24 +109,24 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_weight="1"
+                android:orientation="vertical"
                 android:paddingLeft="12dp">
 
                 <TextView
-                    android:text="Juega a Diablo III en Game Pass!"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"/>
+                    android:text="Juega a Diablo III en Game Pass!"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Un nuevo pack de recompensas legendarias..."
                     android:textColor="#bbbbbb"
-                    android:textSize="12sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -133,7 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:padding="10dp"
-            android:background="#2E355C"
+            android:background="@drawable/ic_template_news"
             android:layout_marginBottom="12dp">
 
             <ImageView
@@ -186,10 +187,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Settings"
             android:elevation="8dp"
-            android:background="@drawable/circle_bg"/>
+            android:background="@drawable/ic_btn_news_active"/>
 
         <Space
             android:layout_width="10dp"
@@ -200,10 +200,9 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Other"
             android:elevation="8dp"
-            android:background="@drawable/circle_bg_default"/>
+            android:background="@drawable/ic_btn_community_deactive"/>
 
     </LinearLayout>
 

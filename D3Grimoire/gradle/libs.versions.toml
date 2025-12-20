@@ -29,5 +29,5 @@ converterGson = { group = "com.squareup.retrofit2", name="converter-gson", versi
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.6.0" }
+android-application = { id = "com.android.application", version = "8.9.1" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

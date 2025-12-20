@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1A0F0A"
+    android:background="@drawable/ic_background"
     tools:ignore="MissingDefaultResource">
 
     <LinearLayout
@@ -36,15 +36,15 @@
                 android:layout_weight="1"
                 android:layout_marginEnd="4dp">
 
-                <ImageView
+                <!--ImageView
                     android:id="@+id/imgBarbarian1"
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:src="@tools:sample/backgrounds/scenic"
                     android:scaleType="centerCrop"
-                    android:background="#222" />
+                    android:background="#222" -->
 
-                <ImageButton
+                <!--ImageButton
                     android:id="@+id/circle1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -54,9 +54,9 @@
                     android:padding="6dp"
                     android:background="@drawable/circle_bg"
                     android:src="@android:drawable/ic_dialog_info"
-                    android:scaleType="centerInside" />
+                    android:scaleType="centerInside" -->
 
-                <ImageButton
+                <!--ImageButton
                     android:id="@+id/circle2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -66,12 +66,12 @@
                     android:padding="6dp"
                     android:background="@drawable/circle_bg_default"
                     android:src="@android:drawable/ic_dialog_info"
-                    android:scaleType="centerInside" />
+                    android:scaleType="centerInside" -->
 
 
             </FrameLayout>
 
-            <ImageView
+            <!--ImageView
                 android:id="@+id/imgBarbarian2"
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
@@ -79,7 +79,7 @@
                 android:layout_marginStart="4dp"
                 android:src="@tools:sample/backgrounds/scenic"
                 android:scaleType="centerCrop"
-                android:background="#222" />
+                android:background="#222" -->
 
         </LinearLayout>
 
@@ -104,79 +104,34 @@
             android:layout_marginBottom="28dp"/>
 
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/class_ability_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_height="114dp"
             android:layout_marginBottom="20dp"
-            android:background="#113B46"
+            android:background="@drawable/ic_template_classes"
             android:gravity="center_vertical"
-            android:clipToOutline="true"
-            android:backgroundTint="#113B46">
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@tools:sample/avatars"
-                android:layout_marginRight="16dp"
-                android:background="#000"
-                android:clipToOutline="true"/>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="WHIRLWIND"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Cost: 10 Fury"
-                    android:textColor="#87E5FF"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="6dp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Unleash a flurry of attacks hitting everything in your path for 100% damage."
-                    android:textColor="#DDDDDD"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_marginBottom="20dp"
-            android:background="#113B46"
-            android:gravity="center_vertical">
+            android:padding="16dp">
 
-            <ImageView
+            <!--ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@tools:sample/avatars"
                 android:layout_marginRight="16dp"
                 android:background="#000"
-                android:clipToOutline="true"/>
+                android:clipToOutline="true"-->
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -184,47 +139,47 @@
                     android:text="HAMMER OF THE ANCIENTS"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:text="Cost: 25 Fury"
                     android:textColor="#87E5FF"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="6dp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Smash the ground with an ancient hammer for massive concentrated damage."
                     android:textColor="#DDDDDD"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:layout_height="112dp"
             android:layout_marginBottom="20dp"
-            android:background="#113B46"
-            android:gravity="center_vertical">
+            android:background="@drawable/ic_template_classes"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-            <ImageView
+            <!--ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@tools:sample/avatars"
                 android:layout_marginRight="16dp"
                 android:background="#000"
-                android:clipToOutline="true"/>
+                android:clipToOutline="true"-->
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -232,22 +187,22 @@
                     android:text="WHIRLWIND"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:text="Cost: 10 Fury"
                     android:textColor="#87E5FF"
-                    android:textSize="14sp"
-                    android:layout_marginBottom="6dp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="While whirling you move at +100% increased speed."
                     android:textColor="#DDDDDD"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
 
