@@ -2,7 +2,6 @@ package com.example.d3grimoire
 
 import API.AuthResponse
 import API.BlizzardAuthInstance
-import repository.TokenManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.d3grimoire.BuildConfig
+import repository.TokenManager
 
 class SplashActivity : AppCompatActivity() {
 
@@ -22,35 +23,23 @@ class SplashActivity : AppCompatActivity() {
 
     private fun fetchToken() {
         val api = BlizzardAuthInstance.create(
-            clientId = "YOUR_CLIENT_ID",
-            clientSecret = "YOUR_CLIENT_SECRET"
+            clientId = BuildConfig.BLIZZARD_CLIENT_ID,
+            clientSecret = BuildConfig.BLIZZARD_CLIENT_SECRET
         )
 
         api.getAccessToken().enqueue(object : Callback<AuthResponse> {
-
             override fun onResponse(
                 call: Call<AuthResponse>,
                 response: Response<AuthResponse>
             ) {
-                if (response.isSuccessful && response.body() != null) {
+                TokenManager.token = response.body()?.accessToken
 
-                    //Save token
-                    TokenManager.token = response.body()!!.accessToken
-                    Log.d("TOKEN", "Token received")
-
-                    //Navigate to NewsActivity
-                    startActivity(
-                        Intent(this@SplashActivity, NewsActivity::class.java)
-                    )
-                    finish()
-
-                } else {
-                    Log.e("TOKEN", "Response error: ${response.code()}")
-                }
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                finish()
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                Log.e("TOKEN", "Token request failed", t)
+                Log.e("TOKEN", "Failed to fetch token", t)
             }
         })
     }
