@@ -20,7 +20,7 @@ class NavBar : AppCompatActivity() {
     private lateinit var btnNews: ImageButton
     private lateinit var btnInfo: ImageButton
     private lateinit var btnProfile: ImageButton
-
+    private lateinit var postScreen: PostScreen
     private lateinit var floatingButtons: LinearLayout;
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,19 +37,19 @@ class NavBar : AppCompatActivity() {
 
         floatingButtons = findViewById<LinearLayout>(R.id.floatingButtons);
 
-        val communityScreenButton: ImageButton = findViewById<ImageButton>(R.id.community_screen);
-        val newsScreenButton: ImageButton = findViewById<ImageButton>(R.id.news_screen);
+        val communityScreenButton: ImageButton = findViewById<ImageButton>(R.id.btnOther);
+        val newsScreenButton: ImageButton = findViewById<ImageButton>(R.id.btnSettings);
         communityScreenButton.setOnClickListener {
             postScreen = PostScreen.COMMUNITY;
             loadFragment(CommunityScreen());
-            communityScreenButton.setBackgroundResource(R.drawable.circle_bg);
-            newsScreenButton.setBackgroundResource(R.drawable.circle_bg_default);
+            communityScreenButton.setBackgroundResource(R.drawable.ic_btn_community_active);
+            newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_deactive);
         }
         newsScreenButton.setOnClickListener {
             postScreen = PostScreen.NEWS;
             loadFragment(NewsScreen());
-            communityScreenButton.setBackgroundResource(R.drawable.circle_bg_default);
-            newsScreenButton.setBackgroundResource(R.drawable.circle_bg);
+            communityScreenButton.setBackgroundResource(R.drawable.ic_btn_community_deactive);
+            newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_active);
         }
 
         postScreen = PostScreen.NEWS;

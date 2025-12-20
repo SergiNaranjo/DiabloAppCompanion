@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.posts.news
 
 import API.model.ClassDetailResponse
 import API.model.ClassesResponse
@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import repository.TokenManager
+import com.example.d3grimoire.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
