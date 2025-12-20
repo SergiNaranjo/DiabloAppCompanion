@@ -16,13 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D3Grimoire" >
         <activity
-            android:name=".NewsPost"
+            android:name=".posts.news.NewsPost"
             android:exported="false" />
         <activity
-            android:name=".NewsPostButton"
+            android:name=".posts.news.NewsPostButton"
             android:exported="false" />
         <activity
-            android:name=".NewsScreen"
+            android:name=".posts.news.NewsScreen"
             android:exported="false" />
         <activity
             android:name=".ClassInfoScreen"
@@ -43,10 +43,10 @@
             android:name=".ProfileHero"
             android:exported="false" />
         <activity
-            android:name=".CommunityScreen"
+            android:name=".posts.community.CommunityScreen"
             android:exported="false" />
         <activity
-            android:name=".CommunityPost"
+            android:name=".posts.community.CommunityPost"
             android:exported="false" />
         <activity android:name=".NavBar"
             android:exported="false"/>

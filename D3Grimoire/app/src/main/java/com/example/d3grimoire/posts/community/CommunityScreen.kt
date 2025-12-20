@@ -1,18 +1,21 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.posts.community
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import com.example.d3grimoire.R
 
 class CommunityScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.community_screen)
+
+        val imgBtn: ImageButton = findViewById<ImageButton>(R.id.new_post);
+        imgBtn.setOnClickListener { newPost(); }
+
         var bundle : Bundle = bundleOf(
             "title" to "NEW MATERIAL FOR FARMING XP",
             "desc" to "A new advanced tutorial has been released...",
@@ -42,5 +45,9 @@ class CommunityScreen : AppCompatActivity() {
             setReorderingAllowed(true);
             add<CommunityPost>(R.id.post_3, args = bundle);
         }
+    }
+
+    private fun newPost() {
+        //TODO: change to new post screen
     }
 }
