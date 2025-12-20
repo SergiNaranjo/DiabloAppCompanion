@@ -1,49 +1,61 @@
 package com.example.d3grimoire
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class NavBar : AppCompatActivity() {
 
-    private lateinit var bottomNavigationView: BottomNavigationView;
+    private lateinit var btnNews: ImageButton
+    private lateinit var btnInfo: ImageButton
+    private lateinit var btnProfile: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navbar);
-        bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation_bar);
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_navbar)
 
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            handleNavigationItemSelected(item.itemId);
+        btnNews = findViewById(R.id.btnNews)
+        btnInfo = findViewById(R.id.btnInfo)
+        btnProfile = findViewById(R.id.btnProfile)
+
+        setupListeners()
+
+        // Fragment inicial
+        selectTab(btnNews)
+        loadFragment(NewsScreen())
+    }
+
+    private fun setupListeners() {
+        btnNews.setOnClickListener {
+            selectTab(btnNews)
+            loadFragment(NewsScreen())
         }
 
-        loadFragment(NewsScreen());
+        btnInfo.setOnClickListener {
+            selectTab(btnInfo)
+            loadFragment(InfoScreen())
+        }
+
+        btnProfile.setOnClickListener {
+            selectTab(btnProfile)
+            loadFragment(ProfileActivity())
+        }
+    }
+
+    private fun selectTab(selected: ImageButton) {
+        btnNews.isSelected = false
+        btnInfo.isSelected = false
+        btnProfile.isSelected = false
+
+        selected.isSelected = true
     }
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.commit {
-            setReorderingAllowed(true);
-            add(R.id.navbar_fragment, fragment);
-        }
-    }
-
-    private fun handleNavigationItemSelected(itemId: Int): Boolean {
-        return when (itemId) {
-            R.id.news -> {
-                loadFragment(NewsScreen())
-                true
-            }
-            R.id.info -> {
-                loadFragment(InfoScreen())
-                true
-            }
-            R.id.profile -> {
-                loadFragment(ProfileActivity())
-                true
-            }
-            else -> false
+            setReorderingAllowed(true)
+            replace(R.id.fragment_container, fragment)
         }
     }
 }

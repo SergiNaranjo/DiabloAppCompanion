@@ -9,8 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,10 +63,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/bottomBar"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
-        android:gravity="center">
+        android:gravity="center">>
 
         <ImageButton
             android:id="@+id/btnSettings"
@@ -93,45 +92,6 @@
 
     </LinearLayout>
 
-    <!-- BOTTOM BAR -->
-    <LinearLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:background="#333"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
-
-        <ImageButton
-            android:id="@+id/btnNews"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher_foreground"
-            android:padding="14dp"
-            android:backgroundTint="#CC0000"
-            android:contentDescription="News" />
-
-        <ImageButton
-            android:id="@+id/btnInfo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher_foreground"
-            android:padding="14dp"
-            android:contentDescription="Info" />
-
-        <ImageButton
-            android:id="@+id/btnProfile"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher_foreground"
-            android:padding="14dp"
-            android:contentDescription="Profile" />
-
-    </LinearLayout>
 
 
 </RelativeLayout>
