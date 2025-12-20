@@ -58,6 +58,19 @@
         </LinearLayout>
     </ScrollView>
 
+    <ImageButton
+        android:id="@+id/new_post"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/bottomBar"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:padding="12dp"
+        android:src="@android:drawable/ic_dialog_info"
+        android:contentDescription="Settings"
+        android:elevation="8dp"
+        android:background="@drawable/circle_bg_default"/>
+
     <LinearLayout
         android:id="@+id/floatingButtons"
         android:layout_width="wrap_content"
