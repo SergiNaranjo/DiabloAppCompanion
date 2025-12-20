@@ -1,11 +1,9 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.posts.news
 
 import android.os.Bundle
 import android.webkit.WebView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.d3grimoire.R
 
 class NewsPost : AppCompatActivity() {
 
