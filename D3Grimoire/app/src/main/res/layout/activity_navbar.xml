@@ -1,65 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/navbar_fragment"
-        android:layout_weight="0.1"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <LinearLayout
+        android:id="@+id/custom_navbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.9"
-        android:id="@+id/navigation_bar"
-        app:menu="@menu/navbar"/>
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="#333">
 
+        <ImageButton
+            android:id="@+id/btnNews"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_news_selector"
+            android:contentDescription="news"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/btnInfo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_info_selector"
+            android:contentDescription="info"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_nav_profile_selector"
+            android:contentDescription="profile"
+            android:scaleType="centerInside" />
     </LinearLayout>
 
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/floatingButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="150dp"
         android:layout_marginEnd="20dp"
         android:gravity="center">
 
         <ImageButton
-            android:id="@+id/community_screen"
+            android:id="@+id/btnSettings"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Settings"
             android:elevation="8dp"
-            android:background="@drawable/circle_bg_default"/>
+            android:background="@drawable/ic_btn_news_deactive"/>
 
         <Space
             android:layout_width="10dp"
             android:layout_height="10dp"/>
 
         <ImageButton
-            android:id="@+id/news_screen"
+            android:id="@+id/btnOther"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:src="@android:drawable/ic_dialog_info"
             android:contentDescription="Other"
             android:elevation="8dp"
-            android:background="@drawable/circle_bg"/>
+            android:background="@drawable/ic_btn_community_active" />
 
     </LinearLayout>
-
 </RelativeLayout>

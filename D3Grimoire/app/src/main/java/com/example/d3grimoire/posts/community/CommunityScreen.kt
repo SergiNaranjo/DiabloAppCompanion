@@ -13,7 +13,7 @@ import com.example.d3grimoire.R
 class CommunityScreen : Fragment(R.layout.community_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val imgBtn: ImageButton = view.findViewById<ImageButton>(R.id.new_post);
+        val imgBtn: ImageButton = view.findViewById<ImageButton>(R.id.fragment_container_view);
         imgBtn.setOnClickListener { newPost(); }
 
         var bundle : Bundle = bundleOf(

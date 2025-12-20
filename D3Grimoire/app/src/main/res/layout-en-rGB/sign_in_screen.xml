@@ -9,7 +9,7 @@
     android:padding="24dp"
     android:gravity="center_horizontal"
     tools:ignore="MissingDefaultResource"
-    android:background="#1A0F0A">
+    android:background="@drawable/ic_background">
 
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="505dp"
         android:layout_marginTop="12dp"
-        android:background="#7A1F0A"
+        android:background="@drawable/ic_template_login"
         android:elevation="6dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -102,54 +102,48 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="#33000000"
-                android:contentDescription="Login Steam"
-                android:src="@android:drawable/alert_light_frame" />
+                android:background="@drawable/ic_btn_stores"
+                android:contentDescription="Login Steam" />
 
             <ImageButton
                 android:id="@+id/btnPlayStation"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="#33000000"
-                android:contentDescription="Login PlayStation"
-                android:src="@android:drawable/alert_light_frame" />
+                android:background="@drawable/ic_btn_stores"
+                android:contentDescription="Login PlayStation" />
 
             <ImageButton
                 android:id="@+id/btnNintendo"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="#33000000"
-                android:contentDescription="Login Nintendo"
-                android:src="@android:drawable/alert_light_frame" />
+                android:background="@drawable/ic_btn_stores"
+                android:contentDescription="Login Nintendo" />
 
             <ImageButton
                 android:id="@+id/btnXbox"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="#33000000"
-                android:contentDescription="Login Xbox"
-                android:src="@android:drawable/alert_light_frame" />
+                android:background="@drawable/ic_btn_stores"
+                android:contentDescription="Login Xbox" />
 
             <ImageButton
                 android:id="@+id/btnGoogle"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="#33000000"
-                android:contentDescription="Login Google"
-                android:src="@android:drawable/alert_light_frame" />
+                android:background="@drawable/ic_btn_stores"
+                android:contentDescription="Login Google" />
 
             <ImageButton
                 android:id="@+id/btnBattleNet"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="12dp"
-                android:background="#33000000"
-                android:contentDescription="Login BattleNet"
-                android:src="@android:drawable/alert_light_frame" />
+                android:background="@drawable/ic_btn_stores"
+                android:contentDescription="Login BattleNet" />
 
         </androidx.gridlayout.widget.GridLayout>
 

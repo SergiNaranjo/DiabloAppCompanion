@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:layout_marginBottom="12dp"
-    android:background="#2E355C"
+    android:background="@drawable/ic_template_news"
     android:padding="10dp"
     android:orientation="horizontal">
 
