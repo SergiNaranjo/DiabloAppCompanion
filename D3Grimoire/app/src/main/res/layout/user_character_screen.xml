@@ -45,101 +45,89 @@
                     android:alignmentMode="alignMargins"
                     android:useDefaultMargins="true">
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_shoulder"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_head"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_shoulder"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_arm"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_body"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_arm"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_ring"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_belt"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_ring"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_arrow"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_pants"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_bow"/>
 
                     <ImageView
                         android:layout_width="70dp"
@@ -147,13 +135,12 @@
                         android:padding="8dp"
                         android:scaleType="centerInside"/>
 
-                    <!--ImageView
+                    <ImageView
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@tools:sample/avatars"
                         android:padding="8dp"
                         android:scaleType="centerInside"
-                        android:background="#1A0F0A"-->
+                        android:background="@drawable/ic_btn_hero_shoes"/>
 
                     <ImageView
                         android:layout_width="70dp"

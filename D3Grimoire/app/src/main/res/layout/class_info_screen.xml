@@ -44,29 +44,27 @@
                     android:scaleType="centerCrop"
                     android:background="#222" -->
 
-                <!--ImageButton
+                <ImageButton
                     android:id="@+id/circle1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="bottom|start"
                     android:layout_marginStart="4dp"
                     android:layout_marginBottom="40dp"
                     android:padding="6dp"
-                    android:background="@drawable/circle_bg"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:scaleType="centerInside" -->
+                    android:background="@drawable/ic_btn_male_active"
+                    android:scaleType="centerInside" />
 
-                <!--ImageButton
+                <ImageButton
                     android:id="@+id/circle2"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="bottom|start"
                     android:layout_marginStart="4dp"
                     android:layout_marginBottom="4dp"
                     android:padding="6dp"
-                    android:background="@drawable/circle_bg_default"
-                    android:src="@android:drawable/ic_dialog_info"
-                    android:scaleType="centerInside" -->
+                    android:background="@drawable/ic_btn_female_deactive"
+                    android:scaleType="centerInside" />
 
 
             </FrameLayout>

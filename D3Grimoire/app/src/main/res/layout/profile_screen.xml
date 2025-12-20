@@ -28,14 +28,14 @@
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
-            <!--ImageView
+            <ImageView
                 android:id="@+id/imgAvatar"
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginBottom="12dp"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@tools:sample/avatars" -->
+                android:background="@drawable/ic_template_profile_img" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -53,12 +53,12 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
-                <!--ImageView
+                <ImageView
                     android:id="@+id/btnEdit"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="6dp"
-                    android:src="@tools:sample/avatars" -->
+                    android:background="@drawable/ic_btn_username" />
             </LinearLayout>
 
             <TextView
