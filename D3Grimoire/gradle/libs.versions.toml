@@ -16,6 +16,7 @@ firebaseAnalytics = "22.1.0"
 firebaseCommonKtx = "21.0.0"
 firebaseCrashlytics = "20.0.3"
 googleFirebaseCrashlytics = "3.0.6"
+firebaseDatabase = "22.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +33,7 @@ converterGson = { group = "com.squareup.retrofit2", name="converter-gson", versi
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-common-ktx = { group = "com.google.firebase", name = "firebase-common-ktx", version.ref = "firebaseCommonKtx" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version = "8.9.1" }
