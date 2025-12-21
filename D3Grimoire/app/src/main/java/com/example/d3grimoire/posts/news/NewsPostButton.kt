@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.d3grimoire.R
+import com.example.d3grimoire.posts.NewsData
 import java.net.URL
 import java.util.concurrent.Executors
 
