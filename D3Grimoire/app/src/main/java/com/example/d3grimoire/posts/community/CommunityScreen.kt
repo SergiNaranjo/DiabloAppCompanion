@@ -55,6 +55,7 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
                         val bundle: Bundle = bundleOf(
                             "title" to dataSnapshot.child("title").getValue(String::class.java),
                             "desc" to dataSnapshot.child("desc").getValue(String::class.java),
+                            "imgUrl" to dataSnapshot.child("imgUrl").getValue(String::class.java),
                             "author" to "a"
                         );
                         childFragmentManager.commit {
@@ -63,7 +64,9 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
                         }
                         postIndex++;
                     }
-                } else { println("No posts") }
+                } else {
+                    println("No posts")
+                }
             }
             .addOnFailureListener { exception ->
                 println("Error: ${exception.message}")
