@@ -56,7 +56,7 @@ class NavBar : AppCompatActivity() {
         setFloatingButtonsVisibility(View.GONE);
 
         postScreen = PostScreen.NEWS;
-        loadFragment(CommunityScreen())
+        loadFragment(SignInActivity())
     }
 
     private fun setupListeners() {
