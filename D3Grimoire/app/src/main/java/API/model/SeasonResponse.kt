@@ -5,5 +5,6 @@ data class SeasonResponse(
 )
 
 data class Season(
-    val id: Int
+    val id: Int,
+    val name: String
 )

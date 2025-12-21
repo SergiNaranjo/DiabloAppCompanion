@@ -2,23 +2,23 @@ package API.repository
 
 import API.DiabloApiInstance
 import API.model.*
-import repository.TokenManager
 import retrofit2.Call
 
 object DiabloRepository {
 
-    private fun token(): String =
-        TokenManager.token ?: throw IllegalStateException("Token not initialized")
+    fun getSeasons(token: String): Call<SeasonResponse> {
+        return DiabloApiInstance.api.getSeasons(token = token)
+    }
 
-    fun getSeasons(): Call<SeasonResponse> =
-        DiabloApiInstance.api.getSeasons(token = token())
+    fun getClasses(token: String): Call<ClassesResponse> {
+        return DiabloApiInstance.api.getClasses(token = token)
+    }
 
-    fun getClasses(): Call<ClassesResponse> =
-        DiabloApiInstance.api.getClasses(token = token())
+    fun getClassDetail(slug: String, token: String): Call<ClassDetailResponse> {
+        return DiabloApiInstance.api.getClassDetail(slug, token = token)
+    }
 
-    fun getClassDetail(slug: String): Call<ClassDetailResponse> =
-        DiabloApiInstance.api.getClassDetail(classSlug = slug, token = token())
-
-    fun getItem(slug: String): Call<ItemResponse> =
-        DiabloApiInstance.api.getItemDetail(itemSlug = slug, token = token())
+    fun getItem(slug: String, token: String): Call<ItemResponse> {
+        return DiabloApiInstance.api.getItem(slug, token = token)
+    }
 }

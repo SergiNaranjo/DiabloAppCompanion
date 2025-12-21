@@ -1,43 +1,35 @@
 package API
 
-import API.model.ClassDetailResponse
-import API.model.ClassesResponse
-import API.model.ItemResponse
-import API.model.SeasonResponse
+import API.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface DiabloApiService {
 
-    @GET("d3/data/season")
+    @GET("d3/data/season/")
     fun getSeasons(
-        @Query("namespace") namespace: String = "d3",
         @Query("locale") locale: String = "en_US",
         @Query("access_token") token: String
     ): Call<SeasonResponse>
 
-    @GET("d3/data/hero")
+    @GET("d3/data/class/")
     fun getClasses(
-        @Query("namespace") namespace: String = "d3",
         @Query("locale") locale: String = "en_US",
         @Query("access_token") token: String
     ): Call<ClassesResponse>
 
-    @GET("d3/data/hero/{classSlug}")
+    @GET("d3/data/class/{slug}/")
     fun getClassDetail(
-        @Path("classSlug") classSlug: String,
-        @Query("namespace") namespace: String = "d3",
+        @Path("slug") slug: String,
         @Query("locale") locale: String = "en_US",
         @Query("access_token") token: String
     ): Call<ClassDetailResponse>
 
-    @GET("d3/data/item/{itemSlug}")
-    fun getItemDetail(
-        @Path("itemSlug") itemSlug: String,
-        @Query("namespace") namespace: String = "d3",
+    @GET("d3/data/item/{slug}/")
+    fun getItem(
+        @Path("slug") slug: String,
         @Query("locale") locale: String = "en_US",
         @Query("access_token") token: String
     ): Call<ItemResponse>
