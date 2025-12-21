@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d3grimoire.posts.news.NewsActivity
+import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
@@ -26,12 +27,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var progressBar: ProgressBar
 
+    companion object {
+        private const val TAG = "SPLASH_API"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
+
+        Log.d(TAG, "Splash started, showing progress bar")
 
         // Firebase
         analytics = Firebase.analytics
@@ -46,8 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         // Start loading
         fetchToken()
-
-        startActivity(Intent(this, NavBar::class.java))
     }
 
     private fun writeTestMessage() {
@@ -61,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         database.child(dataId)
             .setValue(messageData)
             .addOnSuccessListener {
-                Log.d("FIREBASE", "Message written")
+                Log.d("FIREBASE", "Message written successfully")
             }
             .addOnFailureListener {
                 Log.e("FIREBASE", "Write failed", it)
@@ -69,6 +74,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchToken() {
+        Log.d(TAG, "Starting Blizzard API token request")
+
         val api = BlizzardAuthInstance.create(
             clientId = BuildConfig.BLIZZARD_CLIENT_ID,
             clientSecret = BuildConfig.BLIZZARD_CLIENT_SECRET
@@ -80,24 +87,33 @@ class MainActivity : AppCompatActivity() {
                 call: Call<AuthResponse>,
                 response: Response<AuthResponse>
             ) {
+                Log.d(TAG, "Token response received: code=${response.code()}")
+
                 if (!response.isSuccessful || response.body() == null) {
+                    Log.e(TAG, "Token request failed: ${response.errorBody()?.string()}")
                     showError("Failed to authenticate")
                     return
                 }
 
-                TokenManager.token = response.body()!!.accessToken
+                val token = response.body()!!.accessToken
+                TokenManager.token = token
+
+                Log.d(TAG, "API setup successful, token acquired")
+                Log.d(TAG, "Token preview: ${token.take(10)}...")
 
                 goToNewsScreen()
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                Log.e(TAG, "Token request failed due to network error", t)
                 showError("Network error")
-                Log.e("TOKEN", "Failed to fetch token", t)
             }
         })
     }
 
     private fun goToNewsScreen() {
+        Log.d(TAG, "Navigating to NewsActivity")
+
         progressBar.visibility = View.GONE
         startActivity(Intent(this, NewsActivity::class.java))
         finish()

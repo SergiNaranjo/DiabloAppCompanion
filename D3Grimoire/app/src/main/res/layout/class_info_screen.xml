@@ -101,21 +101,27 @@
             android:gravity="center"
             android:layout_marginBottom="28dp"/>
 
+        <LinearLayout
+            android:id="@+id/skill_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/class_ability_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/class_ability_2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/class_ability_3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
