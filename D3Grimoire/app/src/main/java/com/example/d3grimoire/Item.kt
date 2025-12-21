@@ -2,27 +2,36 @@ package com.example.d3grimoire
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import coil.load
 
 class Item : Fragment(R.layout.item_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val name : String? = requireArguments().getString("name");
-        var textView : TextView = view.findViewById<TextView>(R.id.item_name);
-        textView.text = name;
+        val name = arguments?.getString("name")
+        val type = arguments?.getString("type")
+        val requiredLevel = arguments?.getInt("requiredLevel") ?: 0
+        val description = arguments?.getString("desc")
+        val iconUrl = arguments?.getString("iconUrl")
 
-        val type : String? = requireArguments().getString("type");
-        textView = view.findViewById<TextView>(R.id.item_type);
-        textView.text = type;
+        val nameTv: TextView = view.findViewById(R.id.item_name)
+        val typeTv: TextView = view.findViewById(R.id.item_type)
+        val levelTv: TextView = view.findViewById(R.id.item_level_required)
+        val descTv: TextView = view.findViewById(R.id.item_description)
+        val iconIv: ImageView = view.findViewById(R.id.item_icon)
 
-        val requiredLevel : Int? = requireArguments().getInt("requiredLevel");
-        textView = view.findViewById<TextView>(R.id.item_level_required);
-        textView.text = "REQUIRES LEVEL: " + requiredLevel.toString();
+        nameTv.text = name
+        typeTv.text = type
+        levelTv.text = "REQUIRES LEVEL: $requiredLevel"
+        descTv.text = description
 
-        val description : String? = requireArguments().getString("desc");
-        textView = view.findViewById<TextView>(R.id.item_description);
-        textView.text = description;
+        iconIv.load(iconUrl) {
+            crossfade(true)
+            placeholder(android.R.drawable.progress_horizontal)
+            error(android.R.drawable.stat_notify_error)
+        }
     }
 }
