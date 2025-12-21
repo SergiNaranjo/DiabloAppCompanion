@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Navigating to NewsActivity")
 
         progressBar.visibility = View.GONE
-        startActivity(Intent(this, NewsActivity::class.java))
+        startActivity(Intent(this, NavBar::class.java))
         finish()
     }
 
