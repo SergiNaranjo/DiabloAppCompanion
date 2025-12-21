@@ -1,165 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
-    tools:ignore="MissingDefaultResource"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
     android:background="@drawable/ic_background">
 
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="245dp"
-        android:layout_height="192dp"
-        android:layout_weight="10"
-        app:srcCompat="@android:drawable/alert_dark_frame" />
-
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="505dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/ic_template_login"
-        android:elevation="6dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingDefaultResource">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:gravity="center"
-            android:text="LOGIN"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:text="Username or Email"
-            android:textColor="#fff" />
-
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="16dp"
-            android:background="#33000000"
-            android:hint="example@email.com"
-            android:padding="12dp"
-            android:textColor="#ffffff"
-            android:textColorHint="#bbbbbb" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:text="Password"
-            android:textColor="#fff" />
-
-        <EditText
-            android:id="@+id/username2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
-            android:background="#33000000"
-            android:hint="*********"
-            android:padding="12dp"
-            android:textColor="#ffffff"
-            android:textColorHint="#bbbbbb" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="200dp"
+            android:layout_height="144dp"
             android:layout_marginBottom="12dp"
-            android:gravity="center"
-            android:text="Or login with"
-            android:textColor="#fff"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:background="@drawable/ic_img_logo" />
 
-        <androidx.gridlayout.widget.GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:alignmentMode="alignMargins"
-            app:columnCount="3"
-            app:rowCount="2"
-            app:useDefaultMargins="true">
-
-            <ImageButton
-                android:id="@+id/btnSteam"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                android:background="@drawable/ic_btn_stores"
-                android:contentDescription="Login Steam" />
-
-            <ImageButton
-                android:id="@+id/btnPlayStation"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                android:background="@drawable/ic_btn_stores"
-                android:contentDescription="Login PlayStation" />
-
-            <ImageButton
-                android:id="@+id/btnNintendo"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                android:background="@drawable/ic_btn_stores"
-                android:contentDescription="Login Nintendo" />
-
-            <ImageButton
-                android:id="@+id/btnXbox"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                android:background="@drawable/ic_btn_stores"
-                android:contentDescription="Login Xbox" />
-
-            <ImageButton
-                android:id="@+id/btnGoogle"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                android:background="@drawable/ic_btn_stores"
-                android:contentDescription="Login Google" />
-
-            <ImageButton
-                android:id="@+id/btnBattleNet"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="12dp"
-                android:background="@drawable/ic_btn_stores"
-                android:contentDescription="Login BattleNet" />
-
-        </androidx.gridlayout.widget.GridLayout>
-
-        <TextView
-            android:id="@+id/textView5"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="8dp"
-            android:text="Don't have an account? REGISTER HERE"
-            android:textColor="#ffffff"
+            android:layout_height="511dp"
+            android:background="@drawable/ic_template_login"
+            android:elevation="6dp"
             android:gravity="center"
-            android:textStyle="bold"
-            android:clickable="true"
-            android:focusable="true" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="LOGIN"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Username or Email"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:background="#33000000"
+                android:hint="example@email.com"
+                android:padding="12dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#bbbbbb" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="Password"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
+                android:background="#33000000"
+                android:hint="********"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#bbbbbb" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="Or login with"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.gridlayout.widget.GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:columnCount="3"
+                app:rowCount="2"
+                app:useDefaultMargins="true">
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_btn_stores"
+                    android:contentDescription="Steam" />
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_btn_stores"
+                    android:contentDescription="PlayStation" />
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_btn_stores"
+                    android:contentDescription="Nintendo" />
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_btn_stores"
+                    android:contentDescription="Xbox" />
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_btn_stores"
+                    android:contentDescription="Google" />
+
+                <ImageButton
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_btn_stores"
+                    android:contentDescription="BattleNet" />
+            </androidx.gridlayout.widget.GridLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="Don't have an account? REGISTER HERE"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+</ScrollView>
