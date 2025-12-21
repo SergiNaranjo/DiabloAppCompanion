@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.firebase.common.ktx)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

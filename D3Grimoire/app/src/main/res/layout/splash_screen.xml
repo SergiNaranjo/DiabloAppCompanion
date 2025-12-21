@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:padding="50dp"
-    android:background="#1A0F0A">
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@drawable/ic_background">
 
+    <!-- LOGO -->
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="196dp"
-        android:layout_weight="10"
-        app:srcCompat="@android:drawable/ic_notification_overlay" />
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:src="@drawable/ic_img_logo"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
 
+    <!-- SPLASH IMAGE -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="238dp"
-        android:layout_weight="10"
-        app:srcCompat="@android:drawable/ic_notification_overlay" />
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:src="@drawable/ic_img_splash"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="193dp"
-        android:layout_weight="4"
-        app:srcCompat="@android:drawable/btn_radio" />
-    
+    <!-- LOADING -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:indeterminate="true" />
+
 </LinearLayout>
