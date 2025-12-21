@@ -2,6 +2,7 @@ package com.example.d3grimoire.posts.news
 
 import API.DiabloApiInstance
 import API.model.HeroClassResponse
+import API.model.ItemResponse
 import API.model.SkillResponse
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +17,11 @@ class NewsActivity : AppCompatActivity() {
     companion object {
         private const val TAG_CLASS = "CLASS_API"
         private const val TAG_SKILL = "SKILL_API"
+        private const val TAG_ITEM = "ITEM_API"
     }
+
+    private val testItemSlug =
+        "corrupted-ashbringer-Unique_Sword_2H_104_x1"
 
     private val heroSlugs = listOf(
         "barbarian",
@@ -34,6 +39,7 @@ class NewsActivity : AppCompatActivity() {
 
         loadAllHeroClasses()
         loadSingleSkill()
+        loadItem()
     }
 
     private fun loadAllHeroClasses() {
@@ -96,5 +102,33 @@ class NewsActivity : AppCompatActivity() {
                 Log.e(TAG_SKILL, "Skill API error", t)
             }
         })
+    }
+
+    private fun loadItem() {
+        DiabloApiInstance.api.getItem(testItemSlug)
+            .enqueue(object : Callback<ItemResponse> {
+
+                override fun onResponse(
+                    call: Call<ItemResponse>,
+                    response: Response<ItemResponse>
+                ) {
+                    if (!response.isSuccessful) {
+                        Log.e(TAG_ITEM, "Item failed: ${response.code()}")
+                        return
+                    }
+
+                    val item = response.body() ?: return
+
+                    Log.d(TAG_ITEM, "Item name: ${item.name}")
+                    Log.d(TAG_ITEM, "Level: ${item.itemLevel}")
+                    Log.d(TAG_ITEM, "Required level: ${item.requiredLevel}")
+                    Log.d(TAG_ITEM, "Damage: ${item.damage}")
+                    Log.d(TAG_ITEM, "APS: ${item.attacksPerSecond}")
+                }
+
+                override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
+                    Log.e(TAG_ITEM, "Item API error", t)
+                }
+            })
     }
 }
