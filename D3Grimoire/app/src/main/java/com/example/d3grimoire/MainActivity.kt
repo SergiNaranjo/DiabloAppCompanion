@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
         // Start loading
         fetchToken()
+
+        startActivity(Intent(this, NavBar::class.java))
     }
 
     private fun writeTestMessage() {
