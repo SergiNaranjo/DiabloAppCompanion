@@ -1,13 +1,11 @@
 package com.example.d3grimoire.posts.news
 
-import API.model.ClassDetailResponse
-import API.model.ClassesResponse
+import API.DiabloApiInstance
+import API.model.HeroClassResponse
 import API.model.ItemResponse
-import API.model.SeasonResponse
-import API.repository.DiabloRepository
+import API.model.SkillResponse
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d3grimoire.R
 import retrofit2.Call
@@ -16,89 +14,120 @@ import retrofit2.Response
 
 class NewsActivity : AppCompatActivity() {
 
+    companion object {
+        private const val TAG_CLASS = "CLASS_API"
+        private const val TAG_SKILL = "SKILL_API"
+        private const val TAG_ITEM = "ITEM_API"
+    }
+
+    private val testItemSlug =
+        "corrupted-ashbringer-Unique_Sword_2H_104_x1"
+
+    private val heroSlugs = listOf(
+        "barbarian",
+        "crusader",
+        "demon-hunter",
+        "monk",
+        "necromancer",
+        "witch-doctor",
+        "wizard"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.news_screen)
 
-        loadSeasons()
+        loadAllHeroClasses()
+        loadSingleSkill()
+        loadItem()
     }
 
-    private fun loadSeasons() {
-        DiabloRepository.getSeasons()
-            .enqueue(object : Callback<SeasonResponse> {
+    private fun loadAllHeroClasses() {
+        heroSlugs.forEach { slug ->
+            loadHero(slug)
+        }
+    }
+
+    private fun loadHero(slug: String) {
+        DiabloApiInstance.api.getHeroClass(slug)
+            .enqueue(object : Callback<HeroClassResponse> {
 
                 override fun onResponse(
-                    call: Call<SeasonResponse>,
-                    response: Response<SeasonResponse>
+                    call: Call<HeroClassResponse>,
+                    response: Response<HeroClassResponse>
                 ) {
-                    if (response.isSuccessful) {
-                        val seasons = response.body()?.season
-                        seasons?.forEach {
-                            Log.d("SEASON", "Season ID: ${it.id}")
-                        }
+                    if (!response.isSuccessful) {
+                        Log.e(TAG_CLASS, "Failed $slug: ${response.code()}")
+                        return
+                    }
+
+                    val hero = response.body() ?: return
+
+                    Log.d(TAG_CLASS, "Hero: ${hero.name}")
+                    Log.d(TAG_CLASS, "Male: ${hero.maleName}, Female: ${hero.femaleName}")
+
+                    hero.skills.active.forEach {
+                        Log.d(TAG_CLASS, "Active: ${it.name}")
+                    }
+
+                    hero.skills.passive.forEach {
+                        Log.d(TAG_CLASS, "Passive: ${it.name}")
                     }
                 }
 
-                override fun onFailure(call: Call<SeasonResponse>, t: Throwable) {
-                    Toast.makeText(this@NewsActivity, "API Error", Toast.LENGTH_SHORT).show()
+                override fun onFailure(call: Call<HeroClassResponse>, t: Throwable) {
+                    Log.e(TAG_CLASS, "API error for $slug", t)
                 }
             })
     }
 
-    private fun loadClasses() {
-        DiabloRepository.getClasses()
-            .enqueue(object : Callback<ClassesResponse> {
-                override fun onResponse(call: Call<ClassesResponse>, response: Response<ClassesResponse>) {
-                    if (response.isSuccessful) {
-                        val classes = response.body()?.classes
-                        classes?.forEach {
-                            Log.d("CLASS", "Class: ${it.name} (${it.slug})")
-                        }
-                    }
-                }
+    private fun loadSingleSkill() {
+        DiabloApiInstance.api.getSkill(
+            classSlug = "barbarian",
+            skillSlug = "bash"
+        ).enqueue(object : Callback<SkillResponse> {
 
-                override fun onFailure(call: Call<ClassesResponse>, t: Throwable) {
-                    //TODO REPLACE NEWS ACTIVITY WITH THE ACTUAL ACTIVITY THIS FUNCTION WILL BE IN
-                    Toast.makeText(this@NewsActivity, "API Error", Toast.LENGTH_SHORT).show()
+            override fun onResponse(
+                call: Call<SkillResponse>,
+                response: Response<SkillResponse>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d(TAG_SKILL, "Skill: ${response.body()?.name}")
+                } else {
+                    Log.e(TAG_SKILL, "Skill failed: ${response.code()}")
                 }
-            })
+            }
+
+            override fun onFailure(call: Call<SkillResponse>, t: Throwable) {
+                Log.e(TAG_SKILL, "Skill API error", t)
+            }
+        })
     }
 
-    private fun loadClassDetail(slug: String) {
-        DiabloRepository.getClassDetail(slug)
-            .enqueue(object : Callback<ClassDetailResponse> {
-                override fun onResponse(call: Call<ClassDetailResponse>, response: Response<ClassDetailResponse>) {
-                    if (response.isSuccessful) {
-                        val skills = response.body()?.skills
-                        skills?.active?.forEach {
-                            Log.d("SKILL", "Active: ${it.name} - ${it.description}")
-                        }
-                        skills?.passive?.forEach {
-                            Log.d("SKILL", "Passive: ${it.name} - ${it.description}")
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<ClassDetailResponse>, t: Throwable) {
-                    //TODO REPLACE NEWS ACTIVITY WITH THE ACTUAL ACTIVITY THIS FUNCTION WILL BE IN
-                    Toast.makeText(this@NewsActivity, "API Error", Toast.LENGTH_SHORT).show()
-                }
-            })
-    }
-
-    private fun loadItem(itemSlug: String) {
-        DiabloRepository.getItem(itemSlug)
+    private fun loadItem() {
+        DiabloApiInstance.api.getItem(testItemSlug)
             .enqueue(object : Callback<ItemResponse> {
-                override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
-                    if (response.isSuccessful) {
-                        val item = response.body()
-                        Log.d("ITEM", "Name: ${item?.name}, Damage: ${item?.damage}, APS: ${item?.attacksPerSecond}")
+
+                override fun onResponse(
+                    call: Call<ItemResponse>,
+                    response: Response<ItemResponse>
+                ) {
+                    if (!response.isSuccessful) {
+                        Log.e(TAG_ITEM, "Item failed: ${response.code()}")
+                        return
                     }
+
+                    val item = response.body() ?: return
+
+                    Log.d(TAG_ITEM, "Item name: ${item.name}")
+                    Log.d(TAG_ITEM, "Level: ${item.itemLevel}")
+                    Log.d(TAG_ITEM, "Required level: ${item.requiredLevel}")
+                    Log.d(TAG_ITEM, "Damage: ${item.damage}")
+                    Log.d(TAG_ITEM, "APS: ${item.attacksPerSecond}")
                 }
 
                 override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
-                    //TODO REPLACE NEWS ACTIVITY WITH THE ACTUAL ACTIVITY THIS FUNCTION WILL BE IN
-                    Toast.makeText(this@NewsActivity, "API Error", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG_ITEM, "Item API error", t)
                 }
             })
     }

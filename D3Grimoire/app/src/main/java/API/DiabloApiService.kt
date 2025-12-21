@@ -1,44 +1,32 @@
 package API
 
-import API.model.ClassDetailResponse
-import API.model.ClassesResponse
-import API.model.ItemResponse
-import API.model.SeasonResponse
+import API.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface DiabloApiService {
 
-    @GET("d3/data/season")
-    fun getSeasons(
-        @Query("namespace") namespace: String = "d3",
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
-    ): Call<SeasonResponse>
+    @GET("d3/data/hero/{slug}")
+    fun getHeroClass(
+        @Path("slug") slug: String,
+        @Query("namespace") namespace: String = "static-d3-eu",
+        @Query("locale") locale: String = "es_ES"
+    ): Call<HeroClassResponse>
 
-    @GET("d3/data/hero")
-    fun getClasses(
-        @Query("namespace") namespace: String = "d3",
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
-    ): Call<ClassesResponse>
-
-    @GET("d3/data/hero/{classSlug}")
-    fun getClassDetail(
+    @GET("d3/data/hero/{classSlug}/skill/{skillSlug}")
+    fun getSkill(
         @Path("classSlug") classSlug: String,
-        @Query("namespace") namespace: String = "d3",
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
-    ): Call<ClassDetailResponse>
+        @Path("skillSlug") skillSlug: String,
+        @Query("namespace") namespace: String = "static-d3-eu",
+        @Query("locale") locale: String = "es_ES"
+    ): Call<SkillResponse>
 
-    @GET("d3/data/item/{itemSlug}")
-    fun getItemDetail(
-        @Path("itemSlug") itemSlug: String,
-        @Query("namespace") namespace: String = "d3",
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
+    @GET("d3/data/item/{slugAndId}")
+    fun getItem(
+        @Path("slugAndId") slugAndId: String,
+        @Query("namespace") namespace: String = "static-d3-eu",
+        @Query("locale") locale: String = "es_ES"
     ): Call<ItemResponse>
 }
