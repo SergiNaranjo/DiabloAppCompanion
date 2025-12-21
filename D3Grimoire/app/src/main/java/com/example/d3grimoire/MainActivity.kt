@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d3grimoire.posts.news.NewsActivity
+import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
