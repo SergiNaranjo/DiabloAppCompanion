@@ -12,20 +12,23 @@ val newsButtonData: List<NewsData> = listOf(
         "Season 35: Eternal Conflict – Has Concluded",
         "Diablo III Season 35 begins on June 6. Eradicate Hell’s emissaries using powerful boons granted by the season theme, and more. ",
         "",
-        "https://news.blizzard.com/en-us/article/24191146/season-35-eternal-conflict-has-concluded"
+        "https://news.blizzard.com/en-us/article/24191146/season-35-eternal-conflict-has-concluded",
+        "Admin"
     ),
     NewsData(
         R.id.news_post_2,
         "Play Diablo III on Game Pass now!",
         "The legendary action-RPG is now available on Game Pass, including the original game and the Reaper of Souls expansion.",
         "",
-        "https://news.blizzard.com/en-us/article/24186408/play-diablo-iii-on-game-pass-now"
+        "https://news.blizzard.com/en-us/article/24186408/play-diablo-iii-on-game-pass-now",
+        "Admin"
     ),
     NewsData(
         R.id.news_post_3,
         "BlizzCon Returns In 2026",
         "Our celebration of our universes, connection, and community is coming back to the Anaheim Convention Center next year.",
         "",
-        "https://news.blizzard.com/en-us/article/24178650/blizzcon-returns-in-2026"
+        "https://news.blizzard.com/en-us/article/24178650/blizzcon-returns-in-2026",
+        "Admin"
     )
 );

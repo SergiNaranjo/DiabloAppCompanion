@@ -4,19 +4,22 @@ class NewsData {
     var id: Int;
     var name: String?;
     var description: String?;
-    var imgId: String?;
+    var imgUrl: String?;
     var url: String?;
+    var author: String?;
 
     public constructor(
         id: Int,
         name: String?, description: String?,
-        imgId: String?,
-        url: String?
+        imgUrl: String?,
+        url: String?,
+        author: String?
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.imgId = imgId;
+        this.imgUrl = imgUrl;
         this.url = url;
+        this.author = author;
     }
 }

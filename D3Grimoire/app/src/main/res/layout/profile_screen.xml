@@ -70,6 +70,11 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
+            <ImageButton
+                android:id="@+id/btn_sign_out"
+                android:layout_width="100dp"
+                android:layout_height="30dp"/>
+
             <TextView
                 android:id="@+id/txtHeroesTitle"
                 android:layout_width="wrap_content"

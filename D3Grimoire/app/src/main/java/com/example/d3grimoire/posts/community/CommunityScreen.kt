@@ -13,11 +13,13 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.d3grimoire.NavBar
 import com.example.d3grimoire.R
+import com.example.d3grimoire.UserHandler
 import com.example.d3grimoire.posts.NewsData
 import com.example.d3grimoire.posts.news.NewsPost
 import com.example.d3grimoire.posts.news.NewsPostButton
 import com.example.d3grimoire.posts.news.NewsScreen
 import com.example.d3grimoire.posts.news.newsButtonData
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,7 +29,6 @@ import com.google.firebase.database.Query
 import kotlin.math.min
 
 class CommunityScreen : Fragment(R.layout.community_screen) {
-
     private lateinit var database: DatabaseReference
     private lateinit var view: View;
 
@@ -96,26 +97,47 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
             communityNewsButtonIds.count(),
             communityNewsButtonData.count()
         );
-        Log.d("Community Posts", len.toString());
+
         for(i in 0..len-1) {
             val data: NewsData = communityNewsButtonData[i];
-
-            val intent : Intent = Intent(requireActivity(), NewsPost::class.java);
-            intent.putExtra("url", data.url);
-
-            val newsPostButton: NewsPostButton = NewsPostButton.newInstance(
-                data,
-                {
-                    requireActivity().run {
-                        startActivity(intent);
-                    }
-                }
-            );
-
+            val newsPostButton: NewsPostButton = NewsPostButton.newInstance(data);
             childFragmentManager.commit {
                 setReorderingAllowed(true);
                 add(data.id, newsPostButton);
             }
+        }
+    }
+
+    companion object {
+        public fun fetchPostData(database: DatabaseReference) {
+            val query: Query = database.orderByKey();
+            query.get()
+                .addOnSuccessListener { snapshot ->
+                    if(snapshot.exists()) {
+                        var postIndex: Int = 0;
+                        communityNewsButtonData.clear();
+                        for (dataSnapshot in snapshot.children) {
+                            Log.d("Community Screen", "Child");
+                            if(postIndex >= communityNewsButtonIds.count()) break;
+                            val newsData: NewsData = NewsData(
+                                communityNewsButtonIds[postIndex],
+                                dataSnapshot.child("title").getValue(String::class.java),
+                                dataSnapshot.child("desc").getValue(String::class.java),
+                                dataSnapshot.child("imgUrl").getValue(String::class.java),
+                                dataSnapshot.child("url").getValue(String::class.java),
+                                dataSnapshot.child("author").getValue(String::class.java)
+                            );
+                            communityNewsButtonData.add(newsData);
+                            postIndex++;
+                        }
+                        Log.d("Community Screen", communityNewsButtonData.count().toString());
+                    } else {
+                        Log.d("Community Screen", "No posts")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("Community Screen", "Error: ${exception.message}")
+                }
         }
     }
 }

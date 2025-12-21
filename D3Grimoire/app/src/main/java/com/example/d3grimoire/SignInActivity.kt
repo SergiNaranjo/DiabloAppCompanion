@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.d3grimoire.posts.community.CommunityPost
@@ -19,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
@@ -28,6 +31,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
 
+    //Encryption constants
     val p: Int = 31;
     val m: Int = 1000000009;
 
@@ -45,27 +49,18 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
-        val account = GoogleSignIn.getLastSignedInAccount(requireActivity());
-        account?.let {
-            Log.d("Login Google", "You already have: " + account.displayName);
-        }
-            ?: run {
-                Log.d("Login Google", "No account yet");
-                view.findViewById<SignInButton>(R.id.btn_sign_in).setOnClickListener {
-                    googleSignIn();
-                }
+        val account = UserHandler.getUserGoogle(requireActivity());
+        if(account == null)
+            view.findViewById<SignInButton>(R.id.btn_sign_in).setOnClickListener {
+                googleSignIn();
             }
     }
 
     private fun signIn(view: View) {
-
-        var playerPrefs: SharedPreferences =
-            requireActivity().getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
-        val lastUser = playerPrefs.getString("user", "");
-        if(lastUser != "") {
-            Log.d("Login", "User is already: " + lastUser)
-        } else {
-            Log.d("Login", "No user yet");
+        val activity: FragmentActivity = requireActivity();
+        if(activity is AppCompatActivity &&
+            UserHandler.getUserNative(activity) != null) {
+            Log.d("Login", "User already signed in!");
         }
 
         val user: String? = view.findViewById<EditText>(R.id.username).text.toString();
@@ -79,28 +74,30 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
         val query: Query = database.orderByChild("user").equalTo(user);
         query.get()
             .addOnSuccessListener { snapshot ->
-                if(snapshot.exists()) {
-                    for (dataSnapshot in snapshot.children) {
-                        val hashedPass: Int? = dataSnapshot.child("password").getValue(Int::class.java);
-                        pass?.let {
-                            if(hashedPass == encryptPass(pass)) {
-                                //Correct login!!!!
-                                Log.d("Login", "Success! User is: " + user);
-                                var playerPrefs: SharedPreferences =
-                                    requireActivity().getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
-                                playerPrefs.edit().putString("user", user).apply();
-                            }
-                        } ?: run {
-                            Log.d("Login", "User has no passwprd")
-                        }
-                    }
-                } else {
-                    Log.d("Login", "User not registered")
-                }
+                checkPassword(snapshot, user, pass);
             }
             .addOnFailureListener { exception ->
                 println("Error: ${exception.message}")
             }
+    }
+
+    private fun checkPassword(snapshot: DataSnapshot, user: String?, pass: String?) {
+        if(snapshot.exists()) {
+            for (dataSnapshot in snapshot.children) {
+                val hashedPass: Int? = dataSnapshot.child("password").getValue(Int::class.java);
+                pass?.let {
+                    if(hashedPass == encryptPass(pass)) {
+                        val act: FragmentActivity = requireActivity();
+                        if(act is AppCompatActivity)
+                            UserHandler.setUserNative(act, user);
+                    }
+                } ?: run {
+                    Log.d("Login", "User has no passwprd")
+                }
+            }
+        } else {
+            Log.d("Login", "User not registered")
+        }
     }
 
     private fun googleSignIn() {
@@ -122,6 +119,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
         }
     }
 
+    //Basic password hashing for encryption
     private fun encryptPass(password: String): Int {
         var p_pow = 1;
         var sum = 0;
