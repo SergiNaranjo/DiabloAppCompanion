@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import android.view.View
 import com.example.d3grimoire.posts.community.CommunityScreen
+import com.example.d3grimoire.posts.community.NewPostActivity
 import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -52,8 +53,10 @@ class NavBar : AppCompatActivity() {
             newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_active);
         }
 
+        setFloatingButtonsVisibility(View.GONE);
+
         postScreen = PostScreen.NEWS;
-        loadFragment(NewsScreen())
+        loadFragment(CommunityScreen())
     }
 
     private fun setupListeners() {
@@ -68,19 +71,19 @@ class NavBar : AppCompatActivity() {
                     loadFragment(CommunityScreen())
                 }
             }
-            floatingButtons.visibility = View.VISIBLE;
+            setFloatingButtonsVisibility(View.VISIBLE);
         }
 
         btnInfo.setOnClickListener {
             selectTab(btnInfo)
             loadFragment(InfoScreen())
-            floatingButtons.visibility = View.GONE;
+            setFloatingButtonsVisibility(View.GONE);
         }
 
         btnProfile.setOnClickListener {
             selectTab(btnProfile)
             loadFragment(ProfileActivity())
-            floatingButtons.visibility = View.GONE;
+            setFloatingButtonsVisibility(View.GONE);
         }
     }
 
@@ -92,10 +95,14 @@ class NavBar : AppCompatActivity() {
         selected.isSelected = true
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    public fun loadFragment(fragment: Fragment) {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace(R.id.fragment_container, fragment)
         }
+    }
+
+    public fun setFloatingButtonsVisibility(state: Int) {
+        floatingButtons.visibility = state;
     }
 }
