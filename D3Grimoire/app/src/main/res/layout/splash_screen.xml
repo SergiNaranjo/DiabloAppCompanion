@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:padding="50dp"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
     android:background="@drawable/ic_background">
 
+    <!-- LOGO -->
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="236dp"
-        android:background="@drawable/ic_img_logo" />
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:src="@drawable/ic_img_logo"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
 
+    <!-- SPLASH IMAGE -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="276dp"
-        android:background="@drawable/ic_img_splash" />
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:src="@drawable/ic_img_splash"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true" />
 
+    <!-- LOADING -->
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:indeterminate="true"
-        />
+        android:layout_marginTop="16dp"
+        android:indeterminate="true" />
 
 </LinearLayout>
