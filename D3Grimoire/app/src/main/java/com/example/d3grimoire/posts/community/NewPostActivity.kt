@@ -10,11 +10,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.d3grimoire.NavBar
 import com.example.d3grimoire.R
+import com.example.d3grimoire.UserHandler
 import com.example.d3grimoire.posts.news.NewsScreen
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.io.InputStream
@@ -38,16 +42,11 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
             .getReference("posts");
 
         uploadPostButton.setOnClickListener {
-            uploadPost(view);
+            tryUploadPost(view);
         }
 
         exitButton.setOnClickListener {
-            val act = requireActivity();
-            if (act !is NavBar) println("Bad Cast");
-            else {
-                act.setFloatingButtonsVisibility(View.VISIBLE);
-                act.loadFragment(NewsScreen());
-            }
+            exitToNews();
         }
     }
 
@@ -74,10 +73,10 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
         alertDialog.show();
     }
 
-    private fun uploadPost(view: View) {
+    private fun tryUploadPost(view: View) {
         //Check image url
         val executor: Executor = Executors.newSingleThreadExecutor();
-        var image: Bitmap? = null;
+        var image: Bitmap?;
         val handler: Handler = Handler(Looper.getMainLooper());
         executor.execute {
             try {
@@ -85,32 +84,57 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
                     view.findViewById<EditText>(R.id.new_post_img_url).text.toString();
                 val `in`: InputStream = URL(url).openStream();
                 image = BitmapFactory.decodeStream(`in`);
-                image?.let {
-                    val dataId = database.push().key;
-                    dataId?.let {
-                        database.child(dataId)
-                            .setValue(getData(view))
-                            .addOnSuccessListener {
-                                Log.d("FIREBASE", "Message written")
-                            }
-                            .addOnFailureListener {
-                                Log.e("FIREBASE", "Write failed", it)
-                            };
-                    }
+                if (image == null) throw Exception("Image is null!");
 
-                    val activity: FragmentActivity = requireActivity();
-                    if (activity !is NavBar) Log.d("ACTIVITY", "Bad Cast");
-                    else {
-                        activity.setFloatingButtonsVisibility(View.VISIBLE);
-                        activity.loadFragment(NewsScreen());
-                    }
-                }
+                pushPost(view);
+                exitToNews();
             } catch (e: Exception) {
                 handler.post {
                     showInvalidImgUrlAlert();
                 }
                 e.printStackTrace();
             }
+        }
+    }
+
+    private fun pushPost(view: View) {
+        val dataId = database.push().key;
+        dataId?.let {
+            database.child(dataId)
+                .setValue(getData(view))
+                .addOnSuccessListener {
+                    postAnalyticsPostCreator();
+                }
+                .addOnFailureListener {
+                    Log.e("FIREBASE", "Write failed", it)
+                };
+        }
+    }
+
+    private fun postAnalyticsPostCreator() {
+        val act = requireActivity();
+        if (act !is AppCompatActivity) return;
+        var user: String?;
+        if (UserHandler.getUserGoogle(act) != null) {
+            user = UserHandler.getUserGoogle(act)!!.displayName;
+        } else if (UserHandler.getUserNative(act) != null) {
+            user = UserHandler.getUserNative(act);
+        } else {
+            user = "";
+        }
+        val bundle: Bundle = bundleOf(
+            "post_creation_user" to user
+        );
+        FirebaseAnalytics.getInstance(requireActivity())
+            .logEvent("NewPost", bundle);
+    }
+
+    private fun exitToNews() {
+        val activity: FragmentActivity = requireActivity();
+        if (activity !is NavBar) Log.d("ACTIVITY", "Bad Cast");
+        else {
+            activity.setFloatingButtonsVisibility(View.VISIBLE);
+            activity.loadFragment(NewsScreen());
         }
     }
 }

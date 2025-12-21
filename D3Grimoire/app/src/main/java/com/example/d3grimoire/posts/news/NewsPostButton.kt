@@ -1,5 +1,6 @@
 package com.example.d3grimoire.posts.news
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -8,28 +9,29 @@ import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.d3grimoire.R
+import com.example.d3grimoire.UserHandler
+import com.example.d3grimoire.posts.NewsData
+import com.google.firebase.analytics.FirebaseAnalytics
 import java.net.URL
 import java.util.concurrent.Executors
 
 class NewsPostButton : Fragment(R.layout.news_post_button) {
-
-    private var onClickListener: (() -> Unit)? = null;
-
     companion object {
         fun newInstance(
-            data: NewsData,
-            onClick: () -> Unit
+            data: NewsData
         ): NewsPostButton {
             return NewsPostButton().apply {
                 arguments = bundleOf(
                     "title" to data.name,
                     "desc" to data.description,
-                    "imgId" to data.imgId
+                    "imgUrl" to data.imgUrl,
+                    "url" to data.url,
+                    "author" to data.author
                 )
-                this.onClickListener = onClick
             }
         }
     }
@@ -43,54 +45,50 @@ class NewsPostButton : Fragment(R.layout.news_post_button) {
         textView = view.findViewById<TextView>(R.id.news_post_description);
         textView.text = description;
 
-        //val imgId: Int? = requireArguments().getInt("imgId");
-        //var imageView : ImageView = view.findViewById<ImageView>(R.id.news_post_image);
-        //imageView.setImageResource(imgId!!);
-
-        // Declaring and initializing the ImageView
         val imageView = view.findViewById<ImageView>(R.id.news_post_image)
-
-        // Declaring executor to parse the URL
         val executor = Executors.newSingleThreadExecutor()
-
-        // Once the executor parses the URL
-        // and receives the image, handler will load it
-        // in the ImageView
         val handler = Handler(Looper.getMainLooper())
+        var image: Bitmap?;
 
-        // Initializing the image
-        var image: Bitmap? = null
-
-        // Only for Background process (can take time depending on the Internet speed)
         executor.execute {
-
-            // Image URL
-            val imageURL = "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200x200-min.png"
-            println("executing");
-            // Tries to get the image and post it in the ImageView
-            // with the help of Handler
+            val imageURL = requireArguments().getString("imgUrl");
             try {
                 val `in` = URL(imageURL).openStream()
                 image = BitmapFactory.decodeStream(`in`)
-                println("stream open");
-                assert(imageView != null);
-                assert(image != null);
-
-                // Only for making changes in UI
                 handler.post {
                     imageView.setImageBitmap(image)
                 }
-                println("posted");
             }
-
-            // If the URL doesnot point to
-            // image or any other kind of failure
             catch (e: Exception) {
-                println("AAA")
                 e.printStackTrace()
             }
         }
 
-        view.findViewById<View>(R.id.news_post_button).setOnClickListener { this.onClickListener?.invoke(); }
+        view.findViewById<View>(R.id.news_post_button).setOnClickListener { onClick(); }
+    }
+
+    fun onClick() {
+        requireActivity().run {
+            val act = requireActivity();
+            if (act is AppCompatActivity) {
+                var user: String?;
+                if (UserHandler.getUserGoogle(act) != null) {
+                    user = UserHandler.getUserGoogle(act)!!.displayName;
+                } else if (UserHandler.getUserNative(act) != null) {
+                    user = UserHandler.getUserNative(act);
+                } else {
+                    user = "";
+                }
+                val bundle: Bundle = bundleOf(
+                    "post_click_user" to user,
+                    "post_click_author" to requireArguments().getString("author")
+                );
+                FirebaseAnalytics.getInstance(requireActivity())
+                    .logEvent("PostSelected", bundle);
+            }
+            val intent: Intent = Intent(requireActivity(), NewsPost::class.java);
+            intent.putExtra("url", requireArguments().getString("url"));
+            startActivity(intent);
+        }
     }
 }

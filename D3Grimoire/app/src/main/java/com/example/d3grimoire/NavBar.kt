@@ -11,7 +11,7 @@ import com.example.d3grimoire.posts.community.CommunityScreen
 import com.example.d3grimoire.posts.community.NewPostActivity
 import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
+import com.google.firebase.database.FirebaseDatabase
 
 
 class NavBar : AppCompatActivity() {
@@ -57,6 +57,12 @@ class NavBar : AppCompatActivity() {
 
         postScreen = PostScreen.NEWS;
         loadFragment(SignInActivity())
+
+        val databaseUrl =
+            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
+        val database = FirebaseDatabase.getInstance(databaseUrl)
+            .getReference("posts");
+        CommunityScreen.fetchPostData(database);
     }
 
     private fun setupListeners() {
