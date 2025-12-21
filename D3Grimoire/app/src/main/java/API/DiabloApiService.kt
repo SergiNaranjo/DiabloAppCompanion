@@ -8,29 +8,25 @@ import retrofit2.http.Query
 
 interface DiabloApiService {
 
-    @GET("d3/data/season/")
-    fun getSeasons(
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
-    ): Call<SeasonResponse>
-
-    @GET("d3/data/class/")
-    fun getClasses(
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
-    ): Call<ClassesResponse>
-
-    @GET("d3/data/class/{slug}/")
-    fun getClassDetail(
+    @GET("d3/data/hero/{slug}")
+    fun getHeroClass(
         @Path("slug") slug: String,
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
-    ): Call<ClassDetailResponse>
+        @Query("namespace") namespace: String = "static-d3-eu",
+        @Query("locale") locale: String = "es_ES"
+    ): Call<HeroClassResponse>
 
-    @GET("d3/data/item/{slug}/")
+    @GET("d3/data/hero/{classSlug}/skill/{skillSlug}")
+    fun getSkill(
+        @Path("classSlug") classSlug: String,
+        @Path("skillSlug") skillSlug: String,
+        @Query("namespace") namespace: String = "static-d3-eu",
+        @Query("locale") locale: String = "es_ES"
+    ): Call<SkillResponse>
+
+    @GET("d3/data/item/{slugAndId}")
     fun getItem(
-        @Path("slug") slug: String,
-        @Query("locale") locale: String = "en_US",
-        @Query("access_token") token: String
+        @Path("slugAndId") slugAndId: String,
+        @Query("namespace") namespace: String = "static-d3-eu",
+        @Query("locale") locale: String = "es_ES"
     ): Call<ItemResponse>
 }
