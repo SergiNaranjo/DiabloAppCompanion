@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
-import com.example.d3grimoire.UserHandler
+import com.example.d3grimoire.signin.UserHandler
 import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.DatabaseReference

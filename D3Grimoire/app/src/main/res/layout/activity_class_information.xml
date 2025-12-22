@@ -16,7 +16,7 @@
             android:id="@+id/txtBarbarianTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Class Name"
+            android:text="@string/class_name"
             android:textColor="#FFFFFF"
             android:textSize="34sp"
             android:textStyle="bold"
@@ -59,7 +59,7 @@
                     android:layout_marginBottom="8dp"
                     android:padding="8dp"
                     android:scaleType="centerInside"
-                    android:contentDescription="Select Male"
+                    android:contentDescription="@string/content_description_select_male"
                     android:background="@drawable/ic_btn_male_active"
                     />
 
@@ -70,7 +70,7 @@
                     android:padding="8dp"
                     android:background="@drawable/ic_btn_female_deactive"
                     android:scaleType="centerInside"
-                    android:contentDescription="Select Female" />
+                    android:contentDescription="@string/content_description_select_female" />
             </LinearLayout>
 
         </FrameLayout>

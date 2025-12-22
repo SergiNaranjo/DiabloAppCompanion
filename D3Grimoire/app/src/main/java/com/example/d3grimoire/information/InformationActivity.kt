@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.information
 
 import API.DiabloApiInstance
 import API.DiabloImageUrl
@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.example.d3grimoire.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

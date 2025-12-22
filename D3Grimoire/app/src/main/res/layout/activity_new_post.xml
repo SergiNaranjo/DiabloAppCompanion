@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:text="Title"
+        android:text="@string/title"
         android:textColor="@color/white"/>
 
 
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:text="Description"
+        android:text="@string/description"
         android:textColor="@color/white"/>
 
 
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:text="Url"
+        android:text="@string/url"
         android:textColor="@color/white"/>
 
 
@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.8"
-        android:text="Image Url"
+        android:text="@string/image_url"
         android:textColor="@color/white"/>
 
 
@@ -103,10 +103,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:padding="12dp"
-        android:contentDescription="Other"
+        android:contentDescription="@string/content_description"
         android:elevation="8dp"
         android:background="@drawable/ic_btn_community_active"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="50dp"/>
 
     <ImageButton
@@ -116,7 +116,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:padding="12dp"
-        android:contentDescription="Other"
+        android:contentDescription="@string/content_description"
         android:elevation="8dp"
         android:background="@drawable/ic_btn_news_deactive"
         android:layout_margin="20dp"/>

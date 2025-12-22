@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.signin
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import kotlin.text.iterator
 
 class UserHandler {
     companion object {

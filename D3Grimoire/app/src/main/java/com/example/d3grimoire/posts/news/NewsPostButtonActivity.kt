@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.d3grimoire.R
-import com.example.d3grimoire.UserHandler
+import com.example.d3grimoire.signin.UserHandler
 import com.example.d3grimoire.posts.NewsData
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.net.URL

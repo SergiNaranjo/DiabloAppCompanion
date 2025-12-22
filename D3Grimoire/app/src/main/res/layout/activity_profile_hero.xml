@@ -14,7 +14,8 @@
         android:layout_width="70dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="12dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/content_description"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -27,16 +28,14 @@
             android:id="@+id/hero_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name2"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF"/>
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/hero_class_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BARBARIAN LV. 5"
             android:textSize="13sp"
             android:textColor="#FFFFFF"/>
     </LinearLayout>

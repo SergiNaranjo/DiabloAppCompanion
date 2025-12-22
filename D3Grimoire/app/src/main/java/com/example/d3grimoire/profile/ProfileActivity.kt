@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.profile
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -19,6 +19,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import com.example.d3grimoire.NavBarActivity
+import com.example.d3grimoire.R
+import com.example.d3grimoire.signin.SignInActivity
+import com.example.d3grimoire.signin.UserHandler
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
@@ -42,7 +46,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
         val activity: FragmentActivity = requireActivity();
         if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
-        if(!UserHandler.isSignedIn(activity)) {
+        if(!UserHandler.Companion.isSignedIn(activity)) {
             activity.loadFragment(SignInActivity());
         }
 
@@ -101,7 +105,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
         var imgUrl: String? = null;
 
-        val query: Query = database.orderByChild("user").equalTo(UserHandler.getUsername(activity));
+        val query: Query = database.orderByChild("user").equalTo(UserHandler.Companion.getUsername(activity));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if(snapshot.exists()) {
@@ -170,7 +174,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     private fun pushEdit(view: View) {
         val act: FragmentActivity = requireActivity();
         if(act !is AppCompatActivity) throw Exception("Invalid root activity!");
-        val username: String? = UserHandler.getUsername(act);
+        val username: String? = UserHandler.Companion.getUsername(act);
         val query: Query = database.orderByChild("user").equalTo(username);
         query.get()
             .addOnSuccessListener { snapshot ->
@@ -184,8 +188,8 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                     key?.let {
                         Log.d("Profile", key);
                         database.child(key).setValue(mapOf(
-                            "user" to UserHandler.getUsername(act),
-                            "password" to UserHandler.getPassNative(act),
+                            "user" to UserHandler.Companion.getUsername(act),
+                            "password" to UserHandler.Companion.getPassNative(act),
                             "imgUrl" to imgUrl,
                             "status" to status
                         ));
@@ -201,8 +205,8 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     private fun signOut() {
         val activity: FragmentActivity = requireActivity();
         if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
-        UserHandler.signOutGoogle(activity);
-        UserHandler.signOutNative(activity);
+        UserHandler.Companion.signOutGoogle(activity);
+        UserHandler.Companion.signOutNative(activity);
         activity.loadFragment(ProfileActivity());
     }
 
@@ -210,7 +214,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
         val usernameText: TextView = view.findViewById<TextView>(R.id.profile_username);
         val act: FragmentActivity = requireActivity();
         if(act !is AppCompatActivity) throw Exception("Invalid root activity!");
-        val username: String? = UserHandler.getUsername(act);
+        val username: String? = UserHandler.Companion.getUsername(act);
         username?.let{ usernameText.text = username; } ?: run { usernameText.text = "Not Signed in"; }
     }
 
@@ -220,7 +224,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
         var status: String? = null;
 
-        val query: Query = database.orderByChild("user").equalTo(UserHandler.getUsername(activity));
+        val query: Query = database.orderByChild("user").equalTo(UserHandler.Companion.getUsername(activity));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if(snapshot.exists()) {

@@ -1,6 +1,7 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.profile
 
 import android.os.Bundle
+import com.example.d3grimoire.R
 
 val heroIds: List<Int> = listOf(
     R.id.profile_hero_1,

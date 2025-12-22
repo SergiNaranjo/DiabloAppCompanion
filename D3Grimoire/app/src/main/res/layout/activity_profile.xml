@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="Profile"
+                android:text="@string/profile"
                 android:textColor="#FFFFFF"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -34,23 +34,23 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_marginBottom="12dp"
-                android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:background="@drawable/ic_template_profile_img" />
+                android:background="@drawable/ic_template_profile_img"
+                android:contentDescription="@string/content_description"/>
 
             <EditText
                 android:id="@+id/profile_img_url"
                 android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:hint="Image URL..."
+                android:layout_height="50dp"
+                android:hint="@string/image_url_ellipsis"
                 android:textColor="@color/white"
-                android:textColorHint="@color/white"/>
+                android:textColorHint="@color/white" />
 
             <TextView
                 android:id="@+id/profile_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USERNAME"
+                android:text="@string/username"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -75,15 +75,16 @@
                     android:id="@+id/profile_edit_btn"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:layout_marginLeft="6dp"
-                    android:background="@drawable/ic_btn_username" />
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/ic_btn_username"
+                    android:contentDescription="@string/content_description"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/btn_sign_out"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:text="Sign Out"
+                android:text="@string/sign_out"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:textAlignment="center"
@@ -94,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Heroes"
+                android:text="@string/heroes"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold" />

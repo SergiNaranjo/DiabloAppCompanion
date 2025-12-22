@@ -1,9 +1,10 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.profile
 
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.d3grimoire.R
 
 class ProfileHeroActivity : Fragment(R.layout.activity_profile_hero) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

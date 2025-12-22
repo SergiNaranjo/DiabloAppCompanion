@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.signin
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.d3grimoire.NavBarActivity
+import com.example.d3grimoire.R
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

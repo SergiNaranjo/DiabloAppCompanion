@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.information
 
 import API.DiabloApiInstance
 import API.DiabloImageUrl
@@ -13,9 +13,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.bumptech.glide.Glide
+import com.example.d3grimoire.R
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -122,7 +124,7 @@ class ClassInformationActivity : AppCompatActivity() {
                 "icon" to skill.icon
             )
 
-            val fragmentContainer = androidx.fragment.app.FragmentContainerView(this).apply {
+            val fragmentContainer = FragmentContainerView(this).apply {
                 id = View.generateViewId()
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

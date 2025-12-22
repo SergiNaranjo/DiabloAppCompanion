@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import android.view.View
+import com.example.d3grimoire.information.InformationActivity
 import com.example.d3grimoire.posts.community.CommunityActivity
 import com.example.d3grimoire.posts.news.NewsScreen
+import com.example.d3grimoire.profile.ProfileActivity
 import com.google.firebase.database.FirebaseDatabase
 
 

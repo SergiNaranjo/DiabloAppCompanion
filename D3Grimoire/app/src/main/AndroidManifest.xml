@@ -25,7 +25,7 @@
 <!--            android:name=".posts.news.NewsScreen"-->
 <!--            android:exported="false" />-->
         <activity
-            android:name=".ClassInformationActivity"
+            android:name=".information.ClassInformationActivity"
             android:exported="false" />
 
 <!--        <activity-->
