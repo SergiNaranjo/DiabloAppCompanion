@@ -96,6 +96,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+<!-- This is from Chatgpt because I didnt know how to do the girdlayout at first becuase it had errors -->
             <androidx.gridlayout.widget.GridLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

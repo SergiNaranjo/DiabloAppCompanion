@@ -3,9 +3,11 @@ package com.example.d3grimoire
 import API.DiabloApiInstance
 import API.DiabloImageUrl
 import API.model.ItemResponse
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -31,6 +33,22 @@ class InfoScreen : Fragment(R.layout.info_screen) {
             if (index < containers.size) {
                 loadItem(slug, containers[index])
             }
+        }
+
+        setupClassButton(view, R.id.btn_barbarian, "barbarian")
+        setupClassButton(view, R.id.btn_crusader, "crusader")
+        setupClassButton(view, R.id.btn_demon_hunter, "demon-hunter")
+        setupClassButton(view, R.id.btn_monk, "monk")
+        setupClassButton(view, R.id.btn_necromancer, "necromancer")
+        setupClassButton(view, R.id.btn_witch_doctor, "witch-doctor")
+        setupClassButton(view, R.id.btn_wizard, "wizard")
+    }
+
+    private fun setupClassButton(view: View, buttonId: Int, slug: String) {
+        view.findViewById<FrameLayout>(buttonId)?.setOnClickListener {
+            val intent = Intent(requireContext(), ClassInfoScreen::class.java)
+            intent.putExtra("HERO_SLUG", slug)
+            startActivity(intent)
         }
     }
 

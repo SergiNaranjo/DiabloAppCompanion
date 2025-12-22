@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
-    tools:ignore="MissingDefaultResource">
+    android:background="@drawable/ic_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,75 +16,70 @@
             android:id="@+id/txtBarbarianTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Barbarian"
+            android:text="Class Name"
             android:textColor="#FFFFFF"
             android:textSize="34sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"/>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal"
-            android:gravity="center"
+            android:layout_height="250dp"
             android:layout_marginBottom="32dp">
 
-            <FrameLayout
-                android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/imgClassGifBg"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginEnd="4dp">
+                android:scaleType="centerCrop"
+                android:alpha="0.5"
+                tools:background="#333333" />
 
-                <!--ImageView
-                    android:id="@+id/imgBarbarian1"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:src="@tools:sample/backgrounds/scenic"
-                    android:scaleType="centerCrop"
-                    android:background="#222" -->
+            <ImageView
+                android:id="@+id/imgHeroPortrait"
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:background="@drawable/ic_template_classes"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp">
 
                 <ImageButton
                     android:id="@+id/circle1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom|start"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="40dp"
-                    android:padding="6dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="8dp"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Select Male"
                     android:background="@drawable/ic_btn_male_active"
-                    android:scaleType="centerInside" />
+                    />
 
                 <ImageButton
                     android:id="@+id/circle2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom|start"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:padding="6dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="8dp"
                     android:background="@drawable/ic_btn_female_deactive"
-                    android:scaleType="centerInside" />
+                    android:scaleType="centerInside"
+                    android:contentDescription="Select Female" />
+            </LinearLayout>
 
-
-            </FrameLayout>
-
-            <!--ImageView
-                android:id="@+id/imgBarbarian2"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:src="@tools:sample/backgrounds/scenic"
-                android:scaleType="centerCrop"
-                android:background="#222" -->
-
-        </LinearLayout>
+        </FrameLayout>
 
         <TextView
             android:id="@+id/txtStrengthTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Strength"
+            android:text="Primary Stat"
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -95,7 +89,7 @@
             android:id="@+id/txtStrengthDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This warrior uses bare strength to smash their enemies"
+            android:text="Loading class description..."
             android:textColor="#DDDDDD"
             android:textSize="14sp"
             android:gravity="center"
@@ -105,24 +99,7 @@
             android:id="@+id/skill_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"/>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/class_ability_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/class_ability_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/class_ability_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:orientation="vertical" />
 
     </LinearLayout>
-
 </ScrollView>

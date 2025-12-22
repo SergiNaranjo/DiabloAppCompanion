@@ -1,86 +1,125 @@
 package com.example.d3grimoire
 
 import API.DiabloApiInstance
+import API.DiabloImageUrl
 import API.model.HeroClassResponse
 import API.model.HeroSkill
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ClassInfoScreen : AppCompatActivity() {
 
-    companion object {
-        private const val TAG_CLASS = "CLASS_API"
-        private const val TAG_SKILL = "SKILL_API"
-    }
-
-    private val heroSlugs = listOf(
-        "barbarian",
-        "crusader",
-        "demon-hunter",
-        "monk",
-        "necromancer",
-        "witch-doctor",
-        "wizard"
-    )
+    private var currentGender = "male"
+    private lateinit var heroSlug: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.class_info_screen)
 
-        loadHero("barbarian")
+        heroSlug = intent.getStringExtra("HERO_SLUG") ?: "barbarian"
+
+        setupGenderButtons()
+        loadHero(heroSlug)
+        loadClassGif(heroSlug)
+    }
+
+    private fun setupGenderButtons() {
+        val maleBtn = findViewById<ImageButton>(R.id.circle1)
+        val femaleBtn = findViewById<ImageButton>(R.id.circle2)
+
+        maleBtn.setOnClickListener {
+            currentGender = "male"
+            updateGenderUI(maleBtn, femaleBtn)
+        }
+
+        femaleBtn.setOnClickListener {
+            currentGender = "female"
+            updateGenderUI(maleBtn, femaleBtn)
+        }
+    }
+
+    private fun updateGenderUI(maleBtn: ImageButton, femaleBtn: ImageButton) {
+        if (currentGender == "male") {
+            maleBtn.setBackgroundResource(R.drawable.ic_btn_male_active)
+            femaleBtn.setBackgroundResource(R.drawable.ic_btn_female_deactive)
+        } else {
+            maleBtn.setBackgroundResource(R.drawable.ic_btn_male_deactive)
+            femaleBtn.setBackgroundResource(R.drawable.ic_btn_female_active)
+        }
+        loadPortrait()
+    }
+
+    private fun loadPortrait() {
+        val portraitView = findViewById<ImageView>(R.id.imgHeroPortrait)
+
+        val url = DiabloImageUrl.classPortrait(heroSlug, currentGender)
+        Log.d("PORTRAIT", "Loading: $url")
+
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.ic_template_classes)
+            .error(R.drawable.ic_template_classes)
+            .into(portraitView)
+    }
+
+    private fun loadClassGif(slug: String) {
+        val gifView = findViewById<ImageView>(R.id.imgClassGifBg)
+
+        Glide.with(this)
+            .asGif()
+            .load(DiabloImageUrl.classGif(slug))
+            .centerCrop()
+            .into(gifView)
     }
 
     private fun loadHero(slug: String) {
         DiabloApiInstance.api.getHeroClass(slug)
             .enqueue(object : Callback<HeroClassResponse> {
-
                 override fun onResponse(
                     call: Call<HeroClassResponse>,
                     response: Response<HeroClassResponse>
                 ) {
-                    if (!response.isSuccessful) {
-                        Log.e(TAG_CLASS, "Failed $slug: ${response.code()}")
-                        return
-                    }
-
                     val hero = response.body() ?: return
 
-                    Log.d(TAG_CLASS, "Hero: ${hero.name}")
-                    Log.d(TAG_CLASS, "Male: ${hero.maleName}, Female: ${hero.femaleName}")
+                    findViewById<TextView>(R.id.txtBarbarianTitle).text = hero.name
 
-                    val allSkills = hero.skills.active + hero.skills.passive
+                    loadPortrait()
 
-                    populateSkillFragments(allSkills)
+                    val skills = hero.skills.active + hero.skills.passive
+                    populateSkillFragments(skills)
                 }
 
                 override fun onFailure(call: Call<HeroClassResponse>, t: Throwable) {
-                    Log.e(TAG_CLASS, "API error for $slug", t)
+                    Log.e("CLASS_API", "Failed to load $slug", t)
                 }
             })
     }
 
     private fun populateSkillFragments(skills: List<HeroSkill>) {
-        val containerLayout = findViewById<LinearLayout>(R.id.skill_fragment_container)
-            ?: run {
-                Log.e(TAG_CLASS, "Skill container not found")
-                return
-            }
+        val container = findViewById<LinearLayout>(R.id.skill_fragment_container)
+        container.removeAllViews()
 
-        skills.forEachIndexed { index, skill ->
+        skills.forEach { skill ->
             val bundle = bundleOf(
                 "name" to skill.name,
-                "cost" to skill.level,
-                "costUnits" to "Fury",
-                "desc" to skill.description
+                "level" to skill.level,
+                "cost" to 0,
+                "costUnits" to "Resource",
+                "desc" to skill.description,
+                "icon" to skill.icon
             )
 
             val fragmentContainer = androidx.fragment.app.FragmentContainerView(this).apply {
@@ -89,11 +128,11 @@ class ClassInfoScreen : AppCompatActivity() {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    bottomMargin = 12
+                    bottomMargin = 24
                 }
             }
 
-            containerLayout.addView(fragmentContainer)
+            container.addView(fragmentContainer)
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
