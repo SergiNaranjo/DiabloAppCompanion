@@ -46,9 +46,7 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
             activity.loadFragment(SignInActivity());
         }
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
-        database = FirebaseDatabase.getInstance(databaseUrl)
+        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("users");
 
         val signOutButton: ImageButton = view.findViewById<ImageButton>(R.id.btn_sign_out);
@@ -131,7 +129,8 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
                 }
             }
             .addOnFailureListener { exception ->
-                println("Error: ${exception.message}")
+                val message: String? = exception.message;
+                message?.let { Log.e("Profile", message) }
             }
     }
 
@@ -195,7 +194,8 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
                 }
             }
             .addOnFailureListener { exception ->
-                println("Error: ${exception.message}")
+                val message: String? = exception.message;
+                message?.let { Log.e("Profile", message) }
             }
     }
 
@@ -236,7 +236,8 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
                 }
             }
             .addOnFailureListener { exception ->
-                println("Error: ${exception.message}")
+                val message: String? = exception.message;
+                message?.let { Log.e("Profile", message) }
             }
     }
 

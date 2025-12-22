@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import com.example.d3grimoire.posts.community.CommunityPost
 import com.example.d3grimoire.posts.community.NewPostActivity
 import com.example.d3grimoire.posts.community.communityNewsButtonData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -47,7 +46,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
         val account = UserHandler.getUserGoogle(requireActivity());
-        if(account == null)
+        if (account == null)
             view.findViewById<SignInButton>(R.id.btn_sign_in).setOnClickListener {
                 googleSignIn();
             }
@@ -55,8 +54,8 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
         //Sign up
         val signUpButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_btn);
         signUpButton.setOnClickListener {
-            val act = requireActivity()
-            if (act !is NavBar) println("Bad Cast");
+            val act = requireActivity();
+            if (act !is NavBar) throw Exception("Invalid root node!");
             else {
                 act.setFloatingButtonsVisibility(View.GONE);
                 act.loadFragment(SignUpActivity());
@@ -66,17 +65,16 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
 
     private fun signIn(view: View) {
         val activity: FragmentActivity = requireActivity();
-        if(activity is AppCompatActivity &&
-            UserHandler.getUserNative(activity) != null) {
+        if (activity is AppCompatActivity &&
+            UserHandler.getUserNative(activity) != null
+        ) {
             Log.d("Login", "User already signed in!");
         }
 
         val user: String? = view.findViewById<EditText>(R.id.username).text.toString();
         val pass: String? = view.findViewById<EditText>(R.id.password).text.toString();
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/"
-        database = FirebaseDatabase.getInstance(databaseUrl)
+        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("users")
 
         val query: Query = database.orderByChild("user").equalTo(user);
@@ -85,19 +83,21 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
                 checkPassword(snapshot, user, pass);
             }
             .addOnFailureListener { exception ->
-                println("Error: ${exception.message}")
+                val message: String? = exception.message;
+                message?.let { Log.e("Sign In", message) }
             }
     }
 
     private fun checkPassword(snapshot: DataSnapshot, user: String?, pass: String?) {
-        if(snapshot.exists()) {
+        if (snapshot.exists()) {
             for (dataSnapshot in snapshot.children) {
                 val hashedPass: Int? = dataSnapshot.child("password").getValue(Int::class.java);
                 pass?.let {
-                    if(hashedPass == UserHandler.encryptPass(pass)) {
-                        val act: FragmentActivity = requireActivity();
-                        if(act is AppCompatActivity)
-                            UserHandler.setUserNative(act, user, hashedPass);
+                    if (hashedPass == UserHandler.encryptPass(pass)) {
+                        val activity: FragmentActivity = requireActivity();
+                        if (activity !is NavBar) throw Exception("Invalid root node!");
+                        UserHandler.setUserNative(activity, user, hashedPass);
+                        activity.loadFragment(ProfileActivity());
                     }
                 } ?: run {
                     Log.d("Login", "User has no passwprd")
@@ -120,7 +120,9 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data);
             if (task.isSuccessful) {
                 val account = task.getResult(ApiException::class.java);
-                Log.d("Login Google", "Got account for: " + account.displayName)
+                val activity: FragmentActivity = requireActivity();
+                if (activity !is NavBar) throw Exception("Invalid root node!");
+                activity.loadFragment(ProfileActivity());
             } else {
                 Log.e("Login Google", "Error: ", task.exception);
             }

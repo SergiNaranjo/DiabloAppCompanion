@@ -35,19 +35,19 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="12dp"/>
 
-            <!-- res/layout/activity_community_post.xml-->
+            <!-- res/layout/news_post_button.xml-->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/post_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <!-- res/layout/activity_community_post.xml-->
+            <!-- res/layout/news_post_button.xml-->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/post_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <!-- res/layout/activity_community_post.xml-->
+            <!-- res/layout/news_post_button.xml-->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/post_3"
                 android:layout_width="match_parent"

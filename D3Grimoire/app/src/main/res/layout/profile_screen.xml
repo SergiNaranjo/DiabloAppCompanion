@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingTop="32dp">
+            android:paddingTop="32dp"
+            android:layout_gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/txtProfileTitle"

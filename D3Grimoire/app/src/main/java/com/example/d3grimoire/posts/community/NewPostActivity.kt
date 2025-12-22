@@ -36,9 +36,7 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
         val uploadPostButton: ImageButton = view.findViewById<ImageButton>(R.id.upload_post);
         val exitButton: ImageButton = view.findViewById<ImageButton>(R.id.exit_new_post);
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
-        database = FirebaseDatabase.getInstance(databaseUrl)
+        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("posts");
 
         uploadPostButton.setOnClickListener {
@@ -106,7 +104,7 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
                     postAnalyticsPostCreator();
                 }
                 .addOnFailureListener {
-                    Log.e("FIREBASE", "Write failed", it)
+                    Log.e("Firebase", "Write failed", it)
                 };
         }
     }
@@ -131,10 +129,8 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
 
     private fun exitToNews() {
         val activity: FragmentActivity = requireActivity();
-        if (activity !is NavBar) Log.d("ACTIVITY", "Bad Cast");
-        else {
-            activity.setFloatingButtonsVisibility(View.VISIBLE);
-            activity.loadFragment(NewsScreen());
-        }
+        if (activity !is NavBar) throw Exception("Invalid root node!");
+        activity.setFloatingButtonsVisibility(View.VISIBLE);
+        activity.loadFragment(NewsScreen());
     }
 }

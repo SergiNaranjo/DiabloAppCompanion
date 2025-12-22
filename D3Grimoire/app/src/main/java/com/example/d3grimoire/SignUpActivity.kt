@@ -61,9 +61,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
             return;
         }
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/"
-        database = FirebaseDatabase.getInstance(databaseUrl)
+        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("users")
 
         val query: Query = database.orderByChild("user").equalTo(user);
@@ -88,8 +86,8 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
                         };
                 }
 
-                val act = requireActivity()
-                if (act !is NavBar) println("Bad Cast");
+                val act = requireActivity();
+                if (act !is NavBar) throw Exception("Invalid root node!");
                 else {
                     act.setFloatingButtonsVisibility(View.GONE);
                     act.loadFragment(SignInActivity());
@@ -101,7 +99,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
     }
 
     private fun showUserExistsAlert() {
-        val builder = AlertDialog.Builder(requireActivity())
+        val builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The user already exists!");
         builder.setTitle("");
@@ -115,7 +113,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
     }
 
     private fun showPasswordsDifferentAlert() {
-        val builder = AlertDialog.Builder(requireActivity())
+        val builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The passwords are different!");
         builder.setTitle("");

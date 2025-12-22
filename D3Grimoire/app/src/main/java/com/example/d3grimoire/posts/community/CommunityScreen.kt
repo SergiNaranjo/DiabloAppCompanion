@@ -39,9 +39,7 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
         val imgBtn: ImageButton = view.findViewById<ImageButton>(R.id.new_post);
         imgBtn.setOnClickListener { newPost(); }
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
-        database = FirebaseDatabase.getInstance(databaseUrl)
+        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("posts");
 
         database.addChildEventListener(createChildEventListener());
@@ -84,12 +82,10 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
     }
 
     private fun newPost() {
-        val act = requireActivity()
-        if (act !is NavBar) println("Bad Cast");
-        else {
-            act.setFloatingButtonsVisibility(View.GONE);
-            act.loadFragment(NewPostActivity())
-        }
+        val act = requireActivity();
+        if (act !is NavBar) throw Exception("Invalid root node!");
+        act.setFloatingButtonsVisibility(View.GONE);
+        act.loadFragment(NewPostActivity());
     }
 
     private fun loadPosts(view: View) {
@@ -98,7 +94,7 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
             communityNewsButtonData.count()
         );
 
-        for(i in 0..len-1) {
+        for (i in 0..len - 1) {
             val data: NewsData = communityNewsButtonData[i];
             val newsPostButton: NewsPostButton = NewsPostButton.newInstance(data);
             childFragmentManager.commit {
@@ -113,12 +109,12 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
             val query: Query = database.orderByKey();
             query.get()
                 .addOnSuccessListener { snapshot ->
-                    if(snapshot.exists()) {
+                    if (snapshot.exists()) {
                         var postIndex: Int = 0;
                         communityNewsButtonData.clear();
                         for (dataSnapshot in snapshot.children) {
                             Log.d("Community Screen", "Child");
-                            if(postIndex >= communityNewsButtonIds.count()) break;
+                            if (postIndex >= communityNewsButtonIds.count()) break;
                             val newsData: NewsData = NewsData(
                                 communityNewsButtonIds[postIndex],
                                 dataSnapshot.child("title").getValue(String::class.java),
