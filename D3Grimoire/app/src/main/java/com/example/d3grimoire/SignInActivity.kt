@@ -97,7 +97,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
                     if(hashedPass == UserHandler.encryptPass(pass)) {
                         val act: FragmentActivity = requireActivity();
                         if(act is AppCompatActivity)
-                            UserHandler.setUserNative(act, user);
+                            UserHandler.setUserNative(act, user, hashedPass);
                     }
                 } ?: run {
                     Log.d("Login", "User has no passwprd")
