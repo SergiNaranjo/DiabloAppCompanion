@@ -44,16 +44,14 @@ class NavBarActivity : AppCompatActivity() {
             postScreen = PostScreen.COMMUNITY;
             loadFragment(CommunityActivity());
             communityScreenButton.setBackgroundResource(R.drawable.ic_btn_community_active);
-            newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_deactive);
+            newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_inactive);
         }
         newsScreenButton.setOnClickListener {
             postScreen = PostScreen.NEWS;
             loadFragment(NewsScreen());
-            communityScreenButton.setBackgroundResource(R.drawable.ic_btn_community_deactive);
+            communityScreenButton.setBackgroundResource(R.drawable.ic_btn_community_inactive);
             newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_active);
         }
-
-        setFloatingButtonsVisibility(View.GONE);
 
         postScreen = PostScreen.NEWS;
         loadFragment(NewsScreen())
