@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.d3grimoire.posts.community.CommunityPost
+import com.example.d3grimoire.posts.community.NewPostActivity
 import com.example.d3grimoire.posts.community.communityNewsButtonData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,10 +31,6 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
 
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
-
-    //Encryption constants
-    val p: Int = 31;
-    val m: Int = 1000000009;
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -54,6 +51,17 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
             view.findViewById<SignInButton>(R.id.btn_sign_in).setOnClickListener {
                 googleSignIn();
             }
+
+        //Sign up
+        val signUpButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_btn);
+        signUpButton.setOnClickListener {
+            val act = requireActivity()
+            if (act !is NavBar) println("Bad Cast");
+            else {
+                act.setFloatingButtonsVisibility(View.GONE);
+                act.loadFragment(SignUpActivity());
+            }
+        }
     }
 
     private fun signIn(view: View) {
@@ -86,7 +94,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
             for (dataSnapshot in snapshot.children) {
                 val hashedPass: Int? = dataSnapshot.child("password").getValue(Int::class.java);
                 pass?.let {
-                    if(hashedPass == encryptPass(pass)) {
+                    if(hashedPass == UserHandler.encryptPass(pass)) {
                         val act: FragmentActivity = requireActivity();
                         if(act is AppCompatActivity)
                             UserHandler.setUserNative(act, user);
@@ -108,25 +116,14 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == 9001) {
+        if (requestCode == 9001) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if(task.isSuccessful) {
+            if (task.isSuccessful) {
                 val account = task.getResult(ApiException::class.java);
                 Log.d("Login Google", "Got account for: " + account.displayName)
             } else {
                 Log.e("Login Google", "Error: ", task.exception);
             }
         }
-    }
-
-    //Basic password hashing for encryption
-    private fun encryptPass(password: String): Int {
-        var p_pow = 1;
-        var sum = 0;
-        for (letter in password) {
-            sum = (sum + letter.code * p_pow).mod(m);
-            p_pow = (p_pow * p).mod(m);
-        }
-        return sum;
     }
 }
