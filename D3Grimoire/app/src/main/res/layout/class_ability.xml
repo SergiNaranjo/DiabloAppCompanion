@@ -9,12 +9,16 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
+
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginRight="16dp"
-        android:background="#000"
-        android:clipToOutline="true"/>
+        android:id="@+id/class_ability_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="12dp"
+        android:background="#1A1A1A"
+        android:contentDescription="Skill Icon"
+        android:padding="2dp"
+        android:scaleType="fitCenter" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -32,6 +36,14 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/class_ability_level"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Unlocked at Level 0"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/class_ability_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,5 +59,6 @@
             android:text=""
             android:textColor="#DDDDDD"
             android:textSize="12sp" />
+
     </LinearLayout>
 </LinearLayout>

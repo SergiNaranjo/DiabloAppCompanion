@@ -32,16 +32,19 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
-                <!--FrameLayout from ChatGPT because didn't know how to show background and text both in a button -->
                 <FrameLayout
+                    android:id="@+id/btn_barbarian"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -49,19 +52,25 @@
                         android:text="BARBARIAN"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/btn_crusader"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -69,19 +78,25 @@
                         android:text="CRUSADER"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/btn_demon_hunter"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -89,19 +104,25 @@
                         android:text="DEMON HUNTER"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/btn_monk"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -109,19 +130,25 @@
                         android:text="MONK"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/btn_necromancer"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -129,19 +156,25 @@
                         android:text="NECROMANCER"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
 
                 <FrameLayout
+                    android:id="@+id/btn_witch_doctor"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -149,18 +182,25 @@
                         android:text="WITCH DOCTOR"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
+
                 <FrameLayout
+                    android:id="@+id/btn_wizard"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
 
                     <ImageButton
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ic_btn_info"/>
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -168,7 +208,9 @@
                         android:text="WIZARD"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -180,6 +222,7 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"/>
 
             <androidx.fragment.app.FragmentContainerView
@@ -197,5 +240,3 @@
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
-
-
