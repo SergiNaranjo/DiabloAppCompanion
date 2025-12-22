@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.signin
 
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +9,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.d3grimoire.NavBarActivity
+import com.example.d3grimoire.R
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 
-class SignUpActivity : Fragment(R.layout.sign_up_activity) {
+class SignUpActivity : Fragment(R.layout.activity_sign_up) {
 
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
@@ -61,9 +63,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
             return;
         }
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/"
-        database = FirebaseDatabase.getInstance(databaseUrl)
+        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("users")
 
         val query: Query = database.orderByChild("user").equalTo(user);
@@ -88,8 +88,8 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
                         };
                 }
 
-                val act = requireActivity()
-                if (act !is NavBar) println("Bad Cast");
+                val act = requireActivity();
+                if (act !is NavBarActivity) throw Exception("Invalid root node!");
                 else {
                     act.setFloatingButtonsVisibility(View.GONE);
                     act.loadFragment(SignInActivity());
@@ -101,7 +101,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
     }
 
     private fun showUserExistsAlert() {
-        val builder = AlertDialog.Builder(requireActivity())
+        val builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The user already exists!");
         builder.setTitle("");
@@ -115,7 +115,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
     }
 
     private fun showPasswordsDifferentAlert() {
-        val builder = AlertDialog.Builder(requireActivity())
+        val builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The passwords are different!");
         builder.setTitle("");

@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.signin
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import kotlin.text.iterator
 
 class UserHandler {
     companion object {
@@ -16,7 +17,7 @@ class UserHandler {
 
         public fun getUserNative(activity: AppCompatActivity): String? {
             var playerPrefs: SharedPreferences =
-                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
+                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE);
             val lastUser: String? = playerPrefs.getString("user", "");
             if (lastUser != "") return lastUser;
             return null;
@@ -24,7 +25,7 @@ class UserHandler {
 
         public fun getPassNative(activity: AppCompatActivity): Int? {
             var playerPrefs: SharedPreferences =
-                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
+                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE);
             val pass: Int? = playerPrefs.getInt("password", 0);
             if (pass != 0) return pass;
             return null;
@@ -32,7 +33,7 @@ class UserHandler {
 
         public fun setUserNative(activity: AppCompatActivity, user: String?, password: Int) {
             val playerPrefs: SharedPreferences =
-                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
+                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE);
             playerPrefs.edit().putString("user", user).apply();
             playerPrefs.edit().putInt("password", password).apply();
         }
@@ -54,7 +55,7 @@ class UserHandler {
         public fun signOutNative(activity: AppCompatActivity) {
             //Sets user to empty string, which is considered signed out
             val playerPrefs: SharedPreferences =
-                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
+                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE);
             playerPrefs.edit().putString("user", "").apply();
         }
 

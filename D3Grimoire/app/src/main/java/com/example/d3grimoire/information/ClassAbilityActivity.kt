@@ -1,4 +1,4 @@
-package com.example.d3grimoire
+package com.example.d3grimoire.information
 
 import API.DiabloImageUrl
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import coil.load
+import com.example.d3grimoire.R
 
-class ClassAbility : Fragment(R.layout.class_ability) {
+class ClassAbilityActivity : Fragment(R.layout.activity_class_ability) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

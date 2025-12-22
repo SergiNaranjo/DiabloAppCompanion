@@ -7,14 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import android.view.View
-import com.example.d3grimoire.posts.community.CommunityScreen
-import com.example.d3grimoire.posts.community.NewPostActivity
+import com.example.d3grimoire.information.InformationActivity
+import com.example.d3grimoire.posts.community.CommunityActivity
 import com.example.d3grimoire.posts.news.NewsScreen
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.d3grimoire.profile.ProfileActivity
 import com.google.firebase.database.FirebaseDatabase
 
 
-class NavBar : AppCompatActivity() {
+class NavBarActivity : AppCompatActivity() {
     enum class PostScreen {
         NEWS, COMMUNITY
     }
@@ -42,7 +42,7 @@ class NavBar : AppCompatActivity() {
         val newsScreenButton: ImageButton = findViewById<ImageButton>(R.id.btnSettings);
         communityScreenButton.setOnClickListener {
             postScreen = PostScreen.COMMUNITY;
-            loadFragment(CommunityScreen());
+            loadFragment(CommunityActivity());
             communityScreenButton.setBackgroundResource(R.drawable.ic_btn_community_active);
             newsScreenButton.setBackgroundResource(R.drawable.ic_btn_news_deactive);
         }
@@ -62,7 +62,7 @@ class NavBar : AppCompatActivity() {
             "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
         val database = FirebaseDatabase.getInstance(databaseUrl)
             .getReference("posts");
-        CommunityScreen.fetchPostData(database);
+        CommunityActivity.fetchPostData(database);
     }
 
     private fun setupListeners() {
@@ -74,7 +74,7 @@ class NavBar : AppCompatActivity() {
                 }
 
                 PostScreen.COMMUNITY -> {
-                    loadFragment(CommunityScreen())
+                    loadFragment(CommunityActivity())
                 }
             }
             setFloatingButtonsVisibility(View.VISIBLE);
@@ -82,7 +82,7 @@ class NavBar : AppCompatActivity() {
 
         btnInfo.setOnClickListener {
             selectTab(btnInfo)
-            loadFragment(InfoScreen())
+            loadFragment(InformationActivity())
             setFloatingButtonsVisibility(View.GONE);
         }
 

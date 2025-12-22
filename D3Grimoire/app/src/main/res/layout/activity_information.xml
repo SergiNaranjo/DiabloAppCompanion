@@ -20,7 +20,7 @@
                 android:id="@+id/txtClassesTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Classes"
+                android:text="@string/classes"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -49,7 +49,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="BARBARIAN"
+                        android:text="@string/barbarian"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -75,7 +75,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="CRUSADER"
+                        android:text="@string/crusader"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -101,7 +101,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="DEMON HUNTER"
+                        android:text="@string/demon_hunter"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -127,7 +127,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="MONK"
+                        android:text="@string/monk"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -153,7 +153,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="NECROMANCER"
+                        android:text="@string/necromancer"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -179,7 +179,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="WITCH DOCTOR"
+                        android:text="@string/witch_doctor"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -205,7 +205,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="WIZARD"
+                        android:text="@string/wizard"
                         android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:gravity="center"
@@ -218,7 +218,7 @@
                 android:id="@+id/txtItemsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Items"
+                android:text="@string/items"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"

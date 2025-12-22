@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D3Grimoire" >
         <activity
-            android:name=".posts.news.NewsPost"
+            android:name=".posts.news.NewsPostActivity"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".posts.news.NewsPostButton"-->
@@ -25,7 +25,7 @@
 <!--            android:name=".posts.news.NewsScreen"-->
 <!--            android:exported="false" />-->
         <activity
-            android:name=".ClassInfoScreen"
+            android:name=".information.ClassInformationActivity"
             android:exported="false" />
 
 <!--        <activity-->
@@ -49,7 +49,7 @@
 <!--        <activity-->
 <!--            android:name=".posts.community.CommunityPost"-->
 <!--            android:exported="false" />-->
-        <activity android:name=".NavBar"
+        <activity android:name=".NavBarActivity"
             android:exported="false"/>
         <activity android:name=".posts.news.NewsActivity"
             android:exported="false"/>

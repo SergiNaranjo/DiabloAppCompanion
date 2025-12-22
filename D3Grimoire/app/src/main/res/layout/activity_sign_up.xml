@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:text="User:"
+            android:text="@string/user"
             android:textColor="@color/white"/>
 
 
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:text="Password:"
+            android:text="@string/password"
             android:textColor="@color/white"/>
 
 
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:text="Confirm password:"
+            android:text="@string/confirm_password"
             android:textColor="@color/white"/>
 
 
@@ -87,7 +87,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:padding="12dp"
-        android:contentDescription="Other"
+        android:contentDescription="@string/content_description"
         android:elevation="8dp"
         android:background="@drawable/ic_btn_community_active"
         android:layout_marginLeft="20dp"
@@ -100,7 +100,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:padding="12dp"
-        android:contentDescription="Other"
+        android:contentDescription="@string/content_description"
         android:elevation="8dp"
         android:background="@drawable/ic_btn_news_deactive"
         android:layout_margin="20dp"/>

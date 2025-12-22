@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_nav_news_selector"
-            android:contentDescription="news"
+            android:contentDescription="@string/content_description_news"
             android:scaleType="centerInside" />
 
         <ImageButton
@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_nav_info_selector"
-            android:contentDescription="info"
+            android:contentDescription="@string/content_description_info"
             android:scaleType="centerInside" />
 
         <ImageButton
@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_nav_profile_selector"
-            android:contentDescription="profile"
+            android:contentDescription="@string/content_description_profile"
             android:scaleType="centerInside" />
     </LinearLayout>
 
@@ -70,7 +70,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:contentDescription="Settings"
+            android:contentDescription="@string/content_description_settings"
             android:elevation="8dp"
             android:background="@drawable/ic_btn_news_deactive"/>
 
@@ -83,7 +83,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:padding="12dp"
-            android:contentDescription="Other"
+            android:contentDescription="@string/content_description"
             android:elevation="8dp"
             android:background="@drawable/ic_btn_community_active" />
 
