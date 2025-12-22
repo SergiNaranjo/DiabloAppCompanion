@@ -30,7 +30,7 @@ import java.net.URL
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
-class ProfileActivity : Fragment(R.layout.profile_screen) {
+class ProfileActivity : Fragment(R.layout.activity_profile) {
 
     private lateinit var database: DatabaseReference;
     private lateinit var imageUrlEditText: EditText;
@@ -41,7 +41,7 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
         super.onCreate(savedInstanceState)
 
         val activity: FragmentActivity = requireActivity();
-        if(activity !is NavBar) throw Exception("Invalid root activity!");
+        if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
         if(!UserHandler.isSignedIn(activity)) {
             activity.loadFragment(SignInActivity());
         }
@@ -49,7 +49,7 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
         database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("users");
 
-        val signOutButton: ImageButton = view.findViewById<ImageButton>(R.id.btn_sign_out);
+        val signOutButton: TextView = view.findViewById<TextView>(R.id.btn_sign_out);
         signOutButton.setOnClickListener { signOut(); };
 
         imageUrlEditText = view.findViewById<EditText>(R.id.profile_img_url);
@@ -65,35 +65,34 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
 
         loadProfilePicture(view);
 
-        var bundle : Bundle = bundleOf(
-            "name" to "Name",
-            "class" to "Barbarian",
-            "level" to 5
-        );
-        childFragmentManager.commit {
-            setReorderingAllowed(true);
-            add<ProfileHero>(R.id.profile_hero_1, args = bundle);
-        }
+        makeHeroData();
 
-        bundle = bundleOf(
-            "name" to "Name",
-            "class" to "Barbarian",
-            "level" to 5
-        );
-        childFragmentManager.commit {
-            setReorderingAllowed(true);
-            add<ProfileHero>(R.id.profile_hero_2, args = bundle);
+        for(i in heroIds.indices) {
+            childFragmentManager.commit {
+                setReorderingAllowed(true);
+                add<ProfileHeroActivity>(heroIds[i], args = heroData[i]);
+            }
         }
+    }
 
-        bundle = bundleOf(
-            "name" to "Name",
-            "class" to "Barbarian",
-            "level" to 5
+    private fun makeHeroData() {
+        heroData = listOf(
+            bundleOf(
+                "name" to getString(R.string.hero_1_name),
+                "class" to getString(R.string.hero_1_class),
+                "level" to getString(R.string.hero_1_level)
+            ),
+            bundleOf(
+                "name" to getString(R.string.hero_2_name),
+                "class" to getString(R.string.hero_2_class),
+                "level" to getString(R.string.hero_2_level)
+            ),
+            bundleOf(
+                "name" to getString(R.string.hero_3_name),
+                "class" to getString(R.string.hero_3_class),
+                "level" to getString(R.string.hero_3_level)
+            )
         );
-        childFragmentManager.commit {
-            setReorderingAllowed(true);
-            add<ProfileHero>(R.id.profile_hero_3, args = bundle);
-        }
     }
 
     private fun loadProfilePicture(view: View) {
@@ -158,7 +157,7 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
                     delay(500);
 
                     val act: FragmentActivity = requireActivity();
-                    if(act is NavBar) {
+                    if(act is NavBarActivity) {
                         act.loadFragment(ProfileActivity());
                     }
                 }
@@ -201,7 +200,7 @@ class ProfileActivity : Fragment(R.layout.profile_screen) {
 
     private fun signOut() {
         val activity: FragmentActivity = requireActivity();
-        if(activity !is NavBar) throw Exception("Invalid root activity!");
+        if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
         UserHandler.signOutGoogle(activity);
         UserHandler.signOutNative(activity);
         activity.loadFragment(ProfileActivity());

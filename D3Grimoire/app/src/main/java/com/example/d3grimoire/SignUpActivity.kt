@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 
-class SignUpActivity : Fragment(R.layout.sign_up_activity) {
+class SignUpActivity : Fragment(R.layout.activity_sign_up) {
 
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
@@ -87,7 +87,7 @@ class SignUpActivity : Fragment(R.layout.sign_up_activity) {
                 }
 
                 val act = requireActivity();
-                if (act !is NavBar) throw Exception("Invalid root node!");
+                if (act !is NavBarActivity) throw Exception("Invalid root node!");
                 else {
                     act.setFloatingButtonsVisibility(View.GONE);
                     act.loadFragment(SignInActivity());

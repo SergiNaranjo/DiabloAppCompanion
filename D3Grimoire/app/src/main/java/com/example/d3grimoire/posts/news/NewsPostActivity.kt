@@ -5,7 +5,7 @@ import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d3grimoire.R
 
-class NewsPost : AppCompatActivity() {
+class NewsPostActivity : AppCompatActivity() {
 
     private var url : String? = null;
     private lateinit var webView : WebView;

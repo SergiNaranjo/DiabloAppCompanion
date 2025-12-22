@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">D3 Grimoire</string>
     <string name="database_URL">https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/</string>
+    <string name="news_1_title">Season 35: Eternal Conflict – Has Concluded</string>
+    <string name="news_1_description">Diablo III Season 35 begins on June 6. Eradicate Hell’s emissaries using powerful boons granted by the season theme, and more.</string>
+    <string name="news_1_imgUrl">https://bnetcmsus-a.akamaihd.net/cms/blog_header/2m/2M8QRV55TNGM1744065821014.png</string>
+    <string name="news_1_url">https://news.blizzard.com/en-us/article/24191146/season-35-eternal-conflict-has-concluded</string>
+    <string name="news_1_author">Admin</string>
+    <string name="news_2_title">Play Diablo III on Game Pass now!</string>
+    <string name="news_2_description">The legendary action-RPG is now available on Game Pass, including the original game and the Reaper of Souls expansion.</string>
+    <string name="news_2_imgUrl">https://bnetcmsus-a.akamaihd.net/cms/blog_header/5h/5HYUB8O4XUYQ1744130028829.jpg</string>
+    <string name="news_2_url">https://news.blizzard.com/en-us/article/24186408/play-diablo-iii-on-game-pass-now</string>
+    <string name="news_2_author">Admin</string>
+    <string name="news_3_title">BlizzCon Returns In 2026</string>
+    <string name="news_3_description">Our celebration of our universes, connection, and community is coming back to the Anaheim Convention Center next year.</string>
+    <string name="news_3_imgUrl">https://bnetcmsus-a.akamaihd.net/cms/blog_header/lf/LFFILFFOMFKV1741374538375.jpg</string>
+    <string name="news_3_url">https://news.blizzard.com/en-us/article/24178650/blizzcon-returns-in-2026</string>
+    <string name="news_3_author">Admin</string>
+    <string name="hero_1_name">John</string>
+    <string name="hero_1_class">Barbarian</string>
+    <string name="hero_1_level">5</string>
+    <string name="hero_2_name">James</string>
+    <string name="hero_2_class">Monk</string>
+    <string name="hero_2_level">3</string>
+    <string name="hero_3_name">Jack</string>
+    <string name="hero_3_class">Crusader</string>
+    <string name="hero_3_level">1</string>
 </resources>

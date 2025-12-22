@@ -1,21 +1,14 @@
 package com.example.d3grimoire
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import com.example.d3grimoire.posts.community.NewPostActivity
-import com.example.d3grimoire.posts.community.communityNewsButtonData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -26,7 +19,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 
-class SignInActivity : Fragment(R.layout.sign_in_screen) {
+class SignInActivity : Fragment(R.layout.activity_sign_in) {
 
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
@@ -34,7 +27,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //User-Password sign in
-        val loginButton: ImageButton = view.findViewById<ImageButton>(R.id.login_btn);
+        val loginButton: TextView = view.findViewById<TextView>(R.id.login_btn);
         loginButton.setOnClickListener { signIn(view); }
 
         //Google Sign in
@@ -52,10 +45,10 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
             }
 
         //Sign up
-        val signUpButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_btn);
+        val signUpButton: TextView = view.findViewById<TextView>(R.id.sign_up_btn);
         signUpButton.setOnClickListener {
             val act = requireActivity();
-            if (act !is NavBar) throw Exception("Invalid root node!");
+            if (act !is NavBarActivity) throw Exception("Invalid root node!");
             else {
                 act.setFloatingButtonsVisibility(View.GONE);
                 act.loadFragment(SignUpActivity());
@@ -95,7 +88,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
                 pass?.let {
                     if (hashedPass == UserHandler.encryptPass(pass)) {
                         val activity: FragmentActivity = requireActivity();
-                        if (activity !is NavBar) throw Exception("Invalid root node!");
+                        if (activity !is NavBarActivity) throw Exception("Invalid root node!");
                         UserHandler.setUserNative(activity, user, hashedPass);
                         activity.loadFragment(ProfileActivity());
                     }
@@ -121,7 +114,7 @@ class SignInActivity : Fragment(R.layout.sign_in_screen) {
             if (task.isSuccessful) {
                 val account = task.getResult(ApiException::class.java);
                 val activity: FragmentActivity = requireActivity();
-                if (activity !is NavBar) throw Exception("Invalid root node!");
+                if (activity !is NavBarActivity) throw Exception("Invalid root node!");
                 activity.loadFragment(ProfileActivity());
             } else {
                 Log.e("Login Google", "Error: ", task.exception);

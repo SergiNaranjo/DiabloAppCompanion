@@ -1,25 +1,15 @@
 package com.example.d3grimoire.posts.community
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
-import com.example.d3grimoire.NavBar
+import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
-import com.example.d3grimoire.UserHandler
 import com.example.d3grimoire.posts.NewsData
-import com.example.d3grimoire.posts.news.NewsPost
-import com.example.d3grimoire.posts.news.NewsPostButton
-import com.example.d3grimoire.posts.news.NewsScreen
-import com.example.d3grimoire.posts.news.newsButtonData
-import com.google.firebase.analytics.FirebaseAnalytics
+import com.example.d3grimoire.posts.news.NewsPostButtonActivity
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import kotlin.math.min
 
-class CommunityScreen : Fragment(R.layout.community_screen) {
+class CommunityActivity : Fragment(R.layout.activity_community) {
     private lateinit var database: DatabaseReference
     private lateinit var view: View;
 
@@ -83,7 +73,7 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
 
     private fun newPost() {
         val act = requireActivity();
-        if (act !is NavBar) throw Exception("Invalid root node!");
+        if (act !is NavBarActivity) throw Exception("Invalid root node!");
         act.setFloatingButtonsVisibility(View.GONE);
         act.loadFragment(NewPostActivity());
     }
@@ -96,7 +86,7 @@ class CommunityScreen : Fragment(R.layout.community_screen) {
 
         for (i in 0..len - 1) {
             val data: NewsData = communityNewsButtonData[i];
-            val newsPostButton: NewsPostButton = NewsPostButton.newInstance(data);
+            val newsPostButton: NewsPostButtonActivity = NewsPostButtonActivity.newInstance(data);
             childFragmentManager.commit {
                 setReorderingAllowed(true);
                 add(data.id, newsPostButton);

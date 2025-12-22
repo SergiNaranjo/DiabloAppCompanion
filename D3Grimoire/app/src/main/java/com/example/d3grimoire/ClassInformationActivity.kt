@@ -20,14 +20,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ClassInfoScreen : AppCompatActivity() {
+class ClassInformationActivity : AppCompatActivity() {
 
     private var currentGender = "male"
     private lateinit var heroSlug: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.class_info_screen)
+        setContentView(R.layout.activity_class_information)
 
         heroSlug = intent.getStringExtra("HERO_SLUG") ?: "barbarian"
 
@@ -136,7 +136,7 @@ class ClassInfoScreen : AppCompatActivity() {
 
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add<ClassAbility>(fragmentContainer.id, args = bundle)
+                add<ClassAbilityActivity>(fragmentContainer.id, args = bundle)
             }
         }
     }

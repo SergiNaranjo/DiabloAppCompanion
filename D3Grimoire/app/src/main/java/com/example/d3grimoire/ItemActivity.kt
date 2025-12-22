@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import coil.load
 
-class Item : Fragment(R.layout.item_fragment) {
+class ItemActivity : Fragment(R.layout.activity_item) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

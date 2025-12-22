@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import com.example.d3grimoire.NavBar
+import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
 import com.example.d3grimoire.UserHandler
 import com.example.d3grimoire.posts.news.NewsScreen
@@ -129,7 +129,7 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
 
     private fun exitToNews() {
         val activity: FragmentActivity = requireActivity();
-        if (activity !is NavBar) throw Exception("Invalid root node!");
+        if (activity !is NavBarActivity) throw Exception("Invalid root node!");
         activity.setFloatingButtonsVisibility(View.VISIBLE);
         activity.loadFragment(NewsScreen());
     }

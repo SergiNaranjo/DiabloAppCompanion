@@ -9,8 +9,6 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.d3grimoire.posts.news.NewsActivity
-import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_screen)
+        setContentView(R.layout.activity_splash_screen)
 
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
@@ -115,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "Navigating to NewsActivity")
 
         progressBar.visibility = View.GONE
-        startActivity(Intent(this, NavBar::class.java))
+        startActivity(Intent(this, NavBarActivity::class.java))
         finish()
     }
 

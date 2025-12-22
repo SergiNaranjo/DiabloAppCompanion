@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class InfoScreen : Fragment(R.layout.info_screen) {
+class InformationActivity : Fragment(R.layout.activity_information) {
 
     companion object {
         private const val TAG_ITEM = "ITEM_API"
@@ -46,7 +46,7 @@ class InfoScreen : Fragment(R.layout.info_screen) {
 
     private fun setupClassButton(view: View, buttonId: Int, slug: String) {
         view.findViewById<FrameLayout>(buttonId)?.setOnClickListener {
-            val intent = Intent(requireContext(), ClassInfoScreen::class.java)
+            val intent = Intent(requireContext(), ClassInformationActivity::class.java)
             intent.putExtra("HERO_SLUG", slug)
             startActivity(intent)
         }
@@ -74,7 +74,7 @@ class InfoScreen : Fragment(R.layout.info_screen) {
 
                 childFragmentManager.commit {
                     setReorderingAllowed(true)
-                    replace(containerId, Item::class.java, bundle)
+                    replace(containerId, ItemActivity::class.java, bundle)
                 }
             }
 

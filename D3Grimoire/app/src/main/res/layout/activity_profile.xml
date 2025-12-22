@@ -79,10 +79,15 @@
                     android:background="@drawable/ic_btn_username" />
             </LinearLayout>
 
-            <ImageButton
+            <TextView
                 android:id="@+id/btn_sign_out"
                 android:layout_width="100dp"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:text="Sign Out"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:background="@color/white"/>
 
             <TextView
                 android:id="@+id/profile_heroes_title"

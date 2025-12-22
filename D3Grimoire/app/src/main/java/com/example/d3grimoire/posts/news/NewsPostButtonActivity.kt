@@ -19,12 +19,12 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import java.net.URL
 import java.util.concurrent.Executors
 
-class NewsPostButton : Fragment(R.layout.news_post_button) {
+class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
     companion object {
         fun newInstance(
             data: NewsData
-        ): NewsPostButton {
-            return NewsPostButton().apply {
+        ): NewsPostButtonActivity {
+            return NewsPostButtonActivity().apply {
                 arguments = bundleOf(
                     "title" to data.name,
                     "desc" to data.description,
@@ -86,7 +86,7 @@ class NewsPostButton : Fragment(R.layout.news_post_button) {
                 FirebaseAnalytics.getInstance(requireActivity())
                     .logEvent("PostSelected", bundle);
             }
-            val intent: Intent = Intent(requireActivity(), NewsPost::class.java);
+            val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
             intent.putExtra("url", requireArguments().getString("url"));
             startActivity(intent);
         }
