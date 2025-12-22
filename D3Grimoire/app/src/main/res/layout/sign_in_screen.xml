@@ -96,48 +96,10 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <androidx.gridlayout.widget.GridLayout
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_sign_in"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:columnCount="3"
-                app:rowCount="2"
-                app:useDefaultMargins="true">
-
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/ic_btn_stores"
-                    android:contentDescription="Steam" />
-
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/ic_btn_stores"
-                    android:contentDescription="PlayStation" />
-
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/ic_btn_stores"
-                    android:contentDescription="Nintendo" />
-
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/ic_btn_stores"
-                    android:contentDescription="Xbox" />
-
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/btn_sign_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-                <ImageButton
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/ic_btn_stores"
-                    android:contentDescription="BattleNet" />
-            </androidx.gridlayout.widget.GridLayout>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -149,6 +111,11 @@
                 android:text="Don't have an account? REGISTER HERE"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/sign_up_btn"
+                android:layout_width="100dp"
+                android:layout_height="50dp"/>
 
         </LinearLayout>
 
