@@ -65,7 +65,7 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("Firebase", "Cancelled - Error: ${error.message}");
+                Log.e("Firebase", "Cancelled - Error: ${error.message}");
             }
 
         }
@@ -103,7 +103,6 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                         var postIndex: Int = 0;
                         communityNewsButtonData.clear();
                         for (dataSnapshot in snapshot.children) {
-                            Log.d("Community Screen", "Child");
                             if (postIndex >= communityNewsButtonIds.count()) break;
                             val newsData: NewsData = NewsData(
                                 communityNewsButtonIds[postIndex],
@@ -116,7 +115,6 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                             communityNewsButtonData.add(newsData);
                             postIndex++;
                         }
-                        Log.d("Community Screen", communityNewsButtonData.count().toString());
                     } else {
                         Log.d("Community Screen", "No posts")
                     }
