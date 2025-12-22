@@ -65,4 +65,6 @@
     <string name="class_name">Class Name</string>
     <string name="content_description_select_male">Select Male</string>
     <string name="content_description_select_female">Select Female</string>
+    <string name="primary_stat">Primary Stat</string>
+    <string name="loading_class_description">Loading class description...</string>
 </resources>
