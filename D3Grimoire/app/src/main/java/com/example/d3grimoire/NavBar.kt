@@ -56,7 +56,7 @@ class NavBar : AppCompatActivity() {
         setFloatingButtonsVisibility(View.GONE);
 
         postScreen = PostScreen.NEWS;
-        loadFragment(SignInActivity())
+        loadFragment(NewsScreen())
 
         val databaseUrl =
             "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";

@@ -1,18 +1,18 @@
 package com.example.d3grimoire
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
 
 class UserHandler {
     companion object {
+
+        public fun isSignedIn(activity: AppCompatActivity): Boolean {
+            return getUsername(activity) != null;
+        }
 
         public fun getUserNative(activity: AppCompatActivity): String? {
             var playerPrefs: SharedPreferences =
@@ -22,10 +22,19 @@ class UserHandler {
             return null;
         }
 
-        public fun setUserNative(activity: AppCompatActivity, user: String?) {
+        public fun getPassNative(activity: AppCompatActivity): Int? {
+            var playerPrefs: SharedPreferences =
+                activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
+            val pass: Int? = playerPrefs.getInt("password", 0);
+            if (pass != 0) return pass;
+            return null;
+        }
+
+        public fun setUserNative(activity: AppCompatActivity, user: String?, password: Int) {
             val playerPrefs: SharedPreferences =
                 activity.getSharedPreferences("prefs_user", Context.MODE_PRIVATE)
             playerPrefs.edit().putString("user", user).apply();
+            playerPrefs.edit().putInt("password", password).apply();
         }
 
         public fun getUserGoogle(context: Context): GoogleSignInAccount? {
@@ -62,6 +71,14 @@ class UserHandler {
                 p_pow = (p_pow * p).mod(m);
             }
             return sum;
+        }
+
+        public fun getUsername(activity: AppCompatActivity): String? {
+            var username: String? = getUserGoogle(activity)?.displayName;
+            username?.let { return username; }
+            username = getUserNative(activity);
+            username?.let { return username }
+            return null;
         }
 
     }
