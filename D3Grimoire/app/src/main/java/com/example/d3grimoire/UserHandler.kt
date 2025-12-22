@@ -49,5 +49,20 @@ class UserHandler {
             playerPrefs.edit().putString("user", "").apply();
         }
 
+        //Basic password hashing for encryption
+        public fun encryptPass(password: String): Int {
+            //Constants for encryption
+            val p = 31;
+            val m = 1000000009;
+
+            var p_pow = 1;
+            var sum = 0;
+            for (letter in password) {
+                sum = (sum + letter.code * p_pow).mod(m);
+                p_pow = (p_pow * p).mod(m);
+            }
+            return sum;
+        }
+
     }
 }
