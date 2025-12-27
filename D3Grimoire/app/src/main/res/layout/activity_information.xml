@@ -33,7 +33,7 @@
                 android:gravity="center_horizontal">
 
                 <FrameLayout
-                    android:id="@+id/btn_barbarian"
+                    android:id="@+id/information_barbarian_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginBottom="12dp"
@@ -58,7 +58,7 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_crusader"
+                    android:id="@+id/information_crusader_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_demon_hunter"
+                    android:id="@+id/information_demon_hunter_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
@@ -110,7 +110,7 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_monk"
+                    android:id="@+id/information_monk_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
@@ -136,7 +136,7 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_necromancer"
+                    android:id="@+id/information_necromancer_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
@@ -162,7 +162,7 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_witch_doctor"
+                    android:id="@+id/information_witch_doctor_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
@@ -188,7 +188,7 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_wizard"
+                    android:id="@+id/information_wizard_button"
                     android:layout_width="250dp"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"

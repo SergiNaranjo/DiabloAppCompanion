@@ -13,7 +13,7 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/txtBarbarianTitle"
+            android:id="@+id/class_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/class_name"
@@ -28,7 +28,7 @@
             android:layout_marginBottom="32dp">
 
             <ImageView
-                android:id="@+id/imgClassGifBg"
+                android:id="@+id/class_gif_background_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -36,7 +36,7 @@
                 tools:background="#333333" />
 
             <ImageView
-                android:id="@+id/imgHeroPortrait"
+                android:id="@+id/hero_portrait_image"
                 android:layout_width="180dp"
                 android:layout_height="220dp"
                 android:layout_gravity="center"
@@ -53,7 +53,7 @@
                 android:layout_marginBottom="8dp">
 
                 <ImageButton
-                    android:id="@+id/circle1"
+                    android:id="@+id/male_button"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="8dp"
@@ -64,11 +64,11 @@
                     />
 
                 <ImageButton
-                    android:id="@+id/circle2"
+                    android:id="@+id/female_button"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="8dp"
-                    android:background="@drawable/ic_btn_female_deactive"
+                    android:background="@drawable/ic_btn_female_inactive"
                     android:scaleType="centerInside"
                     android:contentDescription="@string/content_description_select_female" />
             </LinearLayout>

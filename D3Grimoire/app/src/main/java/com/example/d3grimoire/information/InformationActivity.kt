@@ -8,9 +8,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
+import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,46 +35,67 @@ class InformationActivity : Fragment(R.layout.activity_information) {
         super.onViewCreated(view, savedInstanceState)
         testItemSlugs.forEachIndexed { index, slug ->
             if (index < containers.size) {
-                loadItem(slug, containers[index])
+                loadItem(slug, containers[index]);
             }
         }
 
-        setupClassButton(view, R.id.btn_barbarian, "barbarian")
-        setupClassButton(view, R.id.btn_crusader, "crusader")
-        setupClassButton(view, R.id.btn_demon_hunter, "demon-hunter")
-        setupClassButton(view, R.id.btn_monk, "monk")
-        setupClassButton(view, R.id.btn_necromancer, "necromancer")
-        setupClassButton(view, R.id.btn_witch_doctor, "witch-doctor")
-        setupClassButton(view, R.id.btn_wizard, "wizard")
+        setupClassButton(view,
+            R.id.information_barbarian_button,
+            getString(R.string.barbarian_slug));
+        setupClassButton(view,
+            R.id.information_crusader_button,
+            getString(R.string.crusader_slug));
+        setupClassButton(view,
+            R.id.information_demon_hunter_button,
+            getString(R.string.demon_hunter_slug));
+        setupClassButton(view,
+            R.id.information_monk_button,
+            getString(R.string.monk_slug));
+        setupClassButton(view,
+            R.id.information_necromancer_button,
+            getString(R.string.necromancer_slug));
+        setupClassButton(view,
+            R.id.information_witch_doctor_button,
+            getString(R.string.witch_doctor_slug));
+        setupClassButton(view,
+            R.id.information_wizard_button,
+            getString(R.string.wizard_slug));
     }
 
     private fun setupClassButton(view: View, buttonId: Int, slug: String) {
         view.findViewById<FrameLayout>(buttonId)?.setOnClickListener {
-            val intent = Intent(requireContext(), ClassInformationActivity::class.java)
-            intent.putExtra("HERO_SLUG", slug)
-            startActivity(intent)
+            val intent: Intent = Intent(requireContext(), ClassInformationActivity::class.java);
+            intent.putExtra(getString(R.string.class_information_hero_slug_key), slug);
+            startActivity(intent);
         }
     }
 
     private fun loadItem(itemSlug: String, containerId: Int) {
         DiabloApiInstance.api.getItem(itemSlug).enqueue(object : Callback<ItemResponse> {
             override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
-                if (!isAdded || view == null) return
+                if (!isAdded || view == null) return;
 
                 if (!response.isSuccessful) {
-                    Log.e(TAG_ITEM, "Item $itemSlug failed: ${response.code()}")
-                    return
+                    Log.e(TAG_ITEM, "Item $itemSlug failed: ${response.code()}");
+                    return;
                 }
 
-                val item = response.body() ?: return
+                val item: ItemResponse = response.body() ?: return;
+
+                val activity: FragmentActivity = requireActivity();
+                if (activity !is AppCompatActivity) throw Exception("Invalid root node!");
 
                 val bundle = bundleOf(
-                    "name" to item.name,
-                    "type" to item.typeName,
-                    "iconUrl" to DiabloImageUrl.item(item.icon),
-                    "requiredLevel" to item.requiredLevel,
-                    "desc" to "Damage: ${item.damage}\nAPS: ${item.attacksPerSecond}"
-                )
+                    getString(R.string.item_name_key) to item.name,
+                    getString(R.string.item_type_key) to item.typeName,
+                    getString(R.string.item_required_level_key) to item.requiredLevel,
+                    getString(R.string.item_description_key) to getString(
+                        R.string.item_description,
+                        item.damage,
+                        item.attacksPerSecond
+                    ),
+                    getString(R.string.item_icon_url_key) to DiabloImageUrl.item(activity, item.icon)
+                );
 
                 childFragmentManager.commit {
                     setReorderingAllowed(true)
