@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
+import com.example.d3grimoire.posts.community.CommunityActivity
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -42,7 +43,9 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     }
 
     private fun exitToSignIn() {
-        TODO("Not yet implemented")
+        val activity: FragmentActivity = requireActivity();
+        if (activity !is NavBarActivity) throw Exception("Invalid root node!");
+        activity.loadFragment(SignInActivity());
     }
 
     private fun trySignUp(view: View) {
@@ -84,7 +87,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                             "password" to UserHandler.encryptPass(pass)
                         ))
                         .addOnFailureListener {
-                            Log.e("FIREBASE", "Write failed", it)
+                            Log.e("Firebase", "Write failed", it)
                         };
                 }
 
@@ -96,7 +99,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                 }
             }
             .addOnFailureListener { exception ->
-                Log.e("FIREBASE", "Exception: ${exception.message}");
+                Log.e("Firebase", "Exception: ${exception.message}");
             }
     }
 

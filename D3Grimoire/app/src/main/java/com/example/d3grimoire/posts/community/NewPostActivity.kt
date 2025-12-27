@@ -131,6 +131,6 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
         val activity: FragmentActivity = requireActivity();
         if (activity !is NavBarActivity) throw Exception("Invalid root node!");
         activity.setFloatingButtonsVisibility(View.VISIBLE);
-        activity.loadFragment(NewsScreen());
+        activity.loadFragment(CommunityActivity());
     }
 }

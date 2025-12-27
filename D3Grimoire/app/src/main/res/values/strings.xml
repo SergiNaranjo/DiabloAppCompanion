@@ -67,4 +67,6 @@
     <string name="content_description_select_female">Select Female</string>
     <string name="primary_stat">Primary Stat</string>
     <string name="loading_class_description">Loading class description...</string>
+    <string name="new_post">NEW POST</string>
+    <string name="sign_up">SIGN UP</string>
 </resources>
