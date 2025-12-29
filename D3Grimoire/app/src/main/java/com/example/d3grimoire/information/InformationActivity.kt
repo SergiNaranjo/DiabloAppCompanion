@@ -82,9 +82,6 @@ class InformationActivity : Fragment(R.layout.activity_information) {
 
                 val item: ItemResponse = response.body() ?: return;
 
-                val activity: FragmentActivity = requireActivity();
-                if (activity !is AppCompatActivity) throw Exception("Invalid root node!");
-
                 val bundle = bundleOf(
                     getString(R.string.item_name_key) to item.name,
                     getString(R.string.item_type_key) to item.typeName,
@@ -94,7 +91,7 @@ class InformationActivity : Fragment(R.layout.activity_information) {
                         item.damage,
                         item.attacksPerSecond
                     ),
-                    getString(R.string.item_icon_url_key) to DiabloImageUrl.item(activity, item.icon)
+                    getString(R.string.item_icon_url_key) to DiabloImageUrl.item(requireActivity(), item.icon)
                 );
 
                 childFragmentManager.commit {

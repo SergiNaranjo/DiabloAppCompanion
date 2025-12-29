@@ -89,33 +89,16 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun loadProfilePicture(view: View) {
-        var imgUrl: String? = null;
-
         val query: Query = FirebaseHandler.usersReference.orderByChild("user")
             .equalTo(UserHandler.getUsername(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
-                if (snapshot.exists()) {
-                    for (dataSnapshot in snapshot.children) {
-                        imgUrl = dataSnapshot.child("imgUrl").getValue(String::class.java);
-                    }
-                }
-                val imageView = view.findViewById<ImageView>(R.id.profile_picture)
-                val executor = Executors.newSingleThreadExecutor()
-                val handler = Handler(Looper.getMainLooper())
-                var image: Bitmap?;
+                if (!snapshot.exists()) return@addOnSuccessListener;
 
-                executor.execute {
-                    try {
-                        val `in` = URL(imgUrl).openStream()
-                        image = BitmapFactory.decodeStream(`in`)
-                        handler.post {
-                            imageView.setImageBitmap(image)
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
+                Utils.trySetImageFromURL(
+                    snapshot.children.first().child("imgUrl").getValue(String::class.java),
+                    view.findViewById<ImageView>(R.id.profile_picture)
+                );
             }
             .addOnFailureListener { exception ->
                 val message: String? = exception.message;

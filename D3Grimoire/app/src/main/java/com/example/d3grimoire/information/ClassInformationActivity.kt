@@ -18,6 +18,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.bumptech.glide.Glide
 import com.example.d3grimoire.R
+import com.example.d3grimoire.Utils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,15 +82,10 @@ class ClassInformationActivity : AppCompatActivity() {
     }
 
     private fun loadPortrait() {
-        val portraitView: ImageView = findViewById<ImageView>(R.id.hero_portrait_image);
-
-        val url: String = DiabloImageUrl.classPortrait(this, heroSlug, currentGender);
-
-        Glide.with(this)
-            .load(url)
-            .placeholder(R.drawable.ic_template_classes)
-            .error(R.drawable.ic_template_classes)
-            .into(portraitView);
+        Utils.trySetImageFromURL(
+            DiabloImageUrl.classPortrait(this, heroSlug, currentGender),
+            findViewById<ImageView>(R.id.hero_portrait_image)
+        )
     }
 
     private fun loadClassGif(slug: String) {

@@ -1,18 +1,21 @@
 package API
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.example.d3grimoire.R
 import com.example.d3grimoire.information.ClassInformationActivity
 
 object DiabloImageUrl {
 
-    fun item(activity: AppCompatActivity, icon: String, size: String = "large"): String =
-        activity.getString(R.string.item_icon_url,
-            activity.getString(R.string.icons_base_url), size, icon.removeSuffix(".png"));
+    fun item(context: Context, icon: String, size: String = "large"): String =
+        context.getString(R.string.item_icon_url,
+            context.getString(R.string.icons_base_url),
+            size, icon.removeSuffix(".png"));
 
-    fun skill(activity: AppCompatActivity, icon: String, size: Int = 64): String =
-        activity.getString(R.string.skill_icon_url,
-            activity.getString(R.string.icons_base_url), size, icon.removeSuffix(".png"));
+    fun skill(context: Context, icon: String, size: Int = 64): String =
+        context.getString(R.string.skill_icon_url,
+            context.getString(R.string.icons_base_url),
+            size, icon.removeSuffix(".png"));
 
     fun classPortrait(activity: AppCompatActivity, slug: String, gender: ClassInformationActivity.Gender): String {
         return when (gender) {

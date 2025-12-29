@@ -13,6 +13,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.R
+import com.example.d3grimoire.Utils
 import com.example.d3grimoire.posts.NewsData
 import java.net.URL
 import java.util.concurrent.Executors
@@ -43,24 +44,10 @@ class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
         textView = view.findViewById<TextView>(R.id.news_post_description);
         textView.text = description;
 
-        val imageView = view.findViewById<ImageView>(R.id.news_post_image)
-        val executor = Executors.newSingleThreadExecutor()
-        val handler = Handler(Looper.getMainLooper())
-        var image: Bitmap?;
-
-        executor.execute {
-            val imageURL = requireArguments().getString("imgUrl");
-            try {
-                val `in` = URL(imageURL).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-                handler.post {
-                    imageView.setImageBitmap(image)
-                }
-            }
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        Utils.trySetImageFromURL(
+            requireArguments().getString("imgUrl"),
+            view.findViewById<ImageView>(R.id.news_post_image)
+        );
 
         view.findViewById<View>(R.id.news_post_button).setOnClickListener { onClick(); }
     }
