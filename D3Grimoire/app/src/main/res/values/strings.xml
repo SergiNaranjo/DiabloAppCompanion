@@ -112,4 +112,12 @@
     <string name="portrait_base_url">https://us.diablo3.blizzard.com/static/images/hero</string>
     <string name="user_shared_preferences_key">prefs_user</string>
     <string name="profile_username_default">Not Signed in</string>
+    <string name="firebase_users_reference_path">users</string>
+    <string name="firebase_posts_reference_path">posts</string>
+    <string name="firebase_analytics_post_click_user_key">post_click_user</string>
+    <string name="firebase_analytics_post_click_author_key">post_click_author</string>
+    <string name="firebase_analytics_post_selected_event">PostSelected</string>
+    <string name="firebase_analytics_post_creation_user_key">post_creation_user</string>
+    <string name="firebase_analytics_post_created_event">PostCreated</string>
+    <string name="firebase_error_tag">FIREBASE</string>
 </resources>

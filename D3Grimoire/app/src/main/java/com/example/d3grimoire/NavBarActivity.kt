@@ -55,12 +55,7 @@ class NavBarActivity : AppCompatActivity() {
 
         postScreen = PostScreen.NEWS;
         loadFragment(NewsScreen())
-
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
-        val database = FirebaseDatabase.getInstance(databaseUrl)
-            .getReference("posts");
-        CommunityActivity.fetchPostData(database);
+        CommunityActivity.fetchPostData();
     }
 
     private fun setupListeners() {
