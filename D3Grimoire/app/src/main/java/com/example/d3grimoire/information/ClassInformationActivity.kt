@@ -24,67 +24,82 @@ import retrofit2.Response
 
 class ClassInformationActivity : AppCompatActivity() {
 
-    private var currentGender = "male"
-    private lateinit var heroSlug: String
+    enum class Gender {
+        MALE,
+        FEMALE
+    }
+
+    private lateinit var maleGenderButton: ImageButton;
+    private lateinit var femaleGenderButton: ImageButton;
+    private var currentGender: Gender = Gender.MALE;
+    private lateinit var heroSlug: String;
+    private val SKILL_BOTTOM_MARGIN: Int = 24;
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_class_information)
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_class_information);
 
-        heroSlug = intent.getStringExtra("HERO_SLUG") ?: "barbarian"
+        heroSlug = intent.getStringExtra(
+            getString(R.string.class_information_hero_slug_key)) ?:
+            getString(R.string.class_information_hero_slug_default);
 
-        setupGenderButtons()
-        loadHero(heroSlug)
-        loadClassGif(heroSlug)
+        setupGenderButtons();
+        loadHero(heroSlug);
+        loadClassGif(heroSlug);
     }
 
     private fun setupGenderButtons() {
-        val maleBtn = findViewById<ImageButton>(R.id.circle1)
-        val femaleBtn = findViewById<ImageButton>(R.id.circle2)
+        maleGenderButton = findViewById<ImageButton>(R.id.male_button);
+        femaleGenderButton = findViewById<ImageButton>(R.id.female_button);
 
-        maleBtn.setOnClickListener {
-            currentGender = "male"
-            updateGenderUI(maleBtn, femaleBtn)
+        maleGenderButton.setOnClickListener {
+            updateGenderUI(Gender.MALE);
         }
 
-        femaleBtn.setOnClickListener {
-            currentGender = "female"
-            updateGenderUI(maleBtn, femaleBtn)
+        femaleGenderButton.setOnClickListener {
+            updateGenderUI(Gender.FEMALE);
         }
     }
 
-    private fun updateGenderUI(maleBtn: ImageButton, femaleBtn: ImageButton) {
-        if (currentGender == "male") {
-            maleBtn.setBackgroundResource(R.drawable.ic_btn_male_active)
-            femaleBtn.setBackgroundResource(R.drawable.ic_btn_female_deactive)
-        } else {
-            maleBtn.setBackgroundResource(R.drawable.ic_btn_male_deactive)
-            femaleBtn.setBackgroundResource(R.drawable.ic_btn_female_active)
+    private fun updateGenderUI(newGender: Gender) {
+        if(currentGender == newGender) return;
+        currentGender = newGender;
+
+        when (currentGender) {
+            Gender.MALE -> {
+                maleGenderButton.setBackgroundResource(R.drawable.ic_btn_male_active);
+                femaleGenderButton.setBackgroundResource(R.drawable.ic_btn_female_inactive);
+            }
+
+            Gender.FEMALE -> {
+                maleGenderButton.setBackgroundResource(R.drawable.ic_btn_male_inactive);
+                femaleGenderButton.setBackgroundResource(R.drawable.ic_btn_female_active);
+            }
         }
-        loadPortrait()
+
+        loadPortrait();
     }
 
     private fun loadPortrait() {
-        val portraitView = findViewById<ImageView>(R.id.imgHeroPortrait)
+        val portraitView: ImageView = findViewById<ImageView>(R.id.hero_portrait_image);
 
-        val url = DiabloImageUrl.classPortrait(heroSlug, currentGender)
-        Log.d("PORTRAIT", "Loading: $url")
+        val url: String = DiabloImageUrl.classPortrait(this, heroSlug, currentGender);
 
         Glide.with(this)
             .load(url)
             .placeholder(R.drawable.ic_template_classes)
             .error(R.drawable.ic_template_classes)
-            .into(portraitView)
+            .into(portraitView);
     }
 
     private fun loadClassGif(slug: String) {
-        val gifView = findViewById<ImageView>(R.id.imgClassGifBg)
+        val gifView: ImageView = findViewById<ImageView>(R.id.class_gif_background_image);
 
         Glide.with(this)
             .asGif()
-            .load(DiabloImageUrl.classGif(slug))
+            .load(DiabloImageUrl.classGif(this, slug))
             .centerCrop()
-            .into(gifView)
+            .into(gifView);
     }
 
     private fun loadHero(slug: String) {
@@ -94,51 +109,51 @@ class ClassInformationActivity : AppCompatActivity() {
                     call: Call<HeroClassResponse>,
                     response: Response<HeroClassResponse>
                 ) {
-                    val hero = response.body() ?: return
+                    val hero: HeroClassResponse = response.body() ?: return;
 
-                    findViewById<TextView>(R.id.txtBarbarianTitle).text = hero.name
+                    findViewById<TextView>(R.id.class_name_text).text = hero.name;
 
-                    loadPortrait()
+                    loadPortrait();
 
-                    val skills = hero.skills.active + hero.skills.passive
-                    populateSkillFragments(skills)
+                    val skills: List<HeroSkill> = hero.skills.active + hero.skills.passive;
+                    populateSkillFragments(skills);
                 }
 
                 override fun onFailure(call: Call<HeroClassResponse>, t: Throwable) {
-                    Log.e("CLASS_API", "Failed to load $slug", t)
+                    Log.e("CLASS_API", "Failed to load $slug", t);
                 }
             })
     }
 
     private fun populateSkillFragments(skills: List<HeroSkill>) {
-        val container = findViewById<LinearLayout>(R.id.skill_fragment_container)
-        container.removeAllViews()
+        val container: LinearLayout = findViewById<LinearLayout>(R.id.skill_fragment_container);
+        container.removeAllViews();
 
-        skills.forEach { skill ->
+        skills.forEach { skill: HeroSkill ->
             val bundle = bundleOf(
-                "name" to skill.name,
-                "level" to skill.level,
-                "cost" to 0,
-                "costUnits" to "Resource",
-                "desc" to skill.description,
-                "icon" to skill.icon
-            )
+                getString(R.string.class_ability_name_key) to skill.name,
+                getString(R.string.class_ability_level_key) to skill.level,
+                getString(R.string.class_ability_cost_key) to 0,
+                getString(R.string.class_ability_costunits_key) to getString(R.string.class_ability_cost_default),
+                getString(R.string.class_ability_description_key) to skill.description,
+                getString(R.string.class_ability_icon_key) to skill.icon
+            );
 
-            val fragmentContainer = FragmentContainerView(this).apply {
-                id = View.generateViewId()
+            val fragmentContainer: FragmentContainerView = FragmentContainerView(this).apply {
+                id = View.generateViewId();
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    bottomMargin = 24
-                }
+                    bottomMargin = SKILL_BOTTOM_MARGIN;
+                };
             }
 
-            container.addView(fragmentContainer)
+            container.addView(fragmentContainer);
 
             supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                add<ClassAbilityActivity>(fragmentContainer.id, args = bundle)
+                setReorderingAllowed(true);
+                add<ClassAbilityActivity>(fragmentContainer.id, args = bundle);
             }
         }
     }
