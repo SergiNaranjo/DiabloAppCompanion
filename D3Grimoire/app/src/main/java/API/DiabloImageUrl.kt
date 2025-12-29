@@ -1,28 +1,69 @@
 package API
 
+import androidx.appcompat.app.AppCompatActivity
+import com.example.d3grimoire.R
+import com.example.d3grimoire.information.ClassInformationActivity
+
 object DiabloImageUrl {
-    private const val BASE_ICONS = "https://blzmedia-a.akamaihd.net/d3/icons"
-    private const val BASE_PORTRAIT = "https://us.diablo3.blizzard.com/static/images/hero"
 
-    fun item(icon: String, size: String = "large"): String =
-        "$BASE_ICONS/items/$size/${icon.removeSuffix(".png")}.png"
+    fun item(activity: AppCompatActivity, icon: String, size: String = "large"): String =
+        activity.getString(R.string.item_icon_url,
+            activity.getString(R.string.icons_base_url), size, icon.removeSuffix(".png"));
 
-    fun skill(icon: String, size: Int = 64): String =
-        "$BASE_ICONS/skills/$size/${icon.removeSuffix(".png")}.png"
+    fun skill(activity: AppCompatActivity, icon: String, size: Int = 64): String =
+        activity.getString(R.string.skill_icon_url,
+            activity.getString(R.string.icons_base_url), size, icon.removeSuffix(".png"));
 
-    fun classPortrait(slug: String, gender: String): String =
-        "$BASE_PORTRAIT/$slug/$gender-portrait.jpg"
+    fun classPortrait(activity: AppCompatActivity, slug: String, gender: ClassInformationActivity.Gender): String {
+        return when (gender) {
+            ClassInformationActivity.Gender.MALE -> {
+                activity.getString(R.string.male_portrait,
+                    activity.getString(R.string.portrait_base_url), slug)
+            }
 
-    fun classGif(slug: String): String {
+            ClassInformationActivity.Gender.FEMALE -> {
+                activity.getString(R.string.female_portrait,
+                    activity.getString(R.string.portrait_base_url), slug)
+            }
+        }
+
+    }
+
+    fun classGif(activity: AppCompatActivity, slug: String): String {
         return when (slug) {
-            "barbarian" -> "https://static.wikia.nocookie.net/diablo/images/b/b3/Barbarian_Male_Selection.gif"
-            "crusader" -> "https://static.wikia.nocookie.net/diablo/images/3/35/Crusader_Male_Selection.gif"
-            "demon-hunter" -> "https://static.wikia.nocookie.net/diablo/images/7/70/Demon_Hunter_Male_Selection.gif"
-            "monk" -> "https://static.wikia.nocookie.net/diablo/images/a/a7/Monk_Male_Selection.gif"
-            "necromancer" -> "https://static.wikia.nocookie.net/diablo/images/2/25/Necromancer_Selection.gif"
-            "witch-doctor" -> "https://static.wikia.nocookie.net/diablo/images/2/22/Witch_Doctor_Male_Selection.gif"
-            "wizard" -> "https://static.wikia.nocookie.net/diablo/images/7/7a/Wizard_Male_Selection.gif"
-            else -> "https://static.wikia.nocookie.net/diablo/images/b/b3/Barbarian_Male_Selection.gif"
+            activity.getString(R.string.barbarian_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_barbarian)
+                );
+            activity.getString(R.string.crusader_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_crusader)
+                );
+            activity.getString(R.string.demon_hunter_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_demon_hunter)
+                );
+            activity.getString(R.string.monk_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_monk)
+                );
+            activity.getString(R.string.necromancer_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_necromancer)
+                );
+            activity.getString(R.string.witch_doctor_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_witch_doctor)
+                );
+            activity.getString(R.string.wizard_slug) ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_wizard)
+                );
+            //Barbarian is taken as default
+            else ->
+                activity.getString(R.string.class_gif_prefix,
+                    activity.getString(R.string.class_gif_suffix_barbarian)
+                );
         }
     }
 }

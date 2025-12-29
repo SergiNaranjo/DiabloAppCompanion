@@ -7,112 +7,95 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="20dp">
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8" />
+            android:layout_weight="0.75"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_post"
+            android:text="@string/sign_up"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8" />
+            android:layout_weight="0.75"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:text="@string/title"
-            android:textColor="@color/white" />
+            android:text="@string/user"
+            android:textColor="@color/white"/>
 
 
         <EditText
-            android:id="@+id/new_post_title"
+            android:id="@+id/sign_up_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
             android:inputType="text"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8" />
+            android:layout_weight="0.8"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:text="@string/description"
-            android:textColor="@color/white" />
+            android:text="@string/password"
+            android:textColor="@color/white"/>
 
 
         <EditText
-            android:id="@+id/new_post_description"
+            android:id="@+id/sign_up_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
-            android:inputType="text"
-            android:textColor="@color/white" />
+            android:inputType="textPassword"
+            android:textColor="@color/white"/>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8" />
+            android:layout_weight="0.8"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:text="@string/url"
-            android:textColor="@color/white" />
+            android:text="@string/confirm_password"
+            android:textColor="@color/white"/>
 
 
         <EditText
-            android:id="@+id/new_post_url"
+            android:id="@+id/sign_up_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
-            android:inputType="textUri"
-            android:textColor="@color/white" />
+            android:inputType="textPassword"
+            android:textColor="@color/white"/>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.8" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.8"
-            android:text="@string/image_url"
-            android:textColor="@color/white" />
-
-
-        <EditText
-            android:id="@+id/new_post_img_url"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7"
-            android:inputType="textUri"
-            android:textColor="@color/white" />
+            android:layout_weight="0.6"/>
 
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/upload_post"
+        android:id="@+id/sign_up_confirm"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
@@ -123,10 +106,10 @@
         android:contentDescription="@string/content_description"
         android:elevation="8dp"
         android:padding="12dp"
-        android:src="@drawable/baseline_check_24" />
+        android:src="@drawable/baseline_check_24"/>
 
     <ImageButton
-        android:id="@+id/exit_new_post"
+        android:id="@+id/sign_up_exit"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
@@ -136,6 +119,6 @@
         android:contentDescription="@string/content_description"
         android:elevation="8dp"
         android:padding="12dp"
-        android:src="@drawable/baseline_arrow_back_24_white" />
+        android:src="@drawable/baseline_arrow_back_24_white"/>
 
 </RelativeLayout>

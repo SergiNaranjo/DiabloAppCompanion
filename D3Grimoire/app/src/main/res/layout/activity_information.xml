@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="32dp"
+    android:background="@drawable/ic_background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtClassesTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/classes"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <FrameLayout
+                    android:id="@+id/information_barbarian_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/barbarian"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/information_crusader_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/crusader"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/information_demon_hunter_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/demon_hunter"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/information_monk_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/monk"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/information_necromancer_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/necromancer"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/information_witch_doctor_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/witch_doctor"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/information_wizard_button"
+                    android:layout_width="250dp"
+                    android:layout_height="59dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_btn_info"
+                        android:clickable="false"
+                        android:focusable="false" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/wizard"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtItemsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/items"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/item_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/item_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
