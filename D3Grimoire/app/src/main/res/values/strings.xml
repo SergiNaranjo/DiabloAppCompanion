@@ -110,4 +110,6 @@
     <string name="skill_icon_url">%s/skills/%d/%s.png</string>
     <string name="icons_base_url">https://blzmedia-a.akamaihd.net/d3/icons</string>
     <string name="portrait_base_url">https://us.diablo3.blizzard.com/static/images/hero</string>
+    <string name="user_shared_preferences_key">prefs_user</string>
+    <string name="profile_username_default">Not Signed in</string>
 </resources>

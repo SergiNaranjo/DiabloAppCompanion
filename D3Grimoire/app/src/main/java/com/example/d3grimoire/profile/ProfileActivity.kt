@@ -21,6 +21,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
+import com.example.d3grimoire.Utils
 import com.example.d3grimoire.signin.SignInActivity
 import com.example.d3grimoire.signin.UserHandler
 import com.google.firebase.database.DatabaseReference
@@ -44,11 +45,8 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val activity: FragmentActivity = requireActivity();
-        if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
-        if(!UserHandler.Companion.isSignedIn(activity)) {
-            activity.loadFragment(SignInActivity());
-        }
+        if(!UserHandler.isSignedIn(requireActivity()))
+            Utils.getNavBarFromFragment(this).loadFragment(SignInActivity());
 
         database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
             .getReference("users");
@@ -63,11 +61,10 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
         loadUsername(view);
         loadStatus(view);
+        loadProfilePicture(view);
 
         val editButton: ImageButton = view.findViewById<ImageButton>(R.id.profile_edit_btn);
         editButton.setOnClickListener { editProfile(view); };
-
-        loadProfilePicture(view);
 
         makeHeroData();
 
@@ -100,12 +97,10 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun loadProfilePicture(view: View) {
-        val activity: FragmentActivity = requireActivity();
-        if(activity !is AppCompatActivity) throw Exception("Invalid root node!");
-
         var imgUrl: String? = null;
 
-        val query: Query = database.orderByChild("user").equalTo(UserHandler.Companion.getUsername(activity));
+        val query: Query = database.orderByChild("user")
+            .equalTo(UserHandler.getUsername(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if(snapshot.exists()) {
@@ -160,10 +155,8 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                 MainScope().launch {
                     delay(500);
 
-                    val act: FragmentActivity = requireActivity();
-                    if(act is NavBarActivity) {
-                        act.loadFragment(ProfileActivity());
-                    }
+                    Utils.getNavBarFromFragmentActivity(requireActivity())
+                        .loadFragment(ProfileActivity());
                 }
             } catch (e: Exception) {
                 e.printStackTrace();
@@ -172,9 +165,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun pushEdit(view: View) {
-        val act: FragmentActivity = requireActivity();
-        if(act !is AppCompatActivity) throw Exception("Invalid root activity!");
-        val username: String? = UserHandler.Companion.getUsername(act);
+        val username: String? = UserHandler.getUsername(requireActivity());
         val query: Query = database.orderByChild("user").equalTo(username);
         query.get()
             .addOnSuccessListener { snapshot ->
@@ -188,8 +179,8 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                     key?.let {
                         Log.d("Profile", key);
                         database.child(key).setValue(mapOf(
-                            "user" to UserHandler.Companion.getUsername(act),
-                            "password" to UserHandler.Companion.getPassNative(act),
+                            "user" to UserHandler.getUsername(requireActivity()),
+                            "password" to UserHandler.getPassNative(requireActivity()),
                             "imgUrl" to imgUrl,
                             "status" to status
                         ));
@@ -203,28 +194,22 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun signOut() {
-        val activity: FragmentActivity = requireActivity();
-        if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
-        UserHandler.Companion.signOutGoogle(activity);
-        UserHandler.Companion.signOutNative(activity);
-        activity.loadFragment(ProfileActivity());
+        UserHandler.signOut(requireActivity());
+        Utils.getNavBarFromFragment(this).loadFragment(ProfileActivity());
     }
 
     private fun loadUsername(view: View) {
         val usernameText: TextView = view.findViewById<TextView>(R.id.profile_username);
-        val act: FragmentActivity = requireActivity();
-        if(act !is AppCompatActivity) throw Exception("Invalid root activity!");
-        val username: String? = UserHandler.Companion.getUsername(act);
-        username?.let{ usernameText.text = username; } ?: run { usernameText.text = "Not Signed in"; }
+        val username: String? = UserHandler.getUsername(requireActivity());
+        username?.let{ usernameText.text = username; } ?: run { usernameText.text =
+            getString(R.string.profile_username_default); }
     }
 
     private fun loadStatus(view: View) {
-        val activity: FragmentActivity = requireActivity();
-        if(activity !is AppCompatActivity) throw Exception("Invalid root node!");
-
         var status: String? = null;
 
-        val query: Query = database.orderByChild("user").equalTo(UserHandler.Companion.getUsername(activity));
+        val query: Query = database.orderByChild("user")
+            .equalTo(UserHandler.getUsername(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if(snapshot.exists()) {
