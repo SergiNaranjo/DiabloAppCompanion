@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
 import com.example.d3grimoire.posts.NewsData
@@ -19,7 +20,6 @@ import com.google.firebase.database.Query
 import kotlin.math.min
 
 class CommunityActivity : Fragment(R.layout.activity_community) {
-    private lateinit var database: DatabaseReference
     private lateinit var view: View;
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,12 +29,9 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
         val imgBtn: ImageButton = view.findViewById<ImageButton>(R.id.new_post);
         imgBtn.setOnClickListener { newPost(); }
 
-        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
-            .getReference("posts");
+        FirebaseHandler.postsReference.addChildEventListener(createChildEventListener());
 
-        database.addChildEventListener(createChildEventListener());
-
-        loadPosts(view);
+        loadPosts();
     }
 
     private fun createChildEventListener(): ChildEventListener {
@@ -43,25 +40,29 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                 snapshot: DataSnapshot,
                 previousChildName: String?
             ) {
-                fetchPostData(database);
+                fetchPostData();
+                loadPosts();
             }
 
             override fun onChildChanged(
                 snapshot: DataSnapshot,
                 previousChildName: String?
             ) {
-                fetchPostData(database);
+                fetchPostData();
+                loadPosts();
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                fetchPostData(database);
+                fetchPostData();
+                loadPosts();
             }
 
             override fun onChildMoved(
                 snapshot: DataSnapshot,
                 previousChildName: String?
             ) {
-                fetchPostData(database);
+                fetchPostData();
+                loadPosts();
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -78,7 +79,7 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
         act.loadFragment(NewPostActivity());
     }
 
-    private fun loadPosts(view: View) {
+    private fun loadPosts() {
         val len: Int = min(
             communityNewsButtonIds.count(),
             communityNewsButtonData.count()
@@ -95,8 +96,8 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
     }
 
     companion object {
-        public fun fetchPostData(database: DatabaseReference) {
-            val query: Query = database.orderByKey();
+        public fun fetchPostData() {
+            val query: Query = FirebaseHandler.postsReference.orderByKey();
             query.get()
                 .addOnSuccessListener { snapshot ->
                     if (snapshot.exists()) {

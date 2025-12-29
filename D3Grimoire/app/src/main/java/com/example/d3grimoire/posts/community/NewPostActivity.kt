@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
+import com.example.d3grimoire.Utils
 import com.example.d3grimoire.signin.UserHandler
 import com.example.d3grimoire.posts.news.NewsScreen
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -28,16 +30,11 @@ import java.util.concurrent.Executors
 
 class NewPostActivity : Fragment(R.layout.activity_new_post) {
 
-    private lateinit var database: DatabaseReference;
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState);
 
         val uploadPostButton: ImageButton = view.findViewById<ImageButton>(R.id.upload_post);
         val exitButton: ImageButton = view.findViewById<ImageButton>(R.id.exit_new_post);
-
-        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
-            .getReference("posts");
 
         uploadPostButton.setOnClickListener {
             tryUploadPost(view);
@@ -84,7 +81,7 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
                 image = BitmapFactory.decodeStream(`in`);
                 if (image == null) throw Exception("Image is null!");
 
-                pushPost(view);
+                FirebaseHandler.pushPost(requireActivity(), getData(view));
                 exitToNews();
             } catch (e: Exception) {
                 handler.post {
@@ -95,42 +92,10 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
         }
     }
 
-    private fun pushPost(view: View) {
-        val dataId = database.push().key;
-        dataId?.let {
-            database.child(dataId)
-                .setValue(getData(view))
-                .addOnSuccessListener {
-                    postAnalyticsPostCreator();
-                }
-                .addOnFailureListener {
-                    Log.e("Firebase", "Write failed", it)
-                };
-        }
-    }
 
-    private fun postAnalyticsPostCreator() {
-        val act = requireActivity();
-        if (act !is AppCompatActivity) return;
-        var user: String?;
-        if (UserHandler.getUserGoogle(act) != null) {
-            user = UserHandler.getUserGoogle(act)!!.displayName;
-        } else if (UserHandler.getUserNative(act) != null) {
-            user = UserHandler.getUserNative(act);
-        } else {
-            user = "";
-        }
-        val bundle: Bundle = bundleOf(
-            "post_creation_user" to user
-        );
-        FirebaseAnalytics.getInstance(requireActivity())
-            .logEvent("NewPost", bundle);
-    }
 
     private fun exitToNews() {
-        val activity: FragmentActivity = requireActivity();
-        if (activity !is NavBarActivity) throw Exception("Invalid root node!");
-        activity.setFloatingButtonsVisibility(View.VISIBLE);
-        activity.loadFragment(CommunityActivity());
+        Utils.getNavBarFromFragment(this).setFloatingButtonsVisibility(View.VISIBLE);
+        Utils.getNavBarFromFragment(this).loadFragment(CommunityActivity());
     }
 }

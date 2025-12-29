@@ -9,13 +9,11 @@ import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.R
-import com.example.d3grimoire.signin.UserHandler
 import com.example.d3grimoire.posts.NewsData
-import com.google.firebase.analytics.FirebaseAnalytics
 import java.net.URL
 import java.util.concurrent.Executors
 
@@ -68,27 +66,9 @@ class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
     }
 
     fun onClick() {
-        requireActivity().run {
-            val act = requireActivity();
-            if (act is AppCompatActivity) {
-                var user: String?;
-                if (UserHandler.getUserGoogle(act) != null) {
-                    user = UserHandler.getUserGoogle(act)!!.displayName;
-                } else if (UserHandler.getUserNative(act) != null) {
-                    user = UserHandler.getUserNative(act);
-                } else {
-                    user = "";
-                }
-                val bundle: Bundle = bundleOf(
-                    "post_click_user" to user,
-                    "post_click_author" to requireArguments().getString("author")
-                );
-                FirebaseAnalytics.getInstance(requireActivity())
-                    .logEvent("PostSelected", bundle);
-            }
-            val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
-            intent.putExtra("url", requireArguments().getString("url"));
-            startActivity(intent);
-        }
+        FirebaseHandler.analyticsLogPostSelected(requireActivity(), this);
+        val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
+        intent.putExtra("url", requireArguments().getString("url"));
+        startActivity(intent);
     }
 }

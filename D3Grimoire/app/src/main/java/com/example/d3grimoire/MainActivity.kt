@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         UserHandler.Init(this);
+        FirebaseHandler.Init(this);
 
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
