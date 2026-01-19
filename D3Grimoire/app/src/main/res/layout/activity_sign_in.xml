@@ -39,7 +39,7 @@
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:text="@string/login_caps"
-                android:textColor="#ffffff"
+                android:textColor="@color/text_primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -48,37 +48,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="@string/username_or_email"
-                android:textColor="#ffffff" />
+                android:textColor="@color/text_primary" />
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="16dp"
-                android:background="#33000000"
+                android:background="@color/overlay_dark"
                 android:hint="@string/example_email_com"
                 android:padding="12dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#bbbbbb" />
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="@string/password"
-                android:textColor="#ffffff" />
+                android:textColor="@color/text_primary" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
-                android:background="#33000000"
+                android:background="@color/overlay_dark"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword"
                 android:padding="12dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#bbbbbb" />
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint" />
 
             <TextView
                 android:id="@+id/login_btn"
@@ -102,7 +102,7 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="@string/or_login_with"
-                android:textColor="#ffffff"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -119,7 +119,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="@string/don_t_have_an_account"
-                android:textColor="#ffffff"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold" />
 
             <Space
