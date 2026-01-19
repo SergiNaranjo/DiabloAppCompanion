@@ -90,7 +90,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
     private fun loadProfilePicture(view: View) {
         val query: Query = FirebaseHandler.usersReference.orderByChild("user")
-            .equalTo(UserHandler.getUsername(requireActivity()));
+            .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (!snapshot.exists()) return@addOnSuccessListener;
@@ -139,8 +139,9 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun pushEdit(view: View) {
-        val username: String? = UserHandler.getUsername(requireActivity());
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user").equalTo(username);
+        val query: Query = FirebaseHandler.usersReference.orderByChild("user").equalTo(
+            UserHandler.getUserId(requireActivity())
+        );
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (!snapshot.exists()) return@addOnSuccessListener;
@@ -154,7 +155,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                         Log.d("Profile", key);
                         FirebaseHandler.usersReference.child(key).setValue(
                             mapOf(
-                                "user" to UserHandler.getUsername(requireActivity()),
+                                "user" to UserHandler.getUserId(requireActivity()),
                                 "password" to UserHandler.getPassNative(requireActivity()),
                                 "imgUrl" to imgUrl,
                                 "status" to status
@@ -176,7 +177,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
     private fun loadUsername(view: View) {
         val usernameText: TextView = view.findViewById<TextView>(R.id.profile_username);
-        val username: String? = UserHandler.getUsername(requireActivity());
+        val username: String? = UserHandler.getUserDisplayName(requireActivity());
         username?.let { usernameText.text = username; } ?: run {
             usernameText.text =
                 getString(R.string.profile_username_default);
@@ -187,7 +188,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
         var status: String? = null;
 
         val query: Query = FirebaseHandler.usersReference.orderByChild("user")
-            .equalTo(UserHandler.getUsername(requireActivity()));
+            .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {

@@ -21,7 +21,7 @@ class UserHandler {
         }
 
         public fun isSignedIn(context: Context): Boolean {
-            return getUsername(context) != null;
+            return getUserId(context) != null;
         }
 
         public fun getUserNative(context: Context): String? {
@@ -80,12 +80,22 @@ class UserHandler {
             return sum;
         }
 
+        public fun getUserId(context: Context): String? {
+            val googleAccount: GoogleSignInAccount? = getUserGoogle(context);
+            googleAccount?.id?.let { return it; }
+            googleAccount?.email?.let { return it; }
+            googleAccount?.displayName?.let { return it; }
+            return getUserNative(context);
+        }
+
+        public fun getUserDisplayName(context: Context): String? {
+            val googleAccount: GoogleSignInAccount? = getUserGoogle(context);
+            googleAccount?.displayName?.let { return it; }
+            return getUserNative(context);
+        }
+
         public fun getUsername(context: Context): String? {
-            var username: String? = getUserGoogle(context)?.displayName;
-            username?.let { return username; }
-            username = getUserNative(context);
-            username?.let { return username }
-            return null;
+            return getUserDisplayName(context);
         }
 
     }
