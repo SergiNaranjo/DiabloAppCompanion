@@ -110,9 +110,16 @@
     <string name="skill_icon_url">%s/skills/%d/%s.png</string>
     <string name="icons_base_url">https://blzmedia-a.akamaihd.net/d3/icons</string>
     <string name="portrait_base_url">https://us.diablo3.blizzard.com/static/images/hero</string>
+    <string name="class_icon_base_url">https://render-us.worldofwarcraft.com/d3/icons/classes</string>
+    <string name="class_icon_url">%s/%s.png</string>
+    <string name="class_icon_api_url">%s/classes/%s.png</string>
     <string name="user_shared_preferences_key">prefs_user</string>
     <string name="profile_username_default">Not Signed in</string>
     <string name="profile_status_default">Status here</string>
+    <string name="primary_stat_strength">Strength</string>
+    <string name="primary_stat_dexterity">Dexterity</string>
+    <string name="primary_stat_intelligence">Intelligence</string>
+    <string name="class_primary_stat_format">Primary stat: %s</string>
     <string name="firebase_users_reference_path">users</string>
     <string name="firebase_posts_reference_path">posts</string>
     <string name="firebase_analytics_post_click_user_key">post_click_user</string>

@@ -18,19 +18,66 @@ object DiabloImageUrl {
             size, icon.removeSuffix(".png"));
 
     fun classPortrait(activity: AppCompatActivity, slug: String, gender: ClassInformationActivity.Gender): String {
+        val portraitSlug: String = normalizePortraitSlug(slug)
         return when (gender) {
             ClassInformationActivity.Gender.MALE -> {
-                activity.getString(R.string.male_portrait,
-                    activity.getString(R.string.portrait_base_url), slug)
+                activity.getString(
+                    R.string.male_portrait,
+                    activity.getString(R.string.portrait_base_url),
+                    portraitSlug
+                )
             }
-
             ClassInformationActivity.Gender.FEMALE -> {
-                activity.getString(R.string.female_portrait,
-                    activity.getString(R.string.portrait_base_url), slug)
+                activity.getString(
+                    R.string.female_portrait,
+                    activity.getString(R.string.portrait_base_url),
+                    portraitSlug
+                )
             }
         }
-
     }
+
+    fun classIcon(context: Context, slug: String): String {
+        val iconSlug: String = normalizePortraitSlug(slug)
+        return context.getString(
+            R.string.class_icon_url,
+            context.getString(R.string.class_icon_base_url),
+            iconSlug
+        )
+    }
+
+    fun classIconFromApi(context: Context, icon: String): String {
+        val baseUrl: String = context.getString(R.string.icons_base_url)
+        val cleaned: String = icon.removeSuffix(".png")
+        return if (cleaned.contains("/")) {
+            "$baseUrl/$cleaned.png"
+        } else {
+            context.getString(
+                R.string.class_icon_api_url,
+                baseUrl,
+                cleaned
+            )
+        }
+    }
+
+    fun classFallbackIcon(slug: String): String {
+        return when (normalizePortraitSlug(slug)) {
+            "barbarian" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/viking-head.png"
+            "crusader" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/templar-eye.png"
+            "demon-hunter" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/archer.png"
+            "monk" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/monk-face.png"
+            "necromancer" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/necromancer.png"
+            "witch-doctor" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/shaman.png"
+            "wizard" -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/mage.png"
+            else -> "https://game-icons.net/icons/ffffff/000000/1x1/delapouite/evil-wizard.png"
+        }
+    }
+
+    private fun normalizePortraitSlug(slug: String): String {
+        return slug.lowercase()
+    }
+
+    
 
     fun classGif(activity: AppCompatActivity, slug: String): String {
         return when (slug) {

@@ -100,6 +100,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
             .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
+                if (!isAdded) return@addOnSuccessListener
                 if (!snapshot.exists()) return@addOnSuccessListener;
 
                 Utils.trySetImageFromURL(
@@ -198,16 +199,19 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
             .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
+                if (!isAdded) return@addOnSuccessListener
+                val ctx = context ?: return@addOnSuccessListener
                 if (snapshot.exists()) {
                     for (dataSnapshot in snapshot.children) {
                         status = dataSnapshot.child(USER_FIELD_STATUS).getValue(String::class.java);
                     }
                 }
+                if (!isAdded) return@addOnSuccessListener
                 status?.let {
                     statusEditText.text = Editable.Factory.getInstance().newEditable(status);
                 } ?: run {
                     statusEditText.text = Editable.Factory.getInstance().newEditable(
-                        getString(R.string.profile_status_default)
+                        ctx.getString(R.string.profile_status_default)
                     );
                 }
             }

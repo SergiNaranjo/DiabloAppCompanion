@@ -6,19 +6,15 @@ import API.model.HeroClassResponse
 import API.model.HeroSkill
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
 import com.bumptech.glide.Glide
+import coil.load
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,17 +30,24 @@ class ClassInformationActivity : AppCompatActivity() {
     private lateinit var femaleGenderButton: ImageButton;
     private var currentGender: Gender = Gender.MALE;
     private lateinit var heroSlug: String;
-    private val SKILL_BOTTOM_MARGIN: Int = 24;
+    private lateinit var skillsAdapter: ClassAbilityAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_information);
+
+        // RecyclerView keeps long skill lists efficient.
+        val skillsRecycler: RecyclerView = findViewById(R.id.skills_recycler)
+        skillsAdapter = ClassAbilityAdapter()
+        skillsRecycler.layoutManager = LinearLayoutManager(this)
+        skillsRecycler.adapter = skillsAdapter
 
         heroSlug = intent.getStringExtra(
             getString(R.string.class_information_hero_slug_key)) ?:
             getString(R.string.class_information_hero_slug_default);
 
         setupGenderButtons();
+        loadPortrait();
         loadHero(heroSlug);
         loadClassGif(heroSlug);
     }
@@ -82,10 +85,23 @@ class ClassInformationActivity : AppCompatActivity() {
     }
 
     private fun loadPortrait() {
-        Utils.trySetImageFromURL(
-            DiabloImageUrl.classPortrait(this, heroSlug, currentGender),
-            findViewById<ImageView>(R.id.hero_portrait_image)
-        )
+        val portraitUrl: String = DiabloImageUrl.classPortrait(this, heroSlug, currentGender)
+        Log.d("CLASS_PORTRAIT", "Class portrait URL: $portraitUrl")
+        val portraitView: ImageView = findViewById<ImageView>(R.id.hero_portrait_image)
+        portraitView.setImageResource(R.drawable.ic_template_classes)
+        portraitView.background = null
+        portraitView.load(portraitUrl) {
+            crossfade(true)
+            listener(
+                onSuccess = { _, _ ->
+                    Log.d("CLASS_PORTRAIT", "Class portrait loaded")
+                },
+                onError = { _, result ->
+                    Log.e("CLASS_PORTRAIT", "Class portrait failed", result.throwable)
+                    portraitView.setImageResource(R.drawable.ic_template_classes)
+                }
+            )
+        }
     }
 
     private fun loadClassGif(slug: String) {
@@ -99,20 +115,25 @@ class ClassInformationActivity : AppCompatActivity() {
     }
 
     private fun loadHero(slug: String) {
+        Log.d("CLASS_API", "Loading class data for slug=$slug")
         DiabloApiInstance.api.getHeroClass(slug)
             .enqueue(object : Callback<HeroClassResponse> {
                 override fun onResponse(
                     call: Call<HeroClassResponse>,
                     response: Response<HeroClassResponse>
                 ) {
+                    if (!response.isSuccessful) {
+                        Log.e("CLASS_API", "Class API failed: ${response.code()}")
+                        return
+                    }
                     val hero: HeroClassResponse = response.body() ?: return;
 
                     findViewById<TextView>(R.id.class_name_text).text = hero.name;
-
+                    updateClassDescription(hero.slug);
                     loadPortrait();
 
                     val skills: List<HeroSkill> = hero.skills.active + hero.skills.passive;
-                    populateSkillFragments(skills);
+                    skillsAdapter.submitList(skills)
                 }
 
                 override fun onFailure(call: Call<HeroClassResponse>, t: Throwable) {
@@ -121,36 +142,18 @@ class ClassInformationActivity : AppCompatActivity() {
             })
     }
 
-    private fun populateSkillFragments(skills: List<HeroSkill>) {
-        val container: LinearLayout = findViewById<LinearLayout>(R.id.skill_fragment_container);
-        container.removeAllViews();
-
-        skills.forEach { skill: HeroSkill ->
-            val bundle = bundleOf(
-                getString(R.string.class_ability_name_key) to skill.name,
-                getString(R.string.class_ability_level_key) to skill.level,
-                getString(R.string.class_ability_cost_key) to 0,
-                getString(R.string.class_ability_costunits_key) to getString(R.string.class_ability_cost_default),
-                getString(R.string.class_ability_description_key) to skill.description,
-                getString(R.string.class_ability_icon_key) to skill.icon
-            );
-
-            val fragmentContainer: FragmentContainerView = FragmentContainerView(this).apply {
-                id = View.generateViewId();
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    bottomMargin = SKILL_BOTTOM_MARGIN;
-                };
-            }
-
-            container.addView(fragmentContainer);
-
-            supportFragmentManager.commit {
-                setReorderingAllowed(true);
-                add<ClassAbilityActivity>(fragmentContainer.id, args = bundle);
-            }
+    private fun updateClassDescription(slug: String) {
+        val descriptionView: TextView = findViewById<TextView>(R.id.txtStrengthDesc);
+        val primaryStat: String = when (slug) {
+            getString(R.string.barbarian_slug),
+            getString(R.string.crusader_slug) -> getString(R.string.primary_stat_strength)
+            getString(R.string.demon_hunter_slug),
+            getString(R.string.monk_slug) -> getString(R.string.primary_stat_dexterity)
+            getString(R.string.necromancer_slug),
+            getString(R.string.witch_doctor_slug),
+            getString(R.string.wizard_slug) -> getString(R.string.primary_stat_intelligence)
+            else -> getString(R.string.primary_stat_strength)
         }
+        descriptionView.text = getString(R.string.class_primary_stat_format, primaryStat);
     }
 }
