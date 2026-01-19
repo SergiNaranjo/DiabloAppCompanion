@@ -20,32 +20,38 @@ import java.util.concurrent.Executors
 
 class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
     companion object {
+        const val KEY_TITLE: String = "title"
+        const val KEY_DESC: String = "desc"
+        const val KEY_IMG_URL: String = "imgUrl"
+        const val KEY_URL: String = "url"
+        const val KEY_AUTHOR: String = "author"
+
         fun newInstance(
             data: NewsData
         ): NewsPostButtonActivity {
             return NewsPostButtonActivity().apply {
                 arguments = bundleOf(
-                    "title" to data.name,
-                    "desc" to data.description,
-                    "imgUrl" to data.imgUrl,
-                    "url" to data.url,
-                    "author" to data.author
+                    KEY_TITLE to data.name,
+                    KEY_DESC to data.description,
+                    KEY_IMG_URL to data.imgUrl,
+                    KEY_URL to data.url,
+                    KEY_AUTHOR to data.author
                 )
             }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val title : String? = requireArguments().getString("title");
+        val title : String? = requireArguments().getString(KEY_TITLE);
         var textView : TextView = view.findViewById<TextView>(R.id.news_post_title);
         textView.text = title;
 
-        val description : String? = requireArguments().getString("desc");
+        val description : String? = requireArguments().getString(KEY_DESC);
         textView = view.findViewById<TextView>(R.id.news_post_description);
         textView.text = description;
 
         Utils.trySetImageFromURL(
-            requireArguments().getString("imgUrl"),
+            requireArguments().getString(KEY_IMG_URL),
             view.findViewById<ImageView>(R.id.news_post_image)
         );
 
@@ -55,7 +61,7 @@ class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
     fun onClick() {
         FirebaseHandler.analyticsLogPostSelected(requireActivity(), this);
         val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
-        intent.putExtra("url", requireArguments().getString("url"));
+        intent.putExtra(NewsPostActivity.EXTRA_URL, requireArguments().getString(KEY_URL));
         startActivity(intent);
     }
 }

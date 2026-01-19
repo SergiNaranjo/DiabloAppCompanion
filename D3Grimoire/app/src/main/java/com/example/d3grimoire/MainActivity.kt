@@ -1,6 +1,7 @@
 package com.example.d3grimoire
 
 import API.AuthResponse
+import API.BlizzardAuthApi
 import API.BlizzardAuthInstance
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "SPLASH_API"
+        private const val TEST_MESSAGE_USER: String = "Jose"
+        private const val TEST_MESSAGE_TEXT: String = "Hello World"
+        private const val FIREBASE_MESSAGES_PATH: String = "messages"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,10 +50,9 @@ class MainActivity : AppCompatActivity() {
         analytics = Firebase.analytics
         analytics.logEvent("app_open", null)
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/"
+        val databaseUrl: String = getString(R.string.database_URL)
         database = FirebaseDatabase.getInstance(databaseUrl)
-            .getReference("messages")
+            .getReference(FIREBASE_MESSAGES_PATH)
 
         writeTestMessage()
 
@@ -58,11 +61,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun writeTestMessage() {
-        val dataId = database.push().key ?: return
+        val dataId: String = database.push().key ?: return
 
-        val messageData = mapOf(
-            "user" to "Jose",
-            "message" to "Hello World"
+        val messageData: Map<String, String> = mapOf(
+            "user" to TEST_MESSAGE_USER,
+            "message" to TEST_MESSAGE_TEXT
         )
 
         database.child(dataId)
@@ -78,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     private fun fetchToken() {
         Log.d(TAG, "Starting Blizzard API token request")
 
-        val api = BlizzardAuthInstance.create(
+        val api: BlizzardAuthApi = BlizzardAuthInstance.create(
             clientId = BuildConfig.BLIZZARD_CLIENT_ID,
             clientSecret = BuildConfig.BLIZZARD_CLIENT_SECRET
         )
@@ -97,7 +100,7 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
 
-                val token = response.body()!!.accessToken
+                val token: String = response.body()!!.accessToken
                 TokenManager.token = token
 
                 Log.d(TAG, "API setup successful, token acquired")

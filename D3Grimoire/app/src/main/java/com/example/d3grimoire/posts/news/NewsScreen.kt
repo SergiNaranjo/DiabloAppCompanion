@@ -16,7 +16,7 @@ class NewsScreen : Fragment(R.layout.activity_news) {
         super.onViewCreated(view, savedInstanceState);
 
         val recyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.news_posts_recycler)
-        val adapter = NewsPostAdapter { data -> openPost(data) }
+        val adapter: NewsPostAdapter = NewsPostAdapter { data -> openPost(data) }
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.adapter = adapter
 
@@ -53,7 +53,7 @@ class NewsScreen : Fragment(R.layout.activity_news) {
     private fun openPost(data: NewsData) {
         FirebaseHandler.analyticsLogPostSelected(requireActivity(), data);
         val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
-        intent.putExtra("url", data.url);
+        intent.putExtra(NewsPostActivity.EXTRA_URL, data.url);
         startActivity(intent);
     }
 }

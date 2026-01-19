@@ -14,9 +14,11 @@ import com.example.d3grimoire.R
 import com.example.d3grimoire.profile.ProfileActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -27,6 +29,11 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
 
+    companion object {
+        private const val GOOGLE_SIGN_IN_REQUEST_CODE: Int = 9001
+        private const val USERS_REFERENCE: String = "users"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //User-Password sign in
@@ -34,14 +41,14 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
         loginButton.setOnClickListener { signIn(view); }
 
         //Google Sign in
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("554317598986-ltodp92d23e69tsbcedcbqofqpee0s30.apps.googleusercontent.com")
+        val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(UserHandler.GOOGLE_WEB_CLIENT_ID)
             .requestEmail()
             .build();
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
-        val account = UserHandler.getUserGoogle(requireActivity());
+        val account: GoogleSignInAccount? = UserHandler.getUserGoogle(requireActivity());
         if (account == null)
             view.findViewById<SignInButton>(R.id.btn_sign_in).setOnClickListener {
                 googleSignIn();
@@ -71,7 +78,7 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
         val pass: String? = view.findViewById<EditText>(R.id.password).text.toString();
 
         database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
-            .getReference("users")
+            .getReference(USERS_REFERENCE)
 
         val query: Query = database.orderByChild("user").equalTo(user);
         query.get()
@@ -106,16 +113,16 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
 
     private fun googleSignIn() {
         val signInIntent: Intent = googleSignInClient.signInIntent;
-        startActivityForResult(signInIntent, 9001);
+        startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE);
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 9001) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data);
+        if (requestCode == GOOGLE_SIGN_IN_REQUEST_CODE) {
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data);
             if (task.isSuccessful) {
-                val account = task.getResult(ApiException::class.java);
+                val account: GoogleSignInAccount = task.getResult(ApiException::class.java);
                 val activity: FragmentActivity = requireActivity();
                 if (activity !is NavBarActivity) throw Exception("Invalid root node!");
                 activity.loadFragment(ProfileActivity());

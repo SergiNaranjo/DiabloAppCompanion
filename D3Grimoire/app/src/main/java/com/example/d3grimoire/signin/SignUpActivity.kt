@@ -22,16 +22,20 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     private lateinit var googleSignInClient: GoogleSignInClient;
     private lateinit var database: DatabaseReference
 
+    companion object {
+        private const val POSTS_REFERENCE: String = "posts"
+        private const val USERS_REFERENCE: String = "users"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState);
 
         val signUpConfirmButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_confirm);
         val exitButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_exit);
 
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
+        val databaseUrl: String = getString(R.string.database_URL);
         database = FirebaseDatabase.getInstance(databaseUrl)
-            .getReference("posts");
+            .getReference(POSTS_REFERENCE);
 
         signUpConfirmButton.setOnClickListener {
             trySignUp(view);
@@ -67,7 +71,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
         }
 
         database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
-            .getReference("users")
+            .getReference(USERS_REFERENCE)
 
         val query: Query = database.orderByChild("user").equalTo(user);
         query.get()
@@ -79,7 +83,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                 }
 
                 //Valid user - Add to db
-                val dataId = database.push().key;
+                val dataId: String? = database.push().key;
                 dataId?.let {
                     database.child(dataId)
                         .setValue(mapOf(
@@ -104,7 +108,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     }
 
     private fun showUserExistsAlert() {
-        val builder = AlertDialog.Builder(requireActivity());
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The user already exists!");
         builder.setTitle("");
@@ -113,12 +117,12 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
             dialog.cancel();
         }
 
-        val alertDialog = builder.create();
+        val alertDialog: AlertDialog = builder.create();
         alertDialog.show();
     }
 
     private fun showPasswordsDifferentAlert() {
-        val builder = AlertDialog.Builder(requireActivity());
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The passwords are different!");
         builder.setTitle("");
@@ -127,7 +131,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
             dialog.cancel();
         }
 
-        val alertDialog = builder.create();
+        val alertDialog: AlertDialog = builder.create();
         alertDialog.show();
     }
 }

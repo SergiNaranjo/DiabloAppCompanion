@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.example.d3grimoire.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlin.text.iterator
 
@@ -12,6 +13,10 @@ class UserHandler {
     companion object {
 
         public lateinit var playerPrefs: SharedPreferences;
+        const val GOOGLE_WEB_CLIENT_ID: String =
+            "554317598986-ltodp92d23e69tsbcedcbqofqpee0s30.apps.googleusercontent.com"
+        private const val PASSWORD_HASH_BASE: Int = 31
+        private const val PASSWORD_HASH_MOD: Int = 1000000009
 
         public fun Init(context: Context) {
             playerPrefs = context.getSharedPreferences(
@@ -46,12 +51,12 @@ class UserHandler {
         }
 
         public fun signOutGoogle(context: Context) {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("554317598986-ltodp92d23e69tsbcedcbqofqpee0s30.apps.googleusercontent.com")
+            val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(GOOGLE_WEB_CLIENT_ID)
                 .requestEmail()
                 .build();
 
-            val googleSignInClient = GoogleSignIn.getClient(context, gso);
+            val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(context, gso);
             googleSignInClient.signOut();
         }
 
@@ -68,14 +73,11 @@ class UserHandler {
         //Basic password hashing for encryption
         public fun encryptPass(password: String): Int {
             //Constants for encryption
-            val p = 31;
-            val m = 1000000009;
-
             var p_pow = 1;
             var sum = 0;
             for (letter in password) {
-                sum = (sum + letter.code * p_pow).mod(m);
-                p_pow = (p_pow * p).mod(m);
+                sum = (sum + letter.code * p_pow).mod(PASSWORD_HASH_MOD);
+                p_pow = (p_pow * PASSWORD_HASH_BASE).mod(PASSWORD_HASH_MOD);
             }
             return sum;
         }

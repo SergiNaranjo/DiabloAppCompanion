@@ -10,9 +10,9 @@ object BlizzardAuthInstance {
     private const val BASE_URL = "https://oauth.battle.net/"
 
     fun create(clientId: String, clientSecret: String): BlizzardAuthApi {
-        val auth = Credentials.basic(clientId, clientSecret)
+        val auth: String = Credentials.basic(clientId, clientSecret)
 
-        val client = OkHttpClient.Builder()
+        val client: OkHttpClient = OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
                     .addHeader("Authorization", auth)

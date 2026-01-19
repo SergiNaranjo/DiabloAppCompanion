@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import java.net.URL
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class Utils {
@@ -31,8 +32,8 @@ class Utils {
         }
 
         public fun trySetImageFromURL(url: String?, imageView: ImageView) {
-            val executor = Executors.newSingleThreadExecutor();
-            val handler = Handler(Looper.getMainLooper());
+            val executor: ExecutorService = Executors.newSingleThreadExecutor();
+            val handler: Handler = Handler(Looper.getMainLooper());
             var image: Bitmap?;
 
             executor.execute {

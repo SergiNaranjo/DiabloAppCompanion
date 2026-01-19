@@ -32,7 +32,7 @@ class FirebaseHandler {
                 context.getString(R.string.firebase_analytics_post_click_user_key)
                         to UserHandler.getUserId(context),
                 context.getString(R.string.firebase_analytics_post_click_author_key)
-                        to post.requireArguments().getString("author")
+                        to post.requireArguments().getString(NewsPostButtonActivity.KEY_AUTHOR)
             );
             FirebaseAnalytics.getInstance(context)
                 .logEvent(

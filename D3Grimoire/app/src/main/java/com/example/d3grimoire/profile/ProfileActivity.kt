@@ -37,6 +37,13 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     private lateinit var statusEditText: EditText;
     private var editState: Boolean = false;
 
+    companion object {
+        private const val PROFILE_PICTURE_REFRESH_DELAY_MS: Long = 500L
+        private const val USER_FIELD_USER: String = "user"
+        private const val USER_FIELD_PASSWORD: String = "password"
+        private const val USER_FIELD_IMAGE_URL: String = "imgUrl"
+        private const val USER_FIELD_STATUS: String = "status"
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -89,14 +96,14 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun loadProfilePicture(view: View) {
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user")
+        val query: Query = FirebaseHandler.usersReference.orderByChild(USER_FIELD_USER)
             .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (!snapshot.exists()) return@addOnSuccessListener;
 
                 Utils.trySetImageFromURL(
-                    snapshot.children.first().child("imgUrl").getValue(String::class.java),
+                    snapshot.children.first().child(USER_FIELD_IMAGE_URL).getValue(String::class.java),
                     view.findViewById<ImageView>(R.id.profile_picture)
                 );
             }
@@ -127,7 +134,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
                 //Small delay for the pfp to upload
                 MainScope().launch {
-                    delay(500);
+                    delay(PROFILE_PICTURE_REFRESH_DELAY_MS);
 
                     Utils.getNavBarFromFragmentActivity(requireActivity())
                         .loadFragment(ProfileActivity());
@@ -139,7 +146,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun pushEdit(view: View) {
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user").equalTo(
+        val query: Query = FirebaseHandler.usersReference.orderByChild(USER_FIELD_USER).equalTo(
             UserHandler.getUserId(requireActivity())
         );
         query.get()
@@ -155,10 +162,10 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                         Log.d("Profile", key);
                         FirebaseHandler.usersReference.child(key).setValue(
                             mapOf(
-                                "user" to UserHandler.getUserId(requireActivity()),
-                                "password" to UserHandler.getPassNative(requireActivity()),
-                                "imgUrl" to imgUrl,
-                                "status" to status
+                                USER_FIELD_USER to UserHandler.getUserId(requireActivity()),
+                                USER_FIELD_PASSWORD to UserHandler.getPassNative(requireActivity()),
+                                USER_FIELD_IMAGE_URL to imgUrl,
+                                USER_FIELD_STATUS to status
                             )
                         );
                     }
@@ -187,19 +194,21 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     private fun loadStatus(view: View) {
         var status: String? = null;
 
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user")
+        val query: Query = FirebaseHandler.usersReference.orderByChild(USER_FIELD_USER)
             .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (snapshot.exists()) {
                     for (dataSnapshot in snapshot.children) {
-                        status = dataSnapshot.child("status").getValue(String::class.java);
+                        status = dataSnapshot.child(USER_FIELD_STATUS).getValue(String::class.java);
                     }
                 }
                 status?.let {
                     statusEditText.text = Editable.Factory.getInstance().newEditable(status);
                 } ?: run {
-                    statusEditText.text = Editable.Factory.getInstance().newEditable("Status here");
+                    statusEditText.text = Editable.Factory.getInstance().newEditable(
+                        getString(R.string.profile_status_default)
+                    );
                 }
             }
             .addOnFailureListener { exception ->

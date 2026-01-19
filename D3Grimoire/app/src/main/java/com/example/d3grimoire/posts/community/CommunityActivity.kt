@@ -22,6 +22,14 @@ import android.content.Intent
 class CommunityActivity : Fragment(R.layout.activity_community) {
     private lateinit var adapter: NewsPostAdapter
 
+    companion object {
+        private const val POST_KEY_TITLE: String = "title"
+        private const val POST_KEY_DESC: String = "desc"
+        private const val POST_KEY_IMG_URL: String = "imgUrl"
+        private const val POST_KEY_URL: String = "url"
+        private const val POST_KEY_AUTHOR: String = "author"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val recyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.community_posts_recycler)
@@ -88,15 +96,16 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                     for (dataSnapshot in snapshot.children) {
                         val newsData: NewsData = NewsData(
                             postIndex,
-                            dataSnapshot.child("title").getValue(String::class.java),
-                            dataSnapshot.child("desc").getValue(String::class.java),
-                            dataSnapshot.child("imgUrl").getValue(String::class.java),
-                            dataSnapshot.child("url").getValue(String::class.java),
-                            dataSnapshot.child("author").getValue(String::class.java)
+                            dataSnapshot.child(POST_KEY_TITLE).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_DESC).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_IMG_URL).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_URL).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_AUTHOR).getValue(String::class.java)
                         );
                         communityNewsButtonData.add(newsData);
                         postIndex++;
                     }
+                    // Refresh the list with the latest snapshot contents.
                     adapter.submitList(communityNewsButtonData.toList());
                 } else {
                     adapter.submitList(emptyList());
@@ -111,7 +120,7 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
     private fun openPost(data: NewsData) {
         FirebaseHandler.analyticsLogPostSelected(requireActivity(), data);
         val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
-        intent.putExtra("url", data.url);
+        intent.putExtra(NewsPostActivity.EXTRA_URL, data.url);
         startActivity(intent);
     }
 }
