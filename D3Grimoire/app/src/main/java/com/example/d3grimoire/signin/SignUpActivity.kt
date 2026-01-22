@@ -95,7 +95,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                         };
                 }
 
-                val act = requireActivity();
+                val act: FragmentActivity = requireActivity();
                 if (act !is NavBarActivity) throw Exception("Invalid root node!");
                 else {
                     act.setFloatingButtonsVisibility(View.GONE);

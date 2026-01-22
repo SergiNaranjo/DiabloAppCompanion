@@ -15,6 +15,7 @@ class ClassAbilityAdapter : RecyclerView.Adapter<ClassAbilityAdapter.SkillViewHo
 
     private var items: List<HeroSkill> = emptyList()
     private companion object {
+        // API does not provide skill cost, so the UI uses a safe default.
         private const val DEFAULT_SKILL_COST: Int = 0
     }
 

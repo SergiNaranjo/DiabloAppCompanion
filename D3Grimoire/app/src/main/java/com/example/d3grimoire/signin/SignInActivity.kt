@@ -57,7 +57,7 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
         //Sign up
         val signUpButton: TextView = view.findViewById<TextView>(R.id.sign_up_btn);
         signUpButton.setOnClickListener {
-            val act = requireActivity();
+            val act: FragmentActivity = requireActivity();
             if (act !is NavBarActivity) throw Exception("Invalid root node!");
             else {
                 act.setFloatingButtonsVisibility(View.GONE);

@@ -55,7 +55,7 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
     }
 
     private fun showInvalidImgUrlAlert() {
-        val builder = AlertDialog.Builder(requireActivity())
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
 
         builder.setMessage("The image URL is invalid!");
         builder.setTitle("");
@@ -64,12 +64,12 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
             dialog.cancel();
         }
 
-        val alertDialog = builder.create();
+        val alertDialog: AlertDialog = builder.create();
         alertDialog.show();
     }
 
     private fun tryUploadPost(view: View) {
-        //Check image url
+        // Validate image URLs off the main thread before posting.
         val executor: Executor = Executors.newSingleThreadExecutor();
         var image: Bitmap?;
         val handler: Handler = Handler(Looper.getMainLooper());

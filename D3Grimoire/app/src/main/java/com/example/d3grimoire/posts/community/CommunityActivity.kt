@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.d3grimoire.FirebaseHandler
@@ -40,6 +41,7 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
         val imgBtn: ImageButton = view.findViewById<ImageButton>(R.id.new_post);
         imgBtn.setOnClickListener { newPost(); }
 
+        // Keep the list up to date as posts change in Firebase.
         FirebaseHandler.postsReference.addChildEventListener(createChildEventListener());
 
         fetchPostData();
@@ -80,7 +82,7 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
     }
 
     private fun newPost() {
-        val act = requireActivity();
+        val act: FragmentActivity = requireActivity();
         if (act !is NavBarActivity) throw Exception("Invalid root node!");
         act.setFloatingButtonsVisibility(View.GONE);
         act.loadFragment(NewPostActivity());

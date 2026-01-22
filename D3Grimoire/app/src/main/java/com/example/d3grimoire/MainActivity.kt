@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
     companion object {
-        private const val TAG = "SPLASH_API"
+        private const val TAG: String = "SPLASH_API"
         private const val TEST_MESSAGE_USER: String = "Jose"
         private const val TEST_MESSAGE_TEXT: String = "Hello World"
         private const val FIREBASE_MESSAGES_PATH: String = "messages"

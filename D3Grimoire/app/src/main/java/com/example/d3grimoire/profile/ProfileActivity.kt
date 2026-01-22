@@ -1,5 +1,6 @@
 package com.example.d3grimoire.profile
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -200,7 +201,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (!isAdded) return@addOnSuccessListener
-                val ctx = context ?: return@addOnSuccessListener
+                val ctx: Context = context ?: return@addOnSuccessListener
                 if (snapshot.exists()) {
                     for (dataSnapshot in snapshot.children) {
                         status = dataSnapshot.child(USER_FIELD_STATUS).getValue(String::class.java);

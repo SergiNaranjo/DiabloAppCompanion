@@ -7,6 +7,8 @@
         <item name="colorSecondary">@color/accent_ice</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorSurfaceVariant">@color/surface_dark_alt</item>
         <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_muted</item>
     </style>
 </resources>

@@ -32,6 +32,7 @@ class Utils {
         }
 
         public fun trySetImageFromURL(url: String?, imageView: ImageView) {
+            // Fetch images off the UI thread and post results back to the main thread.
             val executor: ExecutorService = Executors.newSingleThreadExecutor();
             val handler: Handler = Handler(Looper.getMainLooper());
             var image: Bitmap?;

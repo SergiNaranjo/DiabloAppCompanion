@@ -19,7 +19,7 @@ import retrofit2.Response
 class InformationActivity : Fragment(R.layout.activity_information) {
 
     companion object {
-        private const val TAG_ITEM = "ITEM_API"
+        private const val TAG_ITEM: String = "ITEM_API"
         private val testItemSlugs: List<String> = listOf(
             "corrupted-ashbringer-Unique_Sword_2H_104_x1",
             "the-furnace-Unique_Mace_2H_103_x1",

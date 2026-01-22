@@ -22,12 +22,12 @@
                 android:textSize="30sp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
-                android:textColor="@color/text_primary" />
+                android:textColor="?attr/colorOnSurface" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/text_primary"
+                android:background="?attr/colorOnSurface"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="12dp"/>
 

@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/class_name"
-            android:textColor="@color/text_primary"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="34sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"/>
@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:alpha="0.5"
-                tools:background="@color/surface_dark_alt" />
+                tools:background="?attr/colorSurfaceVariant" />
 
             <ImageView
                 android:id="@+id/hero_portrait_image"
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/primary_stat"
-            android:textColor="@color/text_primary"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading_class_description"
-            android:textColor="@color/text_secondary"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="14sp"
             android:gravity="center"
             android:layout_marginBottom="28dp"/>

@@ -1,6 +1,7 @@
 package API
 
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.google.gson.Gson
@@ -9,7 +10,7 @@ import repository.TokenManager
 
 object DiabloApiInstance {
 
-    private const val BASE_URL = "https://eu.api.blizzard.com/"
+    private const val BASE_URL: String = "https://eu.api.blizzard.com/"
 
     private val gson: Gson = GsonBuilder()
         .setLenient()
@@ -19,7 +20,7 @@ object DiabloApiInstance {
         .addInterceptor { chain ->
             val token: String? = TokenManager.token
 
-            val request = chain.request().newBuilder()
+            val request: Request = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
 

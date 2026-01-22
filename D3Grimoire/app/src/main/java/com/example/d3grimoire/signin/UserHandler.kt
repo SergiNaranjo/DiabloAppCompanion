@@ -73,8 +73,8 @@ class UserHandler {
         //Basic password hashing for encryption
         public fun encryptPass(password: String): Int {
             //Constants for encryption
-            var p_pow = 1;
-            var sum = 0;
+            var p_pow: Int = 1;
+            var sum: Int = 0;
             for (letter in password) {
                 sum = (sum + letter.code * p_pow).mod(PASSWORD_HASH_MOD);
                 p_pow = (p_pow * PASSWORD_HASH_BASE).mod(PASSWORD_HASH_MOD);
