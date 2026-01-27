@@ -29,19 +29,19 @@ class UserHandler {
             return getUserId(context) != null;
         }
 
-        public fun getUserNative(context: Context): String? {
+        public fun getUserNative(): String? {
             val lastUser: String? = playerPrefs.getString("user", "");
             if (lastUser != "") return lastUser;
             return null;
         }
 
-        public fun getPassNative(context: Context): Int? {
+        public fun getPassNative(): Int? {
             val pass: Int? = playerPrefs.getInt("password", 0);
             if (pass != 0) return pass;
             return null;
         }
 
-        public fun setUserNative(context: Context, user: String?, password: Int) {
+        public fun setUserNative(user: String?, password: Int) {
             playerPrefs.edit().putString("user", user).apply();
             playerPrefs.edit().putInt("password", password).apply();
         }
@@ -73,11 +73,11 @@ class UserHandler {
         //Basic password hashing for encryption
         public fun encryptPass(password: String): Int {
             //Constants for encryption
-            var p_pow: Int = 1;
+            var pPow: Int = 1;
             var sum: Int = 0;
             for (letter in password) {
-                sum = (sum + letter.code * p_pow).mod(PASSWORD_HASH_MOD);
-                p_pow = (p_pow * PASSWORD_HASH_BASE).mod(PASSWORD_HASH_MOD);
+                sum = (sum + letter.code * pPow).mod(PASSWORD_HASH_MOD);
+                pPow = (pPow * PASSWORD_HASH_BASE).mod(PASSWORD_HASH_MOD);
             }
             return sum;
         }
@@ -87,13 +87,13 @@ class UserHandler {
             googleAccount?.id?.let { return it; }
             googleAccount?.email?.let { return it; }
             googleAccount?.displayName?.let { return it; }
-            return getUserNative(context);
+            return getUserNative();
         }
 
         public fun getUserDisplayName(context: Context): String? {
             val googleAccount: GoogleSignInAccount? = getUserGoogle(context);
             googleAccount?.displayName?.let { return it; }
-            return getUserNative(context);
+            return getUserNative();
         }
 
         public fun getUsername(context: Context): String? {

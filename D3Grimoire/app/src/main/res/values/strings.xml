@@ -128,4 +128,5 @@
     <string name="firebase_analytics_post_creation_user_key">post_creation_user</string>
     <string name="firebase_analytics_post_created_event">PostCreated</string>
     <string name="firebase_error_tag">FIREBASE</string>
+    <string name="profile_hero_level">"%s LVL. %s"</string>
 </resources>

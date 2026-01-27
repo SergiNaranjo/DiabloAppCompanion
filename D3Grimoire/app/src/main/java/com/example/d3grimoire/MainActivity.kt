@@ -22,16 +22,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var analytics: FirebaseAnalytics
-    private lateinit var database: DatabaseReference
     private lateinit var progressBar: ProgressBar
 
     companion object {
-        private const val TAG: String = "SPLASH_API"
-        private const val TEST_MESSAGE_USER: String = "Jose"
-        private const val TEST_MESSAGE_TEXT: String = "Hello World"
-        private const val FIREBASE_MESSAGES_PATH: String = "messages"
+        private const val TAG: String = "SPLASH_API";
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,43 +38,11 @@ class MainActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         progressBar.visibility = View.VISIBLE
 
-        Log.d(TAG, "Splash started, showing progress bar")
-
-        // Firebase
-        analytics = Firebase.analytics
-        analytics.logEvent("app_open", null)
-
-        val databaseUrl: String = getString(R.string.database_URL)
-        database = FirebaseDatabase.getInstance(databaseUrl)
-            .getReference(FIREBASE_MESSAGES_PATH)
-
-        writeTestMessage()
-
         // Start loading
         fetchToken()
     }
 
-    private fun writeTestMessage() {
-        val dataId: String = database.push().key ?: return
-
-        val messageData: Map<String, String> = mapOf(
-            "user" to TEST_MESSAGE_USER,
-            "message" to TEST_MESSAGE_TEXT
-        )
-
-        database.child(dataId)
-            .setValue(messageData)
-            .addOnSuccessListener {
-                Log.d("FIREBASE", "Message written successfully")
-            }
-            .addOnFailureListener {
-                Log.e("FIREBASE", "Write failed", it)
-            }
-    }
-
     private fun fetchToken() {
-        Log.d(TAG, "Starting Blizzard API token request")
-
         val api: BlizzardAuthApi = BlizzardAuthInstance.create(
             clientId = BuildConfig.BLIZZARD_CLIENT_ID,
             clientSecret = BuildConfig.BLIZZARD_CLIENT_SECRET
@@ -103,9 +65,6 @@ class MainActivity : AppCompatActivity() {
                 val token: String = response.body()!!.accessToken
                 TokenManager.token = token
 
-                Log.d(TAG, "API setup successful, token acquired")
-                Log.d(TAG, "Token preview: ${token.take(10)}...")
-
                 goToNewsScreen()
             }
 
@@ -117,8 +76,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToNewsScreen() {
-        Log.d(TAG, "Navigating to NewsActivity")
-
         progressBar.visibility = View.GONE
         startActivity(Intent(this, NavBarActivity::class.java))
         finish()

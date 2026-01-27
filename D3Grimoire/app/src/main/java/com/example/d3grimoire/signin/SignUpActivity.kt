@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
 import com.example.d3grimoire.posts.community.CommunityActivity
@@ -16,26 +17,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.example.d3grimoire.Utils
 
 class SignUpActivity : Fragment(R.layout.activity_sign_up) {
-
-    private lateinit var googleSignInClient: GoogleSignInClient;
-    private lateinit var database: DatabaseReference
-
-    companion object {
-        private const val POSTS_REFERENCE: String = "posts"
-        private const val USERS_REFERENCE: String = "users"
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState);
 
         val signUpConfirmButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_confirm);
         val exitButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_exit);
-
-        val databaseUrl: String = getString(R.string.database_URL);
-        database = FirebaseDatabase.getInstance(databaseUrl)
-            .getReference(POSTS_REFERENCE);
 
         signUpConfirmButton.setOnClickListener {
             trySignUp(view);
@@ -47,17 +37,12 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     }
 
     private fun exitToSignIn() {
-        val activity: FragmentActivity = requireActivity();
-        if (activity !is NavBarActivity) throw Exception("Invalid root node!");
-        activity.loadFragment(SignInActivity());
+        Utils.getNavBarFromFragment(this).loadFragment(SignInActivity());
     }
 
     private fun trySignUp(view: View) {
-        val activity: FragmentActivity = requireActivity();
-        if(activity is AppCompatActivity &&
-            UserHandler.getUserNative(activity) != null) {
-            Log.d("Login", "User already signed in!");
-        }
+        if(UserHandler.isSignedIn(Utils.getAppCompatFromFragment(this)))
+            Log.e("Login", "User already signed in!");
 
         val user: String = view.findViewById<EditText>(R.id.sign_up_user).text.toString();
         val pass: String = view.findViewById<EditText>(R.id.sign_up_password).text.toString();
@@ -70,22 +55,19 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
             return;
         }
 
-        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
-            .getReference(USERS_REFERENCE)
-
-        val query: Query = database.orderByChild("user").equalTo(user);
+        val query: Query = FirebaseHandler.usersReference.orderByChild("user").equalTo(user);
         query.get()
             .addOnSuccessListener { snapshot ->
                 if(snapshot.exists()) {
-                    Log.d("Sign Up", "User already exists!");
+                    Log.e("Sign Up", "User already exists!");
                     showUserExistsAlert();
                     return@addOnSuccessListener;
                 }
 
                 //Valid user - Add to db
-                val dataId: String? = database.push().key;
+                val dataId: String? = FirebaseHandler.usersReference.push().key;
                 dataId?.let {
-                    database.child(dataId)
+                    FirebaseHandler.usersReference.child(dataId)
                         .setValue(mapOf(
                             "user" to user,
                             "password" to UserHandler.encryptPass(pass)
@@ -95,12 +77,9 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                         };
                 }
 
-                val act: FragmentActivity = requireActivity();
-                if (act !is NavBarActivity) throw Exception("Invalid root node!");
-                else {
-                    act.setFloatingButtonsVisibility(View.GONE);
-                    act.loadFragment(SignInActivity());
-                }
+                val act: NavBarActivity = Utils.getNavBarFromFragment(this);
+                act.setFloatingButtonsVisibility(View.GONE);
+                act.loadFragment(SignInActivity());
             }
             .addOnFailureListener { exception ->
                 Log.e("Firebase", "Exception: ${exception.message}");

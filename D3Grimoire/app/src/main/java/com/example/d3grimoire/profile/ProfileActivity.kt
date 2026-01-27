@@ -165,7 +165,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                         FirebaseHandler.usersReference.child(key).setValue(
                             mapOf(
                                 USER_FIELD_USER to UserHandler.getUserId(requireActivity()),
-                                USER_FIELD_PASSWORD to UserHandler.getPassNative(requireActivity()),
+                                USER_FIELD_PASSWORD to UserHandler.getPassNative(),
                                 USER_FIELD_IMAGE_URL to imgUrl,
                                 USER_FIELD_STATUS to status
                             )
