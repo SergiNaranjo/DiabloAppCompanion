@@ -8,15 +8,11 @@
     tools:ignore="MissingDefaultResource"
     android:background="@drawable/ic_background">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
             <TextView
                 android:id="@+id/textView6"
@@ -27,7 +23,7 @@
                 android:textSize="30sp"
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
-                android:textColor="#FFFFFF"/>
+                android:textColor="?attr/colorOnSurface"/>
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -46,30 +42,16 @@
                 android:textSize="30sp"
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
-                android:textColor="#FFFFFF"/>
+                android:textColor="?attr/colorOnSurface"/>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/news_posts_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/news_post_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/news_post_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-                <androidx.fragment.app.FragmentContainerView
-                    android:id="@+id/news_post_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingBottom="12dp" />
+    </LinearLayout>
 
 
 </RelativeLayout>

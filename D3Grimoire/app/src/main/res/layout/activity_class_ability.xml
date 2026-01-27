@@ -15,7 +15,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="12dp"
-        android:background="#1A1A1A"
+        android:background="?attr/colorSurfaceVariant"
         android:contentDescription="Skill Icon"
         android:padding="2dp"
         android:scaleType="fitCenter" />
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="#FFFFFF"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -39,7 +39,7 @@
             android:id="@+id/class_ability_level"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#AAAAAA"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="12sp" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:text=""
-            android:textColor="#87E5FF"
+            android:textColor="?attr/colorPrimary"
             android:textSize="14sp" />
 
         <TextView
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="#DDDDDD"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="12sp" />
 
     </LinearLayout>

@@ -17,6 +17,6 @@ class ProfileHeroActivity : Fragment(R.layout.activity_profile_hero) {
         val classType : String? = requireArguments().getString("class");
         val level : String? = requireArguments().getString("level");
         textView = view.findViewById<TextView>(R.id.hero_class_level);
-        textView.text = classType + " LVL. " + level;
+        textView.text = getString(R.string.profile_hero_level, classType, level);
     }
 }

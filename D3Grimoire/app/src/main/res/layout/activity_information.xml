@@ -5,9 +5,10 @@
     android:paddingTop="32dp"
     android:background="@drawable/ic_background">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,8 +24,15 @@
                 android:text="@string/classes"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="16dp"/>
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="12dp"/>
+
+            <View
+                android:layout_width="180dp"
+                android:layout_height="1dp"
+                android:background="?attr/colorOnSurface"
+                android:alpha="0.35"
+                android:layout_marginBottom="20dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -33,8 +41,8 @@
                 android:gravity="center_horizontal">
 
                 <FrameLayout
-                    android:id="@+id/btn_barbarian"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_barbarian_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginBottom="12dp"
                     android:foreground="?attr/selectableItemBackground">
@@ -50,7 +58,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/barbarian"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -58,8 +66,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_crusader"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_crusader_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="12dp"
@@ -76,7 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/crusader"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -84,8 +92,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_demon_hunter"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_demon_hunter_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="12dp"
@@ -102,7 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/demon_hunter"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -110,8 +118,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_monk"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_monk_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="12dp"
@@ -128,7 +136,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/monk"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -136,8 +144,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_necromancer"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_necromancer_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="12dp"
@@ -154,7 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/necromancer"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -162,8 +170,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_witch_doctor"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_witch_doctor_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="12dp"
@@ -180,7 +188,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/witch_doctor"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -188,8 +196,8 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/btn_wizard"
-                    android:layout_width="250dp"
+                    android:id="@+id/information_wizard_button"
+                    android:layout_width="match_parent"
                     android:layout_height="59dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="12dp"
@@ -206,7 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/wizard"
-                        android:textColor="@android:color/white"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:clickable="false"
@@ -221,22 +229,25 @@
                 android:text="@string/items"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"
+                android:textColor="?attr/colorOnSurface"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"/>
+
+            <View
+                android:layout_width="160dp"
+                android:layout_height="1dp"
+                android:background="?attr/colorOnSurface"
+                android:alpha="0.35"
                 android:layout_marginBottom="16dp"/>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/item_0"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/items_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/item_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingBottom="8dp" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

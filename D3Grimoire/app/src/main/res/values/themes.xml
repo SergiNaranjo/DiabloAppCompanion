@@ -2,7 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.D3Grimoire" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/accent_ice</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">@color/accent_ice</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorSurfaceVariant">@color/surface_dark_alt</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnSurfaceVariant">@color/text_muted</item>
     </style>
 
     <style name="Theme.D3Grimoire" parent="Base.Theme.D3Grimoire" />

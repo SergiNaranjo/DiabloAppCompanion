@@ -2,18 +2,27 @@ package com.example.d3grimoire.posts.news
 
 import android.os.Bundle
 import android.view.View
+import android.content.Intent
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.R
 import com.example.d3grimoire.posts.NewsData
+import com.example.d3grimoire.posts.NewsPostAdapter
 
 class NewsScreen : Fragment(R.layout.activity_news) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
+
+        val recyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.news_posts_recycler)
+        val adapter: NewsPostAdapter = NewsPostAdapter { data -> openPost(data) }
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.adapter = adapter
 
         newsButtonData = listOf(
             NewsData(
-                R.id.news_post_1,
+                0,
                 getString(R.string.news_1_title),
                 getString(R.string.news_1_description),
                 getString(R.string.news_1_imgUrl),
@@ -21,7 +30,7 @@ class NewsScreen : Fragment(R.layout.activity_news) {
                 getString(R.string.news_1_author),
             ),
             NewsData(
-                R.id.news_post_2,
+                1,
                 getString(R.string.news_2_title),
                 getString(R.string.news_2_description),
                 getString(R.string.news_2_imgUrl),
@@ -29,7 +38,7 @@ class NewsScreen : Fragment(R.layout.activity_news) {
                 getString(R.string.news_2_author),
             ),
             NewsData(
-                R.id.news_post_3,
+                2,
                 getString(R.string.news_3_title),
                 getString(R.string.news_3_description),
                 getString(R.string.news_3_imgUrl),
@@ -38,12 +47,13 @@ class NewsScreen : Fragment(R.layout.activity_news) {
             )
         );
 
-        newsButtonData.forEach { data ->
-            val newsPostButton: NewsPostButtonActivity = NewsPostButtonActivity.newInstance(data);
-            childFragmentManager.commit {
-                setReorderingAllowed(true);
-                add(data.id, newsPostButton);
-            }
-        }
+        adapter.submitList(newsButtonData)
+    }
+
+    private fun openPost(data: NewsData) {
+        FirebaseHandler.analyticsLogPostSelected(requireActivity(), data);
+        val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
+        intent.putExtra(NewsPostActivity.EXTRA_URL, data.url);
+        startActivity(intent);
     }
 }

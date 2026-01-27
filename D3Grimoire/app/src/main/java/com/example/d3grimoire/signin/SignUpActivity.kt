@@ -6,32 +6,20 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
-import com.example.d3grimoire.posts.community.CommunityActivity
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.example.d3grimoire.ActivityCaster
 
 class SignUpActivity : Fragment(R.layout.activity_sign_up) {
-
-    private lateinit var googleSignInClient: GoogleSignInClient;
-    private lateinit var database: DatabaseReference
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState);
 
         val signUpConfirmButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_confirm);
         val exitButton: ImageButton = view.findViewById<ImageButton>(R.id.sign_up_exit);
-
-        val databaseUrl =
-            "https://appcompanion-eedc3-default-rtdb.europe-west1.firebasedatabase.app/";
-        database = FirebaseDatabase.getInstance(databaseUrl)
-            .getReference("posts");
 
         signUpConfirmButton.setOnClickListener {
             trySignUp(view);
@@ -43,17 +31,12 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     }
 
     private fun exitToSignIn() {
-        val activity: FragmentActivity = requireActivity();
-        if (activity !is NavBarActivity) throw Exception("Invalid root node!");
-        activity.loadFragment(SignInActivity());
+        ActivityCaster.getNavBarFromFragment(this).loadFragment(SignInActivity());
     }
 
     private fun trySignUp(view: View) {
-        val activity: FragmentActivity = requireActivity();
-        if(activity is AppCompatActivity &&
-            UserHandler.getUserNative(activity) != null) {
-            Log.d("Login", "User already signed in!");
-        }
+        if(UserHandler.isSignedIn(ActivityCaster.getAppCompatFromFragment(this)))
+            Log.e("Login", "User already signed in!");
 
         val user: String = view.findViewById<EditText>(R.id.sign_up_user).text.toString();
         val pass: String = view.findViewById<EditText>(R.id.sign_up_password).text.toString();
@@ -66,22 +49,19 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
             return;
         }
 
-        database = FirebaseDatabase.getInstance(getString(R.string.database_URL))
-            .getReference("users")
-
-        val query: Query = database.orderByChild("user").equalTo(user);
+        val query: Query = FirebaseHandler.usersReference.orderByChild("user").equalTo(user);
         query.get()
             .addOnSuccessListener { snapshot ->
                 if(snapshot.exists()) {
-                    Log.d("Sign Up", "User already exists!");
+                    Log.e("Sign Up", "User already exists!");
                     showUserExistsAlert();
                     return@addOnSuccessListener;
                 }
 
                 //Valid user - Add to db
-                val dataId = database.push().key;
+                val dataId: String? = FirebaseHandler.usersReference.push().key;
                 dataId?.let {
-                    database.child(dataId)
+                    FirebaseHandler.usersReference.child(dataId)
                         .setValue(mapOf(
                             "user" to user,
                             "password" to UserHandler.encryptPass(pass)
@@ -91,12 +71,9 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                         };
                 }
 
-                val act = requireActivity();
-                if (act !is NavBarActivity) throw Exception("Invalid root node!");
-                else {
-                    act.setFloatingButtonsVisibility(View.GONE);
-                    act.loadFragment(SignInActivity());
-                }
+                val act: NavBarActivity = ActivityCaster.getNavBarFromFragment(this);
+                act.setFloatingButtonsVisibility(View.GONE);
+                act.loadFragment(SignInActivity());
             }
             .addOnFailureListener { exception ->
                 Log.e("Firebase", "Exception: ${exception.message}");
@@ -104,7 +81,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     }
 
     private fun showUserExistsAlert() {
-        val builder = AlertDialog.Builder(requireActivity());
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The user already exists!");
         builder.setTitle("");
@@ -113,12 +90,12 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
             dialog.cancel();
         }
 
-        val alertDialog = builder.create();
+        val alertDialog: AlertDialog = builder.create();
         alertDialog.show();
     }
 
     private fun showPasswordsDifferentAlert() {
-        val builder = AlertDialog.Builder(requireActivity());
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity());
 
         builder.setMessage("The passwords are different!");
         builder.setTitle("");
@@ -127,7 +104,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
             dialog.cancel();
         }
 
-        val alertDialog = builder.create();
+        val alertDialog: AlertDialog = builder.create();
         alertDialog.show();
     }
 }
