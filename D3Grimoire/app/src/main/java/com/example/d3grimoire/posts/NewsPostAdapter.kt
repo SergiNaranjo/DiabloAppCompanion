@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
+import com.example.d3grimoire.ImageDecoder
 
 class NewsPostAdapter(
     private val onItemClicked: (NewsData) -> Unit
@@ -43,7 +43,7 @@ class NewsPostAdapter(
         fun bind(data: NewsData) {
             titleText.text = data.name
             descriptionText.text = data.description
-            Utils.trySetImageFromURL(data.imgUrl, imageView)
+            ImageDecoder.trySetImageFromURL(data.imgUrl, imageView)
             itemView.setOnClickListener { onItemClicked(data) }
         }
     }

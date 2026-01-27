@@ -6,9 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
@@ -18,13 +16,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import  com.example.d3grimoire.Utils
+import  com.example.d3grimoire.ActivityCaster
 
 class SignInActivity : Fragment(R.layout.activity_sign_in) {
 
@@ -55,7 +50,7 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
         //Sign up
         val signUpButton: TextView = view.findViewById<TextView>(R.id.sign_up_btn);
         signUpButton.setOnClickListener {
-            val act: NavBarActivity = Utils.getNavBarFromFragment(this);
+            val act: NavBarActivity = ActivityCaster.getNavBarFromFragment(this);
             act.setFloatingButtonsVisibility(View.GONE);
             act.loadFragment(SignUpActivity());
         }
@@ -87,7 +82,7 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
                 pass?.let {
                     if (hashedPass == UserHandler.encryptPass(pass)) {
                         UserHandler.setUserNative(user, hashedPass);
-                        Utils.getNavBarFromFragment(this).loadFragment(ProfileActivity());
+                        ActivityCaster.getNavBarFromFragment(this).loadFragment(ProfileActivity());
                     }
                 } ?: run {
                     Log.e("Login", "User has no passwprd")
@@ -110,7 +105,7 @@ class SignInActivity : Fragment(R.layout.activity_sign_in) {
 
         val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data);
         if (task.isSuccessful)
-            Utils.getNavBarFromFragment(this).loadFragment(ProfileActivity());
+            ActivityCaster.getNavBarFromFragment(this).loadFragment(ProfileActivity());
         else
             Log.e("Login Google", "Error: ", task.exception);
     }

@@ -1,14 +1,11 @@
 package com.example.d3grimoire.information
 
-import API.DiabloImageUrl
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import coil.load
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
+import com.example.d3grimoire.ImageDecoder
 
 class ItemActivity : Fragment(R.layout.activity_item) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,7 +26,7 @@ class ItemActivity : Fragment(R.layout.activity_item) {
         levelText.text = getString(R.string.item_requires_level, requiredLevel);
         descriptionText.text = description;
 
-        Utils.trySetImageFromURL(
+        ImageDecoder.trySetImageFromURL(
             arguments?.getString(getString(R.string.item_icon_url_key)),
             view.findViewById(R.id.item_icon)
         )

@@ -6,18 +6,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
-import com.example.d3grimoire.posts.community.CommunityActivity
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import com.example.d3grimoire.Utils
+import com.example.d3grimoire.ActivityCaster
 
 class SignUpActivity : Fragment(R.layout.activity_sign_up) {
 
@@ -37,11 +31,11 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
     }
 
     private fun exitToSignIn() {
-        Utils.getNavBarFromFragment(this).loadFragment(SignInActivity());
+        ActivityCaster.getNavBarFromFragment(this).loadFragment(SignInActivity());
     }
 
     private fun trySignUp(view: View) {
-        if(UserHandler.isSignedIn(Utils.getAppCompatFromFragment(this)))
+        if(UserHandler.isSignedIn(ActivityCaster.getAppCompatFromFragment(this)))
             Log.e("Login", "User already signed in!");
 
         val user: String = view.findViewById<EditText>(R.id.sign_up_user).text.toString();
@@ -77,7 +71,7 @@ class SignUpActivity : Fragment(R.layout.activity_sign_up) {
                         };
                 }
 
-                val act: NavBarActivity = Utils.getNavBarFromFragment(this);
+                val act: NavBarActivity = ActivityCaster.getNavBarFromFragment(this);
                 act.setFloatingButtonsVisibility(View.GONE);
                 act.loadFragment(SignInActivity());
             }

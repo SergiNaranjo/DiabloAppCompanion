@@ -1,11 +1,7 @@
 package com.example.d3grimoire.profile
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.InputType
 import android.util.Log
@@ -20,15 +16,14 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
+import com.example.d3grimoire.ActivityCaster
+import com.example.d3grimoire.ImageDecoder
 import com.example.d3grimoire.signin.SignInActivity
 import com.example.d3grimoire.signin.UserHandler
 import com.google.firebase.database.Query
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.InputStream
-import java.net.URL
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -49,7 +44,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
         super.onCreate(savedInstanceState)
 
         if (!UserHandler.isSignedIn(requireActivity()))
-            Utils.getNavBarFromFragment(this).loadFragment(SignInActivity());
+            ActivityCaster.getNavBarFromFragment(this).loadFragment(SignInActivity());
 
         val signOutButton: TextView = view.findViewById<TextView>(R.id.btn_sign_out);
         signOutButton.setOnClickListener { signOut(); };
@@ -104,7 +99,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                 if (!isAdded) return@addOnSuccessListener
                 if (!snapshot.exists()) return@addOnSuccessListener;
 
-                Utils.trySetImageFromURL(
+                ImageDecoder.trySetImageFromURL(
                     snapshot.children.first().child(USER_FIELD_IMAGE_URL).getValue(String::class.java),
                     view.findViewById<ImageView>(R.id.profile_picture)
                 );
@@ -121,28 +116,21 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
             return;
         }
 
-        //Check image url
+        //Check image url and post
         val executor: Executor = Executors.newSingleThreadExecutor();
-        var image: Bitmap?;
         executor.execute {
-            try {
-                val url: String? =
-                    view.findViewById<EditText>(R.id.profile_img_url).text.toString();
-                val `in`: InputStream = URL(url).openStream();
-                image = BitmapFactory.decodeStream(`in`);
-                if (image == null) throw Exception("Image is null!");
+            val url: String? =
+                view.findViewById<EditText>(R.id.profile_img_url).text.toString();
+            if(!ImageDecoder.isImageURLValid(url)) return@execute;
 
-                pushEdit(view);
+            pushEdit(view);
 
-                //Small delay for the pfp to upload
-                MainScope().launch {
-                    delay(PROFILE_PICTURE_REFRESH_DELAY_MS);
+            //Small delay for the pfp to upload
+            MainScope().launch {
+                delay(PROFILE_PICTURE_REFRESH_DELAY_MS);
 
-                    Utils.getNavBarFromFragmentActivity(requireActivity())
-                        .loadFragment(ProfileActivity());
-                }
-            } catch (e: Exception) {
-                e.printStackTrace();
+                ActivityCaster.getNavBarFromFragmentActivity(requireActivity())
+                    .loadFragment(ProfileActivity());
             }
         }
     }
@@ -161,7 +149,6 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                 for (dataSnapshot in snapshot.children) {
                     val key: String? = dataSnapshot.key;
                     key?.let {
-                        Log.d("Profile", key);
                         FirebaseHandler.usersReference.child(key).setValue(
                             mapOf(
                                 USER_FIELD_USER to UserHandler.getUserId(requireActivity()),
@@ -181,7 +168,7 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
     private fun signOut() {
         UserHandler.signOut(requireActivity());
-        Utils.getNavBarFromFragment(this).loadFragment(ProfileActivity());
+        ActivityCaster.getNavBarFromFragment(this).loadFragment(ProfileActivity());
     }
 
     private fun loadUsername(view: View) {

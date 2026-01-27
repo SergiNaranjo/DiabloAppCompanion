@@ -12,7 +12,7 @@ import java.net.URL
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class Utils {
+class ActivityCaster {
     companion object {
         public fun getAppCompatFromFragment(fragment: Fragment) : AppCompatActivity {
             val activity: FragmentActivity = fragment.requireActivity();
@@ -29,26 +29,6 @@ class Utils {
         public fun getNavBarFromFragmentActivity(activity: FragmentActivity) : NavBarActivity {
             if(activity !is NavBarActivity) throw Exception("Invalid root activity!");
             return activity;
-        }
-
-        public fun trySetImageFromURL(url: String?, imageView: ImageView) {
-            // Fetch images off the UI thread and post results back to the main thread.
-            val executor: ExecutorService = Executors.newSingleThreadExecutor();
-            val handler: Handler = Handler(Looper.getMainLooper());
-            var image: Bitmap?;
-
-            executor.execute {
-                try {
-                    val `in` = URL(url).openStream();
-                    image = BitmapFactory.decodeStream(`in`);
-                    handler.post {
-                        imageView.setImageBitmap(image)
-                    }
-                }
-                catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
         }
     }
 }

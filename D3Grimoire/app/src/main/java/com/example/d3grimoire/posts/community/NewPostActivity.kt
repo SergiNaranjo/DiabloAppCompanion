@@ -1,30 +1,17 @@
 package com.example.d3grimoire.posts.community
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.example.d3grimoire.FirebaseHandler
-import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
-import com.example.d3grimoire.signin.UserHandler
-import com.example.d3grimoire.posts.news.NewsScreen
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import java.io.InputStream
-import java.net.URL
+import com.example.d3grimoire.ActivityCaster
+import com.example.d3grimoire.ImageDecoder
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -69,33 +56,30 @@ class NewPostActivity : Fragment(R.layout.activity_new_post) {
     }
 
     private fun tryUploadPost(view: View) {
-        // Validate image URLs off the main thread before posting.
+        // Validate image url and post
         val executor: Executor = Executors.newSingleThreadExecutor();
-        var image: Bitmap?;
         val handler: Handler = Handler(Looper.getMainLooper());
         executor.execute {
-            try {
-                val url: String? =
-                    view.findViewById<EditText>(R.id.new_post_img_url).text.toString();
-                val `in`: InputStream = URL(url).openStream();
-                image = BitmapFactory.decodeStream(`in`);
-                if (image == null) throw Exception("Image is null!");
-
-                FirebaseHandler.pushPost(requireActivity(), getData(view));
-                exitToNews();
-            } catch (e: Exception) {
+            val url: String? =
+                view.findViewById<EditText>(R.id.new_post_img_url).text.toString();
+            if (!ImageDecoder.isImageURLValid(url)) {
                 handler.post {
                     showInvalidImgUrlAlert();
                 }
-                e.printStackTrace();
+            } else {
+                try {
+                    FirebaseHandler.pushPost(requireActivity(), getData(view));
+                    exitToNews();
+                } catch (e: Exception) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
 
-
     private fun exitToNews() {
-        Utils.getNavBarFromFragment(this).setFloatingButtonsVisibility(View.VISIBLE);
-        Utils.getNavBarFromFragment(this).loadFragment(CommunityActivity());
+        ActivityCaster.getNavBarFromFragment(this).setFloatingButtonsVisibility(View.VISIBLE);
+        ActivityCaster.getNavBarFromFragment(this).loadFragment(CommunityActivity());
     }
 }

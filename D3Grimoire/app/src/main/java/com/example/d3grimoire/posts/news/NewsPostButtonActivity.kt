@@ -1,11 +1,7 @@
 package com.example.d3grimoire.posts.news
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,10 +9,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
+import com.example.d3grimoire.ImageDecoder
 import com.example.d3grimoire.posts.NewsData
-import java.net.URL
-import java.util.concurrent.Executors
 
 class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
     companion object {
@@ -50,7 +44,7 @@ class NewsPostButtonActivity : Fragment(R.layout.activity_news_post_button) {
         textView = view.findViewById<TextView>(R.id.news_post_description);
         textView.text = description;
 
-        Utils.trySetImageFromURL(
+        ImageDecoder.trySetImageFromURL(
             requireArguments().getString(KEY_IMG_URL),
             view.findViewById<ImageView>(R.id.news_post_image)
         );
