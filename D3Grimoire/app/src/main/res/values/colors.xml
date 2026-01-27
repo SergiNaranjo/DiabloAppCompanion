@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#FFDDDDDD</color>
+    <color name="text_dim">#FFAAAAAA</color>
+    <color name="text_hint">#FFBBBBBB</color>
+    <color name="text_muted">#FFCCCCCC</color>
+    <color name="accent_ice">#FF87E5FF</color>
+    <color name="surface_dark">#FF1A1A1A</color>
+    <color name="surface_dark_alt">#FF333333</color>
+    <color name="overlay_dark">#33000000</color>
 </resources>

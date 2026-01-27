@@ -2,19 +2,20 @@ package API
 
 import okhttp3.Credentials
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object BlizzardAuthInstance {
 
-    private const val BASE_URL = "https://oauth.battle.net/"
+    private const val BASE_URL: String = "https://oauth.battle.net/"
 
     fun create(clientId: String, clientSecret: String): BlizzardAuthApi {
-        val auth = Credentials.basic(clientId, clientSecret)
+        val auth: String = Credentials.basic(clientId, clientSecret)
 
-        val client = OkHttpClient.Builder()
+        val client: OkHttpClient = OkHttpClient.Builder()
             .addInterceptor { chain ->
-                val request = chain.request().newBuilder()
+                val request: Request = chain.request().newBuilder()
                     .addHeader("Authorization", auth)
                     .build()
                 chain.proceed(request)

@@ -55,7 +55,6 @@ class NavBarActivity : AppCompatActivity() {
 
         postScreen = PostScreen.NEWS;
         loadFragment(NewsScreen())
-        CommunityActivity.fetchPostData();
     }
 
     private fun setupListeners() {

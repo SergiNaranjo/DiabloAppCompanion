@@ -39,7 +39,7 @@
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:text="@string/login_caps"
-                android:textColor="#ffffff"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -48,49 +48,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="@string/username_or_email"
-                android:textColor="#ffffff" />
+                android:textColor="?attr/colorOnSurface" />
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="6dp"
-                android:background="#33000000"
+                android:background="?attr/colorSurfaceVariant"
                 android:hint="@string/example_email_com"
                 android:padding="12dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#bbbbbb" />
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurfaceVariant" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:text="@string/password"
-                android:textColor="#ffffff" />
+                android:textColor="?attr/colorOnSurface" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
-                android:background="#33000000"
+                android:background="?attr/colorSurfaceVariant"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword"
                 android:padding="12dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#bbbbbb" />
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurfaceVariant" />
 
             <TextView
                 android:id="@+id/login_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="5dp"
-                android:src="@color/white"
+                android:src="?attr/colorPrimary"
                 android:text="@string/login"
                 android:textAlignment="center"
                 android:textSize="25sp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+                android:textColor="?attr/colorOnPrimary"
+                android:background="?attr/colorPrimary"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="@string/or_login_with"
-                android:textColor="#ffffff"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="@string/don_t_have_an_account"
-                android:textColor="#ffffff"
+                android:textColor="?attr/colorOnSurface"
                 android:textStyle="bold" />
 
             <Space
@@ -126,8 +126,8 @@
                 android:layout_width="80dp"
                 android:layout_height="25dp"
                 android:text="@string/register"
-                android:textColor="@color/black"
-                android:background="@color/white"
+                android:textColor="?attr/colorOnPrimary"
+                android:background="?attr/colorPrimary"
                 android:textAlignment="center"
                 android:textSize="15sp"/>
 

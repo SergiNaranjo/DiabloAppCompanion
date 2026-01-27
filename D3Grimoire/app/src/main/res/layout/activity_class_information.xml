@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+    android:background="@drawable/ic_background"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/class_name"
-            android:textColor="#FFFFFF"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="34sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"/>
@@ -33,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:alpha="0.5"
-                tools:background="#333333" />
+                tools:background="?attr/colorSurfaceVariant" />
 
             <ImageView
                 android:id="@+id/hero_portrait_image"
@@ -80,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/primary_stat"
-            android:textColor="#FFFFFF"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
@@ -90,16 +91,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loading_class_description"
-            android:textColor="#DDDDDD"
+            android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="14sp"
             android:gravity="center"
             android:layout_marginBottom="28dp"/>
 
-        <LinearLayout
-            android:id="@+id/skill_fragment_container"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/skills_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

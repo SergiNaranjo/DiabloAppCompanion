@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.os.bundleOf
 import com.example.d3grimoire.posts.news.NewsPostButtonActivity
+import com.example.d3grimoire.posts.NewsData
 import com.example.d3grimoire.signin.UserHandler
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.DatabaseReference
@@ -29,9 +30,25 @@ class FirebaseHandler {
         public fun analyticsLogPostSelected(context: Context, post: NewsPostButtonActivity) {
             val bundle: Bundle = bundleOf(
                 context.getString(R.string.firebase_analytics_post_click_user_key)
-                        to UserHandler.getUsername(context),
+                        to UserHandler.getUserId(context),
                 context.getString(R.string.firebase_analytics_post_click_author_key)
-                        to post.requireArguments().getString("author")
+                        to post.requireArguments().getString(NewsPostButtonActivity.KEY_AUTHOR)
+            );
+            FirebaseAnalytics.getInstance(context)
+                .logEvent(
+                    context.getString(
+                        R.string.firebase_analytics_post_selected_event
+                    ),
+                    bundle
+                );
+        }
+
+        public fun analyticsLogPostSelected(context: Context, data: NewsData) {
+            val bundle: Bundle = bundleOf(
+                context.getString(R.string.firebase_analytics_post_click_user_key)
+                        to UserHandler.getUserId(context),
+                context.getString(R.string.firebase_analytics_post_click_author_key)
+                        to data.author
             );
             FirebaseAnalytics.getInstance(context)
                 .logEvent(
@@ -45,7 +62,7 @@ class FirebaseHandler {
         public fun analyticsLogPostCreated(context: Context) {
             val bundle: Bundle = bundleOf(
                 context.getString(R.string.firebase_analytics_post_creation_user_key)
-                        to UserHandler.getUsername(context)
+                        to UserHandler.getUserId(context)
             );
             FirebaseAnalytics.getInstance(context)
                 .logEvent(

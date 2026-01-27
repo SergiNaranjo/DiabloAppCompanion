@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.gridlayout)
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.firebase.common.ktx)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.database)

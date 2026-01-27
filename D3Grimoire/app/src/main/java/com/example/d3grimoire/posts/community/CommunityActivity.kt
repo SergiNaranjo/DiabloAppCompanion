@@ -5,33 +5,46 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.NavBarActivity
 import com.example.d3grimoire.R
 import com.example.d3grimoire.posts.NewsData
-import com.example.d3grimoire.posts.news.NewsPostButtonActivity
+import com.example.d3grimoire.posts.NewsPostAdapter
+import com.example.d3grimoire.posts.news.NewsPostActivity
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
-import kotlin.math.min
+import android.content.Intent
 
 class CommunityActivity : Fragment(R.layout.activity_community) {
-    private lateinit var view: View;
+    private lateinit var adapter: NewsPostAdapter
+
+    companion object {
+        private const val POST_KEY_TITLE: String = "title"
+        private const val POST_KEY_DESC: String = "desc"
+        private const val POST_KEY_IMG_URL: String = "imgUrl"
+        private const val POST_KEY_URL: String = "url"
+        private const val POST_KEY_AUTHOR: String = "author"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        this.view = view;
+        val recyclerView: RecyclerView = view.findViewById<RecyclerView>(R.id.community_posts_recycler)
+        adapter = NewsPostAdapter { data -> openPost(data) }
+        recyclerView.layoutManager = LinearLayoutManager(view.context)
+        recyclerView.adapter = adapter
 
         val imgBtn: ImageButton = view.findViewById<ImageButton>(R.id.new_post);
         imgBtn.setOnClickListener { newPost(); }
 
+        // Keep the list up to date as posts change in Firebase.
         FirebaseHandler.postsReference.addChildEventListener(createChildEventListener());
 
-        loadPosts();
+        fetchPostData();
     }
 
     private fun createChildEventListener(): ChildEventListener {
@@ -41,7 +54,6 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                 previousChildName: String?
             ) {
                 fetchPostData();
-                loadPosts();
             }
 
             override fun onChildChanged(
@@ -49,12 +61,10 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                 previousChildName: String?
             ) {
                 fetchPostData();
-                loadPosts();
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
                 fetchPostData();
-                loadPosts();
             }
 
             override fun onChildMoved(
@@ -62,7 +72,6 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
                 previousChildName: String?
             ) {
                 fetchPostData();
-                loadPosts();
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -73,56 +82,47 @@ class CommunityActivity : Fragment(R.layout.activity_community) {
     }
 
     private fun newPost() {
-        val act = requireActivity();
+        val act: FragmentActivity = requireActivity();
         if (act !is NavBarActivity) throw Exception("Invalid root node!");
         act.setFloatingButtonsVisibility(View.GONE);
         act.loadFragment(NewPostActivity());
     }
 
-    private fun loadPosts() {
-        val len: Int = min(
-            communityNewsButtonIds.count(),
-            communityNewsButtonData.count()
-        );
-
-        for (i in 0..len - 1) {
-            val data: NewsData = communityNewsButtonData[i];
-            val newsPostButton: NewsPostButtonActivity = NewsPostButtonActivity.newInstance(data);
-            childFragmentManager.commit {
-                setReorderingAllowed(true);
-                add(data.id, newsPostButton);
+    private fun fetchPostData() {
+        val query: Query = FirebaseHandler.postsReference.orderByKey();
+        query.get()
+            .addOnSuccessListener { snapshot ->
+                if (snapshot.exists()) {
+                    var postIndex: Int = 0;
+                    communityNewsButtonData.clear();
+                    for (dataSnapshot in snapshot.children) {
+                        val newsData: NewsData = NewsData(
+                            postIndex,
+                            dataSnapshot.child(POST_KEY_TITLE).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_DESC).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_IMG_URL).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_URL).getValue(String::class.java),
+                            dataSnapshot.child(POST_KEY_AUTHOR).getValue(String::class.java)
+                        );
+                        communityNewsButtonData.add(newsData);
+                        postIndex++;
+                    }
+                    // Refresh the list with the latest snapshot contents.
+                    adapter.submitList(communityNewsButtonData.toList());
+                } else {
+                    adapter.submitList(emptyList());
+                    Log.d("Community Screen", "No posts")
+                }
             }
-        }
+            .addOnFailureListener { exception ->
+                Log.e("Community Screen", "Error: ${exception.message}")
+            }
     }
 
-    companion object {
-        public fun fetchPostData() {
-            val query: Query = FirebaseHandler.postsReference.orderByKey();
-            query.get()
-                .addOnSuccessListener { snapshot ->
-                    if (snapshot.exists()) {
-                        var postIndex: Int = 0;
-                        communityNewsButtonData.clear();
-                        for (dataSnapshot in snapshot.children) {
-                            if (postIndex >= communityNewsButtonIds.count()) break;
-                            val newsData: NewsData = NewsData(
-                                communityNewsButtonIds[postIndex],
-                                dataSnapshot.child("title").getValue(String::class.java),
-                                dataSnapshot.child("desc").getValue(String::class.java),
-                                dataSnapshot.child("imgUrl").getValue(String::class.java),
-                                dataSnapshot.child("url").getValue(String::class.java),
-                                dataSnapshot.child("author").getValue(String::class.java)
-                            );
-                            communityNewsButtonData.add(newsData);
-                            postIndex++;
-                        }
-                    } else {
-                        Log.d("Community Screen", "No posts")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.e("Community Screen", "Error: ${exception.message}")
-                }
-        }
+    private fun openPost(data: NewsData) {
+        FirebaseHandler.analyticsLogPostSelected(requireActivity(), data);
+        val intent: Intent = Intent(requireActivity(), NewsPostActivity::class.java);
+        intent.putExtra(NewsPostActivity.EXTRA_URL, data.url);
+        startActivity(intent);
     }
 }

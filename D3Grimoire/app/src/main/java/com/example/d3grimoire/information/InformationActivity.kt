@@ -8,12 +8,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.commit
-import com.example.d3grimoire.NavBarActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.d3grimoire.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,44 +19,48 @@ import retrofit2.Response
 class InformationActivity : Fragment(R.layout.activity_information) {
 
     companion object {
-        private const val TAG_ITEM = "ITEM_API"
-        private val testItemSlugs = listOf(
+        private const val TAG_ITEM: String = "ITEM_API"
+        private val testItemSlugs: List<String> = listOf(
             "corrupted-ashbringer-Unique_Sword_2H_104_x1",
-            "aidans-revenge-Unique_Axe_1H_104_x1"
+            "the-furnace-Unique_Mace_2H_103_x1",
+            "mempo-of-twilight-Unique_Helm_008_x1",
+            "skorn-Unique_Axe_2H_009_x1",
+            "andariels-visage-Unique_Helm_003_x1",
+            "bul-kathos-wedding-band-Unique_Ring_020_x1",
+            "echoing-fury-Unique_Mace_1H_001_x1",
+            "the-grandfather-Unique_Sword_2H_010_x1",
+            "unity-Unique_Ring_010_x1",
+            "tasker-and-theo-Unique_Gloves_006_x1"
         )
     }
 
-    private val containers = listOf(R.id.item_0, R.id.item_1)
+    private lateinit var itemAdapter: ItemAdapter
+    private val itemSlots: MutableList<ItemUiModel?> =
+        MutableList(testItemSlugs.size) { null }
+    private val classButtons: List<Pair<Int, Int>> = listOf(
+        R.id.information_barbarian_button to R.string.barbarian_slug,
+        R.id.information_crusader_button to R.string.crusader_slug,
+        R.id.information_demon_hunter_button to R.string.demon_hunter_slug,
+        R.id.information_monk_button to R.string.monk_slug,
+        R.id.information_necromancer_button to R.string.necromancer_slug,
+        R.id.information_witch_doctor_button to R.string.witch_doctor_slug,
+        R.id.information_wizard_button to R.string.wizard_slug
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val itemsRecycler: RecyclerView = view.findViewById(R.id.items_recycler)
+        itemAdapter = ItemAdapter()
+        itemsRecycler.layoutManager = LinearLayoutManager(view.context)
+        itemsRecycler.adapter = itemAdapter
+
         testItemSlugs.forEachIndexed { index, slug ->
-            if (index < containers.size) {
-                loadItem(slug, containers[index]);
-            }
+            loadItem(slug, index);
         }
 
-        setupClassButton(view,
-            R.id.information_barbarian_button,
-            getString(R.string.barbarian_slug));
-        setupClassButton(view,
-            R.id.information_crusader_button,
-            getString(R.string.crusader_slug));
-        setupClassButton(view,
-            R.id.information_demon_hunter_button,
-            getString(R.string.demon_hunter_slug));
-        setupClassButton(view,
-            R.id.information_monk_button,
-            getString(R.string.monk_slug));
-        setupClassButton(view,
-            R.id.information_necromancer_button,
-            getString(R.string.necromancer_slug));
-        setupClassButton(view,
-            R.id.information_witch_doctor_button,
-            getString(R.string.witch_doctor_slug));
-        setupClassButton(view,
-            R.id.information_wizard_button,
-            getString(R.string.wizard_slug));
+        classButtons.forEach { (buttonId, slugRes) ->
+            setupClassButton(view, buttonId, getString(slugRes))
+        }
     }
 
     private fun setupClassButton(view: View, buttonId: Int, slug: String) {
@@ -70,10 +71,10 @@ class InformationActivity : Fragment(R.layout.activity_information) {
         }
     }
 
-    private fun loadItem(itemSlug: String, containerId: Int) {
+    private fun loadItem(itemSlug: String, index: Int) {
         DiabloApiInstance.api.getItem(itemSlug).enqueue(object : Callback<ItemResponse> {
             override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
-                if (!isAdded || view == null) return;
+                if (!isAdded || view == null || childFragmentManager.isStateSaved) return;
 
                 if (!response.isSuccessful) {
                     Log.e(TAG_ITEM, "Item $itemSlug failed: ${response.code()}");
@@ -82,25 +83,20 @@ class InformationActivity : Fragment(R.layout.activity_information) {
 
                 val item: ItemResponse = response.body() ?: return;
 
-                val activity: FragmentActivity = requireActivity();
-                if (activity !is AppCompatActivity) throw Exception("Invalid root node!");
-
-                val bundle = bundleOf(
-                    getString(R.string.item_name_key) to item.name,
-                    getString(R.string.item_type_key) to item.typeName,
-                    getString(R.string.item_required_level_key) to item.requiredLevel,
-                    getString(R.string.item_description_key) to getString(
+                val itemUi: ItemUiModel = ItemUiModel(
+                    item.name,
+                    item.typeName,
+                    item.requiredLevel,
+                    getString(
                         R.string.item_description,
                         item.damage,
                         item.attacksPerSecond
                     ),
-                    getString(R.string.item_icon_url_key) to DiabloImageUrl.item(activity, item.icon)
-                );
-
-                childFragmentManager.commit {
-                    setReorderingAllowed(true)
-                    replace(containerId, ItemActivity::class.java, bundle)
-                }
+                    DiabloImageUrl.item(requireActivity(), item.icon)
+                )
+                itemSlots[index] = itemUi
+                // Keep the list in API order while items load asynchronously.
+                itemAdapter.submitList(itemSlots.filterNotNull())
             }
 
             override fun onFailure(call: Call<ItemResponse>, t: Throwable) {

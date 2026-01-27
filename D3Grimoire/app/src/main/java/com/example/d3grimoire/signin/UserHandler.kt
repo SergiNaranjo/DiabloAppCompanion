@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.example.d3grimoire.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlin.text.iterator
 
@@ -12,6 +13,10 @@ class UserHandler {
     companion object {
 
         public lateinit var playerPrefs: SharedPreferences;
+        const val GOOGLE_WEB_CLIENT_ID: String =
+            "554317598986-ltodp92d23e69tsbcedcbqofqpee0s30.apps.googleusercontent.com"
+        private const val PASSWORD_HASH_BASE: Int = 31
+        private const val PASSWORD_HASH_MOD: Int = 1000000009
 
         public fun Init(context: Context) {
             playerPrefs = context.getSharedPreferences(
@@ -21,22 +26,22 @@ class UserHandler {
         }
 
         public fun isSignedIn(context: Context): Boolean {
-            return getUsername(context) != null;
+            return getUserId(context) != null;
         }
 
-        public fun getUserNative(context: Context): String? {
+        public fun getUserNative(): String? {
             val lastUser: String? = playerPrefs.getString("user", "");
             if (lastUser != "") return lastUser;
             return null;
         }
 
-        public fun getPassNative(context: Context): Int? {
+        public fun getPassNative(): Int? {
             val pass: Int? = playerPrefs.getInt("password", 0);
             if (pass != 0) return pass;
             return null;
         }
 
-        public fun setUserNative(context: Context, user: String?, password: Int) {
+        public fun setUserNative(user: String?, password: Int) {
             playerPrefs.edit().putString("user", user).apply();
             playerPrefs.edit().putInt("password", password).apply();
         }
@@ -46,12 +51,12 @@ class UserHandler {
         }
 
         public fun signOutGoogle(context: Context) {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("554317598986-ltodp92d23e69tsbcedcbqofqpee0s30.apps.googleusercontent.com")
+            val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(GOOGLE_WEB_CLIENT_ID)
                 .requestEmail()
                 .build();
 
-            val googleSignInClient = GoogleSignIn.getClient(context, gso);
+            val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(context, gso);
             googleSignInClient.signOut();
         }
 
@@ -68,24 +73,31 @@ class UserHandler {
         //Basic password hashing for encryption
         public fun encryptPass(password: String): Int {
             //Constants for encryption
-            val p = 31;
-            val m = 1000000009;
-
-            var p_pow = 1;
-            var sum = 0;
+            var pPow: Int = 1;
+            var sum: Int = 0;
             for (letter in password) {
-                sum = (sum + letter.code * p_pow).mod(m);
-                p_pow = (p_pow * p).mod(m);
+                sum = (sum + letter.code * pPow).mod(PASSWORD_HASH_MOD);
+                pPow = (pPow * PASSWORD_HASH_BASE).mod(PASSWORD_HASH_MOD);
             }
             return sum;
         }
 
+        public fun getUserId(context: Context): String? {
+            val googleAccount: GoogleSignInAccount? = getUserGoogle(context);
+            googleAccount?.id?.let { return it; }
+            googleAccount?.email?.let { return it; }
+            googleAccount?.displayName?.let { return it; }
+            return getUserNative();
+        }
+
+        public fun getUserDisplayName(context: Context): String? {
+            val googleAccount: GoogleSignInAccount? = getUserGoogle(context);
+            googleAccount?.displayName?.let { return it; }
+            return getUserNative();
+        }
+
         public fun getUsername(context: Context): String? {
-            var username: String? = getUserGoogle(context)?.displayName;
-            username?.let { return username; }
-            username = getUserNative(context);
-            username?.let { return username }
-            return null;
+            return getUserDisplayName(context);
         }
 
     }

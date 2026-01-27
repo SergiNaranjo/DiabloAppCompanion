@@ -1,10 +1,7 @@
 package com.example.d3grimoire.profile
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.InputType
 import android.util.Log
@@ -19,15 +16,14 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.example.d3grimoire.FirebaseHandler
 import com.example.d3grimoire.R
-import com.example.d3grimoire.Utils
+import com.example.d3grimoire.ActivityCaster
+import com.example.d3grimoire.ImageDecoder
 import com.example.d3grimoire.signin.SignInActivity
 import com.example.d3grimoire.signin.UserHandler
 import com.google.firebase.database.Query
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.InputStream
-import java.net.URL
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -37,11 +33,18 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     private lateinit var statusEditText: EditText;
     private var editState: Boolean = false;
 
+    companion object {
+        private const val PROFILE_PICTURE_REFRESH_DELAY_MS: Long = 500L
+        private const val USER_FIELD_USER: String = "user"
+        private const val USER_FIELD_PASSWORD: String = "password"
+        private const val USER_FIELD_IMAGE_URL: String = "imgUrl"
+        private const val USER_FIELD_STATUS: String = "status"
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (!UserHandler.isSignedIn(requireActivity()))
-            Utils.getNavBarFromFragment(this).loadFragment(SignInActivity());
+            ActivityCaster.getNavBarFromFragment(this).loadFragment(SignInActivity());
 
         val signOutButton: TextView = view.findViewById<TextView>(R.id.btn_sign_out);
         signOutButton.setOnClickListener { signOut(); };
@@ -89,33 +92,17 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     }
 
     private fun loadProfilePicture(view: View) {
-        var imgUrl: String? = null;
-
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user")
-            .equalTo(UserHandler.getUsername(requireActivity()));
+        val query: Query = FirebaseHandler.usersReference.orderByChild(USER_FIELD_USER)
+            .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
-                if (snapshot.exists()) {
-                    for (dataSnapshot in snapshot.children) {
-                        imgUrl = dataSnapshot.child("imgUrl").getValue(String::class.java);
-                    }
-                }
-                val imageView = view.findViewById<ImageView>(R.id.profile_picture)
-                val executor = Executors.newSingleThreadExecutor()
-                val handler = Handler(Looper.getMainLooper())
-                var image: Bitmap?;
+                if (!isAdded) return@addOnSuccessListener
+                if (!snapshot.exists()) return@addOnSuccessListener;
 
-                executor.execute {
-                    try {
-                        val `in` = URL(imgUrl).openStream()
-                        image = BitmapFactory.decodeStream(`in`)
-                        handler.post {
-                            imageView.setImageBitmap(image)
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
+                ImageDecoder.trySetImageFromURL(
+                    snapshot.children.first().child(USER_FIELD_IMAGE_URL).getValue(String::class.java),
+                    view.findViewById<ImageView>(R.id.profile_picture)
+                );
             }
             .addOnFailureListener { exception ->
                 val message: String? = exception.message;
@@ -129,35 +116,29 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
             return;
         }
 
-        //Check image url
+        //Check image url and post
         val executor: Executor = Executors.newSingleThreadExecutor();
-        var image: Bitmap?;
         executor.execute {
-            try {
-                val url: String? =
-                    view.findViewById<EditText>(R.id.profile_img_url).text.toString();
-                val `in`: InputStream = URL(url).openStream();
-                image = BitmapFactory.decodeStream(`in`);
-                if (image == null) throw Exception("Image is null!");
+            val url: String? =
+                view.findViewById<EditText>(R.id.profile_img_url).text.toString();
+            if(!ImageDecoder.isImageURLValid(url)) return@execute;
 
-                pushEdit(view);
+            pushEdit(view);
 
-                //Small delay for the pfp to upload
-                MainScope().launch {
-                    delay(500);
+            //Small delay for the pfp to upload
+            MainScope().launch {
+                delay(PROFILE_PICTURE_REFRESH_DELAY_MS);
 
-                    Utils.getNavBarFromFragmentActivity(requireActivity())
-                        .loadFragment(ProfileActivity());
-                }
-            } catch (e: Exception) {
-                e.printStackTrace();
+                ActivityCaster.getNavBarFromFragmentActivity(requireActivity())
+                    .loadFragment(ProfileActivity());
             }
         }
     }
 
     private fun pushEdit(view: View) {
-        val username: String? = UserHandler.getUsername(requireActivity());
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user").equalTo(username);
+        val query: Query = FirebaseHandler.usersReference.orderByChild(USER_FIELD_USER).equalTo(
+            UserHandler.getUserId(requireActivity())
+        );
         query.get()
             .addOnSuccessListener { snapshot ->
                 if (!snapshot.exists()) return@addOnSuccessListener;
@@ -168,13 +149,12 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
                 for (dataSnapshot in snapshot.children) {
                     val key: String? = dataSnapshot.key;
                     key?.let {
-                        Log.d("Profile", key);
                         FirebaseHandler.usersReference.child(key).setValue(
                             mapOf(
-                                "user" to UserHandler.getUsername(requireActivity()),
-                                "password" to UserHandler.getPassNative(requireActivity()),
-                                "imgUrl" to imgUrl,
-                                "status" to status
+                                USER_FIELD_USER to UserHandler.getUserId(requireActivity()),
+                                USER_FIELD_PASSWORD to UserHandler.getPassNative(),
+                                USER_FIELD_IMAGE_URL to imgUrl,
+                                USER_FIELD_STATUS to status
                             )
                         );
                     }
@@ -188,12 +168,12 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
 
     private fun signOut() {
         UserHandler.signOut(requireActivity());
-        Utils.getNavBarFromFragment(this).loadFragment(ProfileActivity());
+        ActivityCaster.getNavBarFromFragment(this).loadFragment(ProfileActivity());
     }
 
     private fun loadUsername(view: View) {
         val usernameText: TextView = view.findViewById<TextView>(R.id.profile_username);
-        val username: String? = UserHandler.getUsername(requireActivity());
+        val username: String? = UserHandler.getUserDisplayName(requireActivity());
         username?.let { usernameText.text = username; } ?: run {
             usernameText.text =
                 getString(R.string.profile_username_default);
@@ -203,19 +183,24 @@ class ProfileActivity : Fragment(R.layout.activity_profile) {
     private fun loadStatus(view: View) {
         var status: String? = null;
 
-        val query: Query = FirebaseHandler.usersReference.orderByChild("user")
-            .equalTo(UserHandler.getUsername(requireActivity()));
+        val query: Query = FirebaseHandler.usersReference.orderByChild(USER_FIELD_USER)
+            .equalTo(UserHandler.getUserId(requireActivity()));
         query.get()
             .addOnSuccessListener { snapshot ->
+                if (!isAdded) return@addOnSuccessListener
+                val ctx: Context = context ?: return@addOnSuccessListener
                 if (snapshot.exists()) {
                     for (dataSnapshot in snapshot.children) {
-                        status = dataSnapshot.child("status").getValue(String::class.java);
+                        status = dataSnapshot.child(USER_FIELD_STATUS).getValue(String::class.java);
                     }
                 }
+                if (!isAdded) return@addOnSuccessListener
                 status?.let {
                     statusEditText.text = Editable.Factory.getInstance().newEditable(status);
                 } ?: run {
-                    statusEditText.text = Editable.Factory.getInstance().newEditable("Status here");
+                    statusEditText.text = Editable.Factory.getInstance().newEditable(
+                        ctx.getString(R.string.profile_status_default)
+                    );
                 }
             }
             .addOnFailureListener { exception ->
